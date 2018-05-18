@@ -123,10 +123,10 @@
         initConnection(myWeb3).then(({account, network}) => {
           userAccount = account;
           networkId = network;
-          if (networkId !== 4 && networkId !== 5777) { throw Error(messages.notRinkeby); }
+          if (networkId !== 4 && networkId !== 5777 && networkId !== 1337) { throw Error(messages.notRinkeby); }
           contract = new myWeb3.eth.Contract(abi, contractAddress);
           poolingInterval = setInterval(getHackatonResults, 1000);
-          console.log(`Connected to ${networkId === 4 ? 'Rinkeby' : 'Ganache'} network`);
+          console.log(`Connected to ${networkId === 4 ? 'Rinkeby' : 'Local'} network`);
           console.log('Your address ' + userAccount);
           console.log('Contract address ' + contract.options.address)
         })
