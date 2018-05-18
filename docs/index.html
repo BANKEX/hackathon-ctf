@@ -1,1 +1,100 @@
-<h1>Hi</h1>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../../../favicon.ico">
+
+  <title>Proof-of-Skill</title>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="assets/bootstrap/boostrap.min.css">
+  <link rel="stylesheet" href="assets/custom/styles.css">
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+</head>
+
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="../assets/img/log.png" alt="POS" class="responsive" style="max-width: 300px; max-height: 300px;">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+          aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div style="color: #1e0010; font-weight: 700; font-size: 20px;" class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="#">Задача 1
+
+      </a>
+      <a class="nav-item nav-link" href="#">Задача 2</a>
+      <a class="nav-item nav-link" href="#">Задача 3</a>
+      <a style="color: red;" class="nav-item nav-link" href="#">Помощь</a>
+      <a style="color: rgb(28,168,252);" class="nav-item nav-link active" href="#">Таблица лидеров
+        <span class="sr-only">(current)</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <p style="margin-top: 5%; font-size: 49px !important; color: #1e0010; font-weight: 700;">Инструкция по решению задачи</p>
+      <br>
+      <p class="text-center" style="margin-top: 5%; font-size: 89px !important; font-weight: 700;">1</p>
+      <p class="text-center" style="margin-top: 5%; font-size: 40px !important; color: #1e0010;">Создайте аккаунт в сети Rinkeby. Используйте для этого MetaMask</p>
+      <p class="text-center" style="margin-top: 5%; font-size: 89px !important; font-weight: 700;">2</p>
+      <p class="text-center" style="margin-top: 5%; font-size: 40px !important; color: #1e0010;">На faucet Rinkeby получите тестового ETH для решения задач</p>
+      <p class="text-center" style="margin-top: 5%; font-size: 89px !important; font-weight: 700;">3</p>
+      <p class="text-center" style="margin-top: 5%; font-size: 40px !important; color: #1e0010;">Вводим имя и <a href="nav/team_reg.html">регистрируемся</a></p>
+      <p class="text-center" style="margin-top: 5%; font-size: 40px !important; color: #1e0010;"><input type="text" maxlength="64" placeholder=""></p>
+      <p class="text-center" style="margin-top: 5%; font-size: 89px !important; font-weight: 700;">4</p>
+      <p class="text-center" style="margin-top: 5%; font-size: 40px !important; color: #1e0010;">Нажмите на кнопку</p>
+      <button type="submit" class="btn btn-success btn-lg" style="font-size: 40px;">
+        <i class="fa fa-user-plus"></i> Деплой в сеть</button>
+      <p class="text-center" style="margin-top: 5%; font-size: 89px !important; font-weight: 700;">4</p>
+      <p class="text-center" style="margin-top: 5%; font-size: 40px !important; color: #1e0010;">Вам известен исходный код, найдите в нем уязвимость. Используйте для этого тестовую среду, советуем такие инструменты,
+        как Remix IDE или Truffle Framework + Ganache.</p>
+      <p class="text-center" style="margin-top: 5%; font-size: 89px !important; font-weight: 700;">5</p>
+      <p class="text-center" style="margin-top: 5%; font-size: 40px !important; color: #1e0010;">Для того, чтобы решение засчиталось, вам нужно вызвать уязвимость на адресе, который вы получите после нажатия кнопки
+        в п. 3.</p>
+      <p class="text-center" style="margin-top: 5%; font-size: 40px !important; color: #1e0010;">Советуем вам делать это через Remix IDE с помощью MetaMask (At address - вызывайте функцию и передавайте туда полученный
+        адрес)
+      </p>
+      <p class="text-center" style="margin-top: 5%; font-size: 89px !important; font-weight: 700;">7</p>
+      <p class="text-center" style="margin-top: 5%; font-size: 40px !important; color: #1e0010;">Как только вы сделали нужные операции с контрактом в сети, нажмите на кнопку</p>
+      <button type="submit" class="btn btn-warning btn-lg" style="font-size: 20px;">
+        <i class="fa fa-user-plus"></i>Отправить решение</button>
+      <p class="text-center" style="margin-top: 5%; font-size: 89px !important; font-weight: 700;">8</p>
+      <p class="text-center" style="margin-top: 5%; font-size: 40px !important; color: #1e0010;">Результаты можно посмотреть в Таблице лидеров</p>
+    </div>
+  </div>
+  <div class="col-12 text-center" style="margin-top: 10%; margin-bottom: 5%">
+    <img src="../assets/img/logo.png" alt="POS" class="responsive" style="max-width: 550px; max-height: 550px;">
+
+  </div>
+
+
+</div>
+
+<script type="text/javascript">
+  var Web3 = require('web3');
+  var web3 = new Web3();
+  debugger
+</script>
+
+<!-- Bootstrap core JavaScript
+  ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../assets/bootstrap/jquery-3.1.1.slim.min.js"></script>
+<script src="../assets/bootstrap/tether.min.js"></script>
+<script src="../assets/bootstrap/bootstrap.min.js"></script>
+</body>
+
+</html>
