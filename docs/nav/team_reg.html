@@ -8,8 +8,8 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="../assets/bootstrap/boostrap.min.css">
-  <link rel="stylesheet" href="../assets/styles/team.css">
-  <title>Regisration</title>
+  <!--<link rel="stylesheet" href="../assets/styles/team.css">-->
+  <title>Registration</title>
 </head>
 
 <body>
@@ -49,7 +49,7 @@
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-12 text-center">
-        <button id="submitRegistration" type="submit" class="btn btn-success">
+        <button id="submitRegistration" type="button" class="btn btn-success">
           <i class="fa fa-user-plus"></i> Зарегистрироваться
         </button>
       </div>
@@ -57,36 +57,49 @@
   </form>
 </div>
 
+
+<!--<script src="../assets/js/vendor/web3.min.js"></script>-->
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+
 <!-- Be carefull for now rootABI should be included before interaction with main contract -->
+<script type="text/javascript" src="../utils/rootABI.js"></script>
+<script type="text/javascript" src="../utils/web3init.js"></script>
+
+<!--
 <script type="text/javascript" src="../assets/js/connection.js"></script>
 <script type="text/javascript" src="../assets/js/abi.js"></script>
+-->
 <script type="text/javascript">
 
-  function startApp() {
-    try {
-      myWeb3 = checkAndInstantiateWeb3();
-      initConnection(myWeb3).then(({account}) => {
-        userAccount = account;
-        contract = new myWeb3.eth.Contract(abi, contractAddress);
-      })
-    }
-    catch (err) {
-      alert(err.message);
-      console.error(err);
-    }
-  }
+  // function startApp() {
+  //   try {
+  //     myWeb3 = checkAndInstantiateWeb3();
+  //     initConnection(myWeb3).then(({account}) => {
+  //       userAccount = account;
+  //       contract = new myWeb3.eth.Contract(abi, contractAddress);
+  //     })
+  //   }
+  //   catch (err) {
+  //     alert(err.message);
+  //     console.error(err);
+  //   }
+  // }
 
   window.onload = () => {
 
-    const address = localStorage.getItem('rootContractAddress') || '0x9a335d5fc5d1bde74ea5544b716933eb999c684e;';
-    startApp();
 
-    const submitBtn = document.getElementById("#submitRegistration");
+    const address = localStorage.getItem('rootContractAddress') || '0x9a335d5fc5d1bde74ea5544b716933eb999c684e';
 
-    submitBtn.click = () => {
+    const submitBtn = document.getElementById("submitRegistration");
+
+    submitBtn.onclick = () => {
+
+      const rootContact = web3.eth.contract(rootABI);
       const rootContactInstance = rootContact.at(address);
       const name = document.getElementById("team").value;
+
       rootContactInstance.signUp.call(name, (err, result) => {
+
         if (result)
           window.location.replace("tasks1.html");
         else
