@@ -1,5 +1,3 @@
-const contractAddress = '0x8cdaf0cd259887258bc13a92c0a6da92698644c0';
-
 async function initConnection(web3) {
   let account, accounts, networkId, error;
   if (!web3 || !web3.currentProvider) {
@@ -18,7 +16,7 @@ async function initConnection(web3) {
 function checkAndInstantiateWeb3() {
   // tslint:disable:max-line-length
   // Checking if Web3 has been injected by the browser
-  if (typeof web3 != 'undefined') {
+  if (false  && typeof web3 != 'undefined') {
     console.warn(
       'Using web3 detected from external source. If you find that your accounts don\'t appear or you have 0 MetaCoin, ensure you\'ve configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask'
     );
