@@ -50,7 +50,7 @@ module.exports = {
         geth_dev: {
             host: "localhost", // Connect to geth on the specified
             port: 8545,
-            network_id: 5777,
+            network_id: 1337,
             gas: 4700000,
             gasPrice: 20000000000
         },

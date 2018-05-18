@@ -7,6 +7,7 @@ import "../factory/IInstance.sol";
 
 contract Root is Ownable {
 
+  mapping (address=>address) public teamHash;
   mapping (address=>string) public participantName;
   mapping (address=>bool) public signed;
 
@@ -24,14 +25,21 @@ contract Root is Ownable {
 
   function signUp(string _name) public returns(bool){
     require(!signed[msg.sender]);
-    participantName[msg.sender] = _name;
+    require(bytes(_name).length<64);
+    address _teamHash = address(keccak256(_name));
+    teamHash[msg.sender] = _teamHash;
+    participantName[_teamHash] = _name;
     signed[msg.sender] = true;
     return true;
   }
 
-  function fixName(address _participant, string _name) public onlyOwner returns(bool){
-    require(signed[_participant]);
-    participantName[_participant] = _name;
+  function getSignedUp() view public returns(bool) {
+    return signed[msg.sender];
+  }
+
+  function fixName(address _teamHash, string _name) public onlyOwner returns(bool){
+    require(signed[_teamHash]);
+    participantName[_teamHash] = _name;
     return true;
   }
 
@@ -54,30 +62,34 @@ contract Root is Ownable {
   }
 
   function createInstance(string _factoryName) public returns(bool){
-    require(!solved[keccak256(_factoryName)][msg.sender]);
+    address _teamHash = teamHash[msg.sender];
+    require(!solved[keccak256(_factoryName)][_teamHash]);
     require(signed[msg.sender]);
     IFactory _factory = IFactory(factoryAddress[keccak256(_factoryName)]);
     address _instance = _factory.deploy();
-    instance[keccak256(_factoryName)][msg.sender] = _instance;
+    instance[keccak256(_factoryName)][_teamHash] = _instance;
     return true;
   }
 
   function getInstance(string _factoryName) public view returns(address){
-    return instance[keccak256(_factoryName)][msg.sender];
+    address _teamHash = teamHash[msg.sender];
+    return instance[keccak256(_factoryName)][_teamHash];
   }
 
   function getSolved(string _factoryName) public view returns(bool){
-    return solved[keccak256(_factoryName)][msg.sender];
+    address _teamHash = teamHash[msg.sender];
+    return solved[keccak256(_factoryName)][_teamHash];
   }
 
   function checkSolved(string _factoryName) public returns(bool){
     require(block.timestamp<1526828400);
-    require(!solved[keccak256(_factoryName)][msg.sender]);
+    address _teamHash = teamHash[msg.sender];
+    require(!solved[keccak256(_factoryName)][_teamHash]);
     require(signed[msg.sender]);
-    bool _status = IInstance(instance[keccak256(_factoryName)][msg.sender]).status();
+    bool _status = IInstance(instance[keccak256(_factoryName)][_teamHash]).status();
     if(_status) {
-      solved[keccak256(_factoryName)][msg.sender] = true;
-      emit Solved(block.timestamp, msg.sender, _factoryName, factoryAmount[keccak256(_factoryName)]);
+      solved[keccak256(_factoryName)][_teamHash] = true;
+      emit Solved(block.timestamp, _teamHash, _factoryName, factoryAmount[keccak256(_factoryName)]);
     }
     return true;
   }

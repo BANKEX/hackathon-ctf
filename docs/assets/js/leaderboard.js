@@ -1,13 +1,17 @@
+const { Observable, Subject, ReplaySubject, from, of, range } = rxjs;
+// const { map, filter, switchMap } = rxjs.operators;
 
+const hackatonResults = new Subject();
 const mockedResults = [
-  {teamId: 1, timestamp1: Date.now(), timestamp2: undefined, timestamp3: Date.now()},
-  {teamId: 2, timestamp1: Date.now(), timestamp2: Date.now(), timestamp3: Date.now()},
-  {teamId: 5, timestamp1: undefined, timestamp2: Date.now(), timestamp3: undefined},
-  {teamId: 10, timestamp1: Date.now(), timestamp2: Date.now(), timestamp3: undefined},
+  {userAddress: '0x1231235', timestamp1: Date.now(), timestamp2: undefined, timestamp3: Date.now()},
+  {userAddress: '0x1233123', timestamp1: Date.now(), timestamp2: Date.now(), timestamp3: Date.now()},
+  {userAddress: '0x4563257', timestamp1: undefined, timestamp2: Date.now(), timestamp3: undefined},
+  {userAddress: '0x1236456', timestamp1: Date.now(), timestamp2: Date.now(), timestamp3: undefined},
 ]
 
 const messages = {
-  notReady: 'Not ready'
+  notReady: 'Not ready',
+  notRinkeby: 'Please use Rinkeby Test Network'
 }
 
 class Result {
@@ -18,7 +22,12 @@ class Result {
     if(result.timestamp3) tasks+=1;
     return tasks;
   }
-
+  constructor( _userAddress, _timestamp1, _timestamp2, _timestamp3) {
+    this.userAddress = _userAddress;
+    this.timestamp1 = _timestamp1;
+    this.timestamp2 = _timestamp2;
+    this.timestamp3 = _timestamp3;
+  }
 }
 
 /**
@@ -42,3 +51,8 @@ function date(timestamp) {
     return messages.notReady;
   }
 }
+
+function getHackatonResults() {
+  hackatonResults.next(mockedResults);
+}
+
