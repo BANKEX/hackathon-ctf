@@ -2,86 +2,105 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../assets/bootstrap/boostrap.min.css">
-    <link rel="stylesheet" href="../assets/styles/team.css">
-    <title>Regisration</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../assets/bootstrap/boostrap.min.css">
+  <link rel="stylesheet" href="../assets/styles/team.css">
+  <title>Regisration</title>
 </head>
 
 <body>
-    <div class="container register-cont">
-        <div class="col-md-12 text-center">
-            <h2>Регистрация</h2>
-            <br>
-            <br>
+<div class="container register-cont">
+  <div class="col-md-12 text-center">
+    <h2>Регистрация</h2>
+    <br>
+    <br>
+  </div>
+  <form class="form-horizontal col-md-12" role="form" method="POST" action="/register">
+    <div class="row">
+      <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+      <div class="col-12 text-center">
+        <h5>Вы вошли как:</h5>
+        <br>
+      </div>
+      <div class="col-md-12 text-center">
+        <h5>
+          <label for="team">Введите имя команды</label>
+        </h5>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon" style="width: 2.6rem">
+              <i class="fa fa-user"></i>
+            </div>
+            <input type="text" name="team" class="form-control" id="team" placeholder="Команда 1" required autofocus>
+          </div>
         </div>
-        <form class="form-horizontal col-md-12" role="form" method="POST" action="/register">
-            <div class="row">
-                <div class="col-md-3"></div>
-            </div>
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h5>Вы вошли как:</h5>
-                    <br>
-                </div>
-                <div class="col-md-12 text-center">
-                    <h5>
-                        <label for="team">Введите имя команды</label>
-                    </h5>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <div class="input-group-addon" style="width: 2.6rem">
-                                <i class="fa fa-user"></i>
-                            </div>
-                            <input type="text" name="team" class="form-control" id="team" placeholder="Команда 1" required autofocus>
-                        </div>
-                    </div>
-                </div>
+      </div>
 
-            </div>
-
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-12 text-center">
-                    <button type="submit" class="btn btn-success">
-                        <i class="fa fa-user-plus"></i> Зарегистрироваться</button>
-                </div>
-            </div>
-        </form>
     </div>
 
-    <!-- Be carefull for now rootABI should be included before interaction with main contract -->
-    <script type="text/javascript" src="../utils/web3init.js"></script>
-    <script type="text/javascript" src="../utils/rootABI.js"></script>
-    <script type="text/javascript">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-12 text-center">
+        <button id="submitRegistration" type="submit" class="btn btn-success">
+          <i class="fa fa-user-plus"></i> Зарегистрироваться
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
 
-      const rootContact = web3.eth.contract(rootABI);
-      const rootContactInstance = rootContact.at("0x9a335d5fc5d1bde74ea5544b716933eb999c684e");
+<!-- Be carefull for now rootABI should be included before interaction with main contract -->
+<script type="text/javascript" src="../assets/js/connection.js"></script>
+<script type="text/javascript" src="../assets/js/abi.js"></script>
+<script type="text/javascript">
 
-      window.onload = () => {
-        const name = document.getElementById("team").value;
+  function startApp() {
+    try {
+      myWeb3 = checkAndInstantiateWeb3();
+      initConnection(myWeb3).then(({account}) => {
+        userAccount = account;
+        contract = new myWeb3.eth.Contract(abi, contractAddress);
+      })
+    }
+    catch (err) {
+      alert(err.message);
+      console.error(err);
+    }
+  }
 
-        rootContactInstance.signUp.call(name, (err, result) => {
-          debugger
-          if(result)
-            window.location.replace("tasks1.html");
-          else
-            alert("Error");
-        });
-      }
-    </script>
+  window.onload = () => {
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="../assets/bootstrap/jquery-3.1.1.slim.min.js"></script>
-    <script src="../assets/bootstrap/tether.min.js"></script>
-    <script src="../assets/bootstrap/bootstrap.min.js"></script>
+    const address = localStorage.getItem('rootContractAddress') || '0x9a335d5fc5d1bde74ea5544b716933eb999c684e;';
+    startApp();
+
+    const submitBtn = document.getElementById("#submitRegistration");
+
+    submitBtn.click = () => {
+      const rootContactInstance = rootContact.at(address);
+      const name = document.getElementById("team").value;
+      rootContactInstance.signUp.call(name, (err, result) => {
+        if (result)
+          window.location.replace("tasks1.html");
+        else
+          alert("Error");
+      });
+    };
+  }
+</script>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="../assets/bootstrap/jquery-3.1.1.slim.min.js"></script>
+<script src="../assets/bootstrap/tether.min.js"></script>
+<script src="../assets/bootstrap/bootstrap.min.js"></script>
 </body>
 
 </html>
