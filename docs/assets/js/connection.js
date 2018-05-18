@@ -1,3 +1,6 @@
+
+const contractAddress = localStorage.getItem('rootContractAddress') || '0x8cdaf0cd259887258bc13a92c0a6da92698644c0';
+
 async function initConnection(web3) {
   let account, accounts, networkId, error;
   if (!web3 || !web3.currentProvider) {
