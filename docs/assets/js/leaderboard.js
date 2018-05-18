@@ -52,7 +52,9 @@ function date(timestamp) {
   }
 }
 
-function getHackatonResults() {
+async function getHackatonResults() {
+  const solvedEvents = await contract.getPastEvents(
+    'Solved', { fromBlock: 0});
   hackatonResults.next(mockedResults);
 }
 
