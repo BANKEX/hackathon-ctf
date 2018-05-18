@@ -53,13 +53,13 @@ contract Root is Ownable {
     return true;
   }
 
-  function createInstance(string _factoryName) public returns(address){
+  function createInstance(string _factoryName) public returns(bool){
     require(!solved[keccak256(_factoryName)][msg.sender]);
     require(signed[msg.sender]);
     IFactory _factory = IFactory(factoryAddress[keccak256(_factoryName)]);
     address _instance = _factory.deploy();
     instance[keccak256(_factoryName)][msg.sender] = _instance;
-    return _instance;
+    return true;
   }
 
   function getInstance(string _factoryName) public view returns(address){
