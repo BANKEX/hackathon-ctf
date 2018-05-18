@@ -14,9 +14,13 @@
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="../assets/bootstrap/boostrap.min.css">
   <link rel="stylesheet" href="../assets/styles/leaderboard.css">
+  <script src="https://unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <script src="../assets/js/vendor/web3.min.js"></script>
+  <script src="../assets/js/abi.js"></script>
+  <script src="../assets/js/connection.js"></script>
   <script src="../assets/js/leaderboard.js"></script>
 </head>
 
@@ -47,23 +51,23 @@
 
   <div class="container" id="root"></div>
 
-  <script type="text/babel">    
-
+  <script type="text/babel">
+    var myWeb3, poolingInterval, userAccount, networkId, contract;
     console.log(mockedResults);
-    
+
     class Results extends React.Component {
       constructor (props) {
         super(props);
         this.state = {};
       }
       componentDidMount() {
-        this.getResults();
+        hackatonResults.subscribe(results => this.setState({results}))
       }
       render(){
         let output;
-        if (!this.state.results) 
+        if (!this.state.results)
           return <p className="warning">Loading results compnent...</p>;
-        else if (!this.state.results.length) 
+        else if (!this.state.results.length)
           return <p className="warning">No appropriate results!</p>;
         else return(
           <div>
@@ -72,7 +76,7 @@
               <table className="table table-striped table-sm">
                 <thead>
                   <tr>
-                    <th>Команда</th>
+                    <th>Участник</th>
                     <th>Задача 1</th>
                     <th>Задача 2</th>
                     <th>Задача 3</th>
@@ -87,9 +91,6 @@
           </div>
         )
       }
-      getResults(){
-        this.setState({results: mockedResults});
-      }
     }
 
     class ResultsItem extends React.Component {
@@ -99,18 +100,12 @@
       render(){
         return(
           <tr>
-            <td>{this.props.teamId}</td>
+            <td>{this.props.userAddress}</td>
             <td>{date(this.props.timestamp1)}</td>
             <td>{date(this.props.timestamp2)}</td>
             <td>{date(this.props.timestamp3)}</td>
             <td>{Result.redyTasks(this.props)}</td>
           </tr>
-          // <li className="search-result-item">
-          //   <img src={this.props.avatar}></img>
-          //   <h3 className="search-result-item-name">{this.props.fname} {this.props.lname}</h3>
-          //   <p className="search-result-item-phone"><b>Phone:</b> {this.props.phone}</p>
-          //   <span className="search-result-item-address item">{this.props.adress}, {this.props.city}</span>
-          // </li>
         )}
     }
 
@@ -118,6 +113,23 @@
       <Results />,
       document.getElementById('root')
     );
+    window.addEventListener('load', function() {
+      startApp();
+    });
+
+    function startApp() {
+      try {
+        myWeb3 = checkAndInstantiateWeb3();
+        initConnection(myWeb3).then(({account, network}) => {
+          userAccount = account;
+          networkId =network;
+          if (networkId !== 4) { throw Error(messages.notRinkeby); }
+          contract = new myWeb3.eth.Contract(abi, contractAddress);
+          poolingInterval = setInterval(getHackatonResults, 1000);
+          console.log('Connected to Rinkeby from address ' + userAccount)
+        })
+      } catch(err) {alert(err.message); console.error(err);}
+    }
   </script>
 
   <!-- Bootstrap core JavaScript
