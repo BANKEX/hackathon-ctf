@@ -1,0 +1,12 @@
+{
+    "extends": "solium:recommended",
+    "plugins": ["security"],
+    "rules": {
+      "quotes": ["error", "double"],
+      "indentation": ["error", 2],
+      "camelcase": "error",
+      "mixedcase": "error",
+      "uppercase": "error",
+      "max-len": ["error", 250]
+    }
+  }
