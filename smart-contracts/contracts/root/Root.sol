@@ -79,7 +79,7 @@ contract Root is Ownable {
       solved[keccak256(_factoryName)][msg.sender] = true;
       emit Solved(block.timestamp, msg.sender, _factoryName, factoryAmount[keccak256(_factoryName)]);
     }
-
+    return true;
   }
   
 }
