@@ -62,6 +62,14 @@ contract Root is Ownable {
     return _instance;
   }
 
+  function getInstance(string _factoryName) public view returns(address){
+    return instance[keccak256(_factoryName)][msg.sender];
+  }
+
+  function getSolved(string _factoryName) public view returns(bool){
+    return solved[keccak256(_factoryName)][msg.sender];
+  }
+
   function checkSolved(string _factoryName) public returns(bool){
     require(block.timestamp<1526828400);
     require(!solved[keccak256(_factoryName)][msg.sender]);
