@@ -1,0 +1,15 @@
+node_modules
+/doxity
+.idea/
+.vscode/
+.editorconfig
+build/
+/*.cmd
+*.sh
+/*.deprecated
+docs/bundle.js.map
+.env
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6a785bd4cf5a330635cd2790e7e9da40c031d060
