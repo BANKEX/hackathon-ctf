@@ -38,6 +38,10 @@ contract Root is Ownable {
     return signed[msg.sender];
   }
 
+  function getTeamName() view public returns(string) {
+    return participantName[teamHash[msg.sender]];
+  }
+
   function fixName(address _teamHash, string _name) public onlyOwner returns(bool){
     require(signed[_teamHash]);
     participantName[_teamHash] = _name;
