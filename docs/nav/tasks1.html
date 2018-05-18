@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../../../favicon.ico">
+
+  <title>Proof-of-Skill</title>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="../assets/bootstrap/boostrap.min.css">
+  <link rel="stylesheet" href="../assets/custom/styles.css">
+
+</head>
+
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="../assets/img/log.png" alt="POS" class="responsive" style="max-width: 300px; max-height: 300px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div style="color: #1e0010; font-weight: 700; font-size: 20px;" class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="#">Задача 1
+          <span class="sr-only">(current)</span>
+        </a>
+        <a class="nav-item nav-link" href="#">Задача 2</a>
+        <a class="nav-item nav-link" href="#">Задача 3</a>
+        <a style="color: red;" class="nav-item nav-link" href="#">Помощь</a>
+        <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="#">Таблица лидеров</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p style="margin-top: 5%; font-size: 69px !important; color: #1e0010; font-weight: 700;">Задача 1: JoiCasino</p>
+        <button type="submit" class="btn btn-success btn-md" style="font-size: 20px;">
+          <i class="fa fa-user-plus"></i> Деплой в сеть</button>
+        <button type="submit" class="btn btn-warning btn-md" style="font-size: 20px;">
+          <i class="fa fa-user-plus"></i>Отправить решение</button>
+
+        <!-- если уже решено-->
+
+        <button type="submit" class="btn btn-danger disabled btn-md" style="font-size: 20px;">
+          <i class="fa fa-user-plus"></i>Уже решено</button>
+
+
+        <blockquote style="font-size: 40px " class="blockquote">
+          <p style="font-size: 40px " class="mb-0">Нужно выиграть в казино</p>
+          <footer style="font-size: 40px " class="blockquote-footer">Ваш смарт-контракт находится по адресу
+            <cite style="font-weight: 900; color: #1e0010" title="Source Title">0ceqiccnoijwncoiwncoiwncb</cite> в сети
+            <strong style="font-weight: 900; color: #1e0010">Rinkeby</strong>
+          </footer>
+        </blockquote>
+        <div style="background: #272822; overfow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em; font-size: 20px;">
+          <pre style="margin: 0; line-height: 125%"><span style="color: #a6e22e">pragma</span> <span style="color: #a6e22e">solidity</span> <span style="color: #a6e22e">^0.4.21;</span>
+  
+  
+  <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">You</span> <span style="color: #a6e22e">need</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">win</span> <span style="color: #a6e22e">by</span> <span style="color: #a6e22e">putting</span> <span style="color: #a6e22e">correct</span> <span style="color: #a6e22e">bet</span>
+  <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">Here</span> <span style="color: #a6e22e">you</span> <span style="color: #a6e22e">a</span> <span style="color: #a6e22e">have</span> <span style="color: #a6e22e">original</span> <span style="color: #a6e22e">code</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">contract</span> 
+  
+
+  <span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">JoiCasino</span> <span style="color: #f8f8f2">{</span>
+    
+  <span style="color: #a6e22e">bool</span> <span style="color: #a6e22e">private</span> <span style="color: #a6e22e">contract_status;</span>
+  
+  <span style="color: #a6e22e">modifier</span> <span style="color: #a6e22e">onlyBet</span><span style="color: #e6db74">()</span> <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">require</span><span style="color: #e6db74">(msg.value &gt;= 0.1 ether &amp;&amp; msg.value &lt;= 5 ether)</span><span style="color: #a6e22e">;</span>
+      <span style="color: #a6e22e">_;</span>
+  <span style="color: #f8f8f2">}</span>
+  
+  <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">status</span><span style="color: #e6db74">()</span> <span style="color: #a6e22e">external</span> <span style="color: #a6e22e">view</span> <span style="color: #a6e22e">returns</span><span style="color: #e6db74">(bool)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">contract_status;</span>
+  <span style="color: #f8f8f2">}</span>
+  
+  <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">setBet</span><span style="color: #e6db74">(uint256 _userBet)</span> <span style="color: #a6e22e">external</span> <span style="color: #a6e22e">payable</span> <span style="color: #a6e22e">onlyBet</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">if</span><span style="color: #e6db74">(_userBet == rand())</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #a6e22e">msg.sender.transfer</span><span style="color: #e6db74">(address(this).balance)</span><span style="color: #a6e22e">;</span>
+        <span style="color: #a6e22e">solved</span><span style="color: #e6db74">()</span><span style="color: #a6e22e">;</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">}</span> 
+  <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">private</span> <span style="color: #a6e22e">curve_dot_one</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">~uint256</span><span style="color: #e6db74">(12)</span><span style="color: #a6e22e">;</span>
+  <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">private</span> <span style="color: #a6e22e">curve_dot_two</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">~uint256</span><span style="color: #e6db74">(100)</span><span style="color: #a6e22e">;</span>
+  <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">private</span> <span style="color: #a6e22e">curve_dot_three</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">~uint256</span><span style="color: #e6db74">(curve_dot_two)</span><span style="color: #a6e22e">;</span>
+  
+  <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">rand</span><span style="color: #e6db74">()</span> <span style="color: #a6e22e">private</span> <span style="color: #a6e22e">view</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(uint256 result)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">solc_one</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">curve_dot_one</span> <span style="color: #960050; background-color: #1e0010">/</span> <span style="color: #a6e22e">curve_dot_two;</span>
+    <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">sum_solc</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">uint256</span><span style="color: #e6db74">(block.blockhash(block.number - 1))</span><span style="color: #a6e22e">;</span>
+    <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">uint256</span><span style="color: #e6db74">((uint256(sum_solc) / solc_one))</span> <span style="color: #75715e">% curve_dot_three;</span>
+  <span style="color: #f8f8f2">}</span>
+  
+  <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">solved</span><span style="color: #e6db74">()</span> <span style="color: #a6e22e">private</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">contract_status</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">true;</span>
+  <span style="color: #f8f8f2">}</span>
+  
+  <span style="color: #a6e22e">function</span><span style="color: #e6db74">()</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">payable</span> <span style="color: #f8f8f2">{}</span>
+  
+  <span style="color: #f8f8f2">}</span>
+  </pre>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 text-center" style="margin-top: 10%; margin-bottom: 5%">
+      <img src="../assets/img/logo.png" alt="POS" class="responsive" style="max-width: 550px; max-height: 550px;">
+    </div>
+
+
+  </div>
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="../assets/bootstrap/jquery-3.1.1.slim.min.js"></script>
+  <script src="../assets/bootstrap/tether.min.js"></script>
+  <script src="../assets/bootstrap/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../../../favicon.ico">
+
+  <title>Proof-of-Skill</title>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="../assets/bootstrap/boostrap.min.css">
+  <link rel="stylesheet" href="../assets/styles/leaderboard.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <script src="../assets/js/leaderboard.js"></script>
+</head>
+
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="../assets/img/log.png" alt="POS" class="responsive" style="max-width: 300px; max-height: 300px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div style="color: #1e0010; font-weight: 700; font-size: 20px;" class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="#">Задача 1
+
+        </a>
+        <a class="nav-item nav-link" href="#">Задача 2</a>
+        <a class="nav-item nav-link" href="#">Задача 3</a>
+        <a style="color: red;" class="nav-item nav-link" href="#">Помощь</a>
+        <a style="color: rgb(28,168,252);" class="nav-item nav-link active" href="#">Таблица лидеров
+          <span class="sr-only">(current)</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="root"></div>
+
+  <script type="text/babel">    
+
+    console.log(mockedResults);
+    
+    class Results extends React.Component {
+      constructor (props) {
+        super(props);
+        this.state = {};
+      }
+      componentDidMount() {
+        this.getResults();
+      }
+      render(){
+        let output;
+        if (!this.state.results) 
+          return <p className="warning">Loading results compnent...</p>;
+        else if (!this.state.results.length) 
+          return <p className="warning">No appropriate results!</p>;
+        else return(
+          <div>
+            <p className="results-title">Результаты</p>
+            <div className="table-responsive">
+              <table className="table table-striped table-sm">
+                <thead>
+                  <tr>
+                    <th>Команда</th>
+                    <th>Задача 1</th>
+                    <th>Задача 2</th>
+                    <th>Задача 3</th>
+                    <th>Решенные задачи</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.state.results.map(item => <ResultsItem key={rnd(10)} {...item}/>)}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )
+      }
+      getResults(){
+        this.setState({results: mockedResults});
+      }
+    }
+
+    class ResultsItem extends React.Component {
+      constructor (props) {
+        super();
+      }
+      render(){
+        return(
+          <tr>
+            <td>{this.props.teamId}</td>
+            <td>{date(this.props.timestamp1)}</td>
+            <td>{date(this.props.timestamp2)}</td>
+            <td>{date(this.props.timestamp3)}</td>
+            <td>{Result.redyTasks(this.props)}</td>
+          </tr>
+          // <li className="search-result-item">
+          //   <img src={this.props.avatar}></img>
+          //   <h3 className="search-result-item-name">{this.props.fname} {this.props.lname}</h3>
+          //   <p className="search-result-item-phone"><b>Phone:</b> {this.props.phone}</p>
+          //   <span className="search-result-item-address item">{this.props.adress}, {this.props.city}</span>
+          // </li>
+        )}
+    }
+
+    ReactDOM.render(
+      <Results />,
+      document.getElementById('root')
+    );
+  </script>
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="../assets/bootstrap/jquery-3.1.1.slim.min.js"></script>
+  <script src="../assets/bootstrap/tether.min.js"></script>
+  <script src="../assets/bootstrap/bootstrap.min.js"></script>
+
+</body>
+
+</html>

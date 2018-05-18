@@ -1,0 +1,33 @@
+body {
+    margin-top: 65px;
+}
+.help {
+    color: red;
+}
+.leaders {
+    color: rgb(28,168,252);
+}
+.task {
+    margin-top: 5%; font-size: 69px !important; color: #1e0010; font-weight: 700;
+}
+.deploy_btn {
+    font-size: 20px;
+}
+.about_task {
+    font-size: 40px !important;
+}
+.head_about_address {
+    font-weight: 900; color: #1e0010;
+}
+
+.logos {
+    margin-top: 10%; margin-bottom: 5%;
+}
+
+.image_logo {
+    max-width: 550px; max-height: 550px;
+}
+
+.about_describtion {
+    color: #1e0010 !important;
+}
