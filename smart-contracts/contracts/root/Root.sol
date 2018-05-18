@@ -29,6 +29,7 @@ contract Root is Ownable {
     address _teamHash = address(keccak256(_name));
     teamHash[msg.sender] = _teamHash;
     participantName[_teamHash] = _name;
+
     signed[msg.sender] = true;
     return true;
   }
@@ -74,11 +75,13 @@ contract Root is Ownable {
   function getInstance(string _factoryName) public view returns(address){
     address _teamHash = teamHash[msg.sender];
     return instance[keccak256(_factoryName)][_teamHash];
+
   }
 
   function getSolved(string _factoryName) public view returns(bool){
     address _teamHash = teamHash[msg.sender];
     return solved[keccak256(_factoryName)][_teamHash];
+
   }
 
   function checkSolved(string _factoryName) public returns(bool){
@@ -93,5 +96,9 @@ contract Root is Ownable {
     }
     return true;
   }
+  
+    function addSolution(address userAddress, string taskName, uint amount) public {
+       emit Solved(block.timestamp, userAddress, taskName, amount);
+    } 
   
 }

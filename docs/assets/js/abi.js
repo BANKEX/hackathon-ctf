@@ -1,4 +1,5 @@
   var contractName = "Root";
+  var contractAddress = "0x9fbda871d559710256a2502a2517b794b482db40";
   var abi = [
     {
       "constant": true,
