@@ -1,19 +1,13 @@
-
-const contractAddress = localStorage.getItem('rootContractAddress') || '0x8cdaf0cd259887258bc13a92c0a6da92698644c0';
-
 async function initConnection(web3) {
-  let account, accounts, networkId, error;
-  if (!web3 || !web3.currentProvider) {
-    throw new Error('No Web3 provider found');
-  }
-  accounts = await web3.eth.getAccounts();
-  if (!accounts) { throw new Error('No Web3 provider found'); }
-  if (!accounts[0]) { throw new Error('Web3 provider is locked'); }
+  let account, network;
+  if (!web3 || !web3.currentProvider) throw new Error('No Web3 provider found');
+  const accounts = await web3.eth.getAccounts();
+  if (!accounts) throw new Error('No Web3 provider found');
+  if (!accounts[0]) throw new Error('Web3 provider is locked');
   account = accounts[0];
   network = await web3.eth.net.getId();
-  if (error) { throw new Error(error); }
-    return {account, network};
-};
+  return {account, network};
+}
 
 // Returns ready-to-go Web3 instacne
 function checkAndInstantiateWeb3() {

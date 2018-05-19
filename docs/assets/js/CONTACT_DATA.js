@@ -1,6 +1,6 @@
-  var contractName = "Root";
-  var contractAddress = "0x9fbda871d559710256a2502a2517b794b482db40";
-  var abi = [
+  const contractName = "Root";
+  const contractAddress = "0x42a5ac4069f8ff8182f7da2212201cbfec96942e";
+  const abi = [
     {
       "constant": true,
       "inputs": [
@@ -75,6 +75,25 @@
         {
           "name": "",
           "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "teamHash",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
         }
       ],
       "payable": false,
@@ -215,10 +234,38 @@
       "type": "function"
     },
     {
+      "constant": true,
+      "inputs": [],
+      "name": "getSignedUp",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getTeamName",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "constant": false,
       "inputs": [
         {
-          "name": "_participant",
+          "name": "_teamHash",
           "type": "address"
         },
         {
@@ -370,6 +417,28 @@
           "type": "bool"
         }
       ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "userAddress",
+          "type": "address"
+        },
+        {
+          "name": "taskName",
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "addSolution",
+      "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
       "type": "function"

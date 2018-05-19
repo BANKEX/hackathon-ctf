@@ -13,107 +13,62 @@
 </head>
 
 <body>
-<div class="container register-cont">
-  <div class="col-md-12 text-center">
-    <h2>Регистрация</h2>
-    <br>
-    <br>
-  </div>
-  <form class="form-horizontal col-md-12" role="form" method="POST" action="/register">
-    <div class="row">
-      <div class="col-md-3"></div>
-    </div>
-    <div class="row">
-      <div class="col-12 text-center">
-        <h5>Вы вошли как:</h5>
-        <br>
-      </div>
-      <div class="col-md-12 text-center">
-        <h5>
-          <label for="team">Введите имя команды</label>
-        </h5>
-      </div>
-      <div class="col-md-12">
-        <div class="form-group">
-          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-            <div class="input-group-addon" style="width: 2.6rem">
-              <i class="fa fa-user"></i>
-            </div>
-            <input type="text" name="team" class="form-control" id="team" placeholder="Команда 1" required autofocus>
-          </div>
+    <div class="container register-cont">
+        <div class="col-md-12 text-center">
+            <h2>Регистрация</h2>
+            <br>
+            <br>
         </div>
-      </div>
+        <form class="form-horizontal col-md-12" role="form">
+            <div class="row">
+                <div class="col-md-3"></div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h5>Вы вошли как:</h5>
+                    <p id="teamName"></p>
+                </div>
+                <div class="col-md-12 text-center">
+                    <h5>
+                        <label for="team">Введите имя команды</label>
+                    </h5>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon" style="width: 2.6rem">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <input type="text" name="team" class="form-control" id="team" placeholder="Команда 1" required autofocus>
+                        </div>
+                    </div>
+                </div>
 
     </div>
 
-    <div class="row">
-      <div class="col-md-3"></div>
-      <div class="col-md-12 text-center">
-        <button id="submitRegistration" type="button" class="btn btn-success">
-          <i class="fa fa-user-plus"></i> Зарегистрироваться
-        </button>
-      </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-12 text-center">
+                    <button type="button" class="btn btn-success" id="regButton">
+                        <i class="fa fa-user-plus"></i> Зарегистрироваться</button>
+                </div>
+            </div>
+        </form>
     </div>
-  </form>
-</div>
 
-
-<!--<script src="../assets/js/vendor/web3.min.js"></script>-->
-<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
-
-<!-- Be carefull for now rootABI should be included before interaction with main contract -->
-<script type="text/javascript" src="../utils/rootABI.js"></script>
-<script type="text/javascript" src="../utils/web3init.js"></script>
-
-<!--
-<script type="text/javascript" src="../assets/js/connection.js"></script>
-<script type="text/javascript" src="../assets/js/abi.js"></script>
--->
-<script type="text/javascript">
-
-  // function startApp() {
-  //   try {
-  //     myWeb3 = checkAndInstantiateWeb3();
-  //     initConnection(myWeb3).then(({account}) => {
-  //       userAccount = account;
-  //       contract = new myWeb3.eth.Contract(abi, contractAddress);
-  //     })
-  //   }
-  //   catch (err) {
-  //     alert(err.message);
-  //     console.error(err);
-  //   }
-  // }
-
-  window.onload = () => {
-
-
-    const address = localStorage.getItem('rootContractAddress') || '0x9a335d5fc5d1bde74ea5544b716933eb999c684e';
-
-    const submitBtn = document.getElementById("submitRegistration");
-
-    submitBtn.onclick = () => {
-
-      const rootContact = web3.eth.contract(rootABI);
-      const rootContactInstance = rootContact.at(address);
-      const name = document.getElementById("team").value;
-
-      rootContactInstance.signUp.call(name, (err, result) => {
-
-        if (result)
-          window.location.replace("tasks1.html");
-        else
-          alert("Error");
-      });
-    };
-  }
-</script>
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="../assets/bootstrap/jquery-3.1.1.slim.min.js"></script>
-<script src="../assets/bootstrap/tether.min.js"></script>
-<script src="../assets/bootstrap/bootstrap.min.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+      regButton.disabled = true;
+    </script>
+    <script src="../assets/bootstrap/jquery-3.1.1.slim.min.js"></script>
+    <script src="../assets/bootstrap/tether.min.js"></script>
+    <script src="../assets/bootstrap/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="../assets/js/vendor/web3.min.js"></script>
+    <script src="../assets/js/connection.js"></script>
+    <script src="../assets/js/CONTACT_DATA.js"></script>
+    <script src="../assets/js/reg.js"></script>
 </body>
 
 </html>
