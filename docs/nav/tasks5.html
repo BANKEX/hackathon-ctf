@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../../../favicon.ico">
+
+  <title>Proof-of-Skill</title>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="../assets/bootstrap/boostrap.min.css">
+</head>
+
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="../assets/img/log.png" alt="POS" class="responsive" style="max-width: 300px; max-height: 300px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div style="color: #1e0010; font-weight: 700; font-size: 20px;" class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="#">Задачи:</a>
+        <a class="nav-item nav-link" href="tasks1.html">1</a>
+        <a class="nav-item nav-link" href="tasks2.html">2</a>
+        <a class="nav-item nav-link" href="tasks3.html">3</a>
+        <a class="nav-item nav-link" href="tasks4.html">4</a>
+        <a class="nav-item nav-link active" href="tasks5.html">5<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="tasks6.html">6</a>
+        <a class="nav-item nav-link" href="tasks7.html">7</a>
+        <a style="color: red;" class="nav-item nav-link" href="help.html">Помощь</a>
+        <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="leaderboard.html">Таблица лидеров</a>
+        <a style="color: black; float: right" class="nav-item nav-link" id="teamName"></a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p style="margin-top: 5%; font-size: 69px !important; color: #1e0010; font-weight: 700;">Задача 5: "Black pearl"</p>
+        <button type="submit" class="btn btn-success btn-md" style="font-size: 20px;" id="taskDeploy">
+          <i class="fa fa-user-plus"></i> Деплой в сеть</button>
+        <button type="submit" class="btn btn-warning btn-md" style="font-size: 20px;" id="taskCheck">
+          <i class="fa fa-user-plus"></i>Отправить решение</button>
+
+        <!-- если уже решено-->
+
+        <button type="submit" class="btn btn-danger disabled btn-md" style="font-size: 20px;" id="taskSolved">
+          <i class="fa fa-user-plus"></i>Уже решено</button>
+          <blockquote style="font-size: 20px " class="blockquote">
+              <br>
+              <p style="font-size: 40px">Исходники задачи:</p>
+              <p style="font-size: 20px" class="mb-0"></p>
+                  <a href="https://github.com/BANKEX/CurveArithmetics/blob/master/contracts/TreasureChestInstance.sol">https://github.com/BANKEX/CurveArithmetics/blob/master/contracts/TreasureChestInstance.sol</a>
+              </p>
+              <footer style="font-size: 40px " class="blockquote-footer">Ваш смарт-контракт находится по адресу
+                <cite style="font-weight: 900; color: #1e0010" title="Source Title" id="taskAddress">0ceqiccnoijwncoiwncoiwncb</cite> в сети
+                <strong style="font-weight: 900; color: #1e0010">Rinkeby</strong>
+              </footer>
+            </blockquote>
+      </div>
+    </div>
+    <div class="col-12 text-center" style="margin-top: 10%; margin-bottom: 5%">
+      <img src="../assets/img/logo.png" alt="POS" class="responsive" style="max-width: 550px; max-height: 550px;">
+    </div>
+
+
+  </div>
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script>
+    taskCheck.disabled = true;
+    taskSolved.style.display = 'none';
+    taskAddress.innerHTML = '---';
+    const TASK = 'Black pearl';
+  </script>
+  <script src="../assets/bootstrap/jquery-3.1.1.slim.min.js"></script>
+  <script src="../assets/bootstrap/tether.min.js"></script>
+  <script src="../assets/bootstrap/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <script src="../assets/js/vendor/web3.min.js"></script>
+  <script src="../assets/js/connection.js"></script>
+  <script src="../assets/js/CONTACT_DATA.js"></script>
+  <script src="../assets/js/tasks.js"></script>
+</body>
+
+</html>
