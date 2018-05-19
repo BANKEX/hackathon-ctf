@@ -10,23 +10,20 @@ const mockedResults = [
 ]
 
 const messages = {
-  notReady: 'Not ready',
+  notReady: 'Не готова',
   notRinkeby: 'Please use Rinkeby Test Network'
 }
 
 class Result {
-  static redyTasks(result) {
-    let tasks = 0;
-    if(result.timestamp1) tasks+=1;
-    if(result.timestamp2) tasks+=1;
-    if(result.timestamp3) tasks+=1;
-    return tasks;
+  static readyTasks(result) {
+    const count = Object.keys(result.tasks).length;
+    return count;
   }
-  constructor( _userAddress, _timestamp1, _timestamp2, _timestamp3) {
+  constructor( _userAddress = undefined) {
     this.userAddress = _userAddress;
-    this.timestamp1 = _timestamp1;
-    this.timestamp2 = _timestamp2;
-    this.timestamp3 = _timestamp3;
+    this.score = undefined;
+    this.timestampScore = undefined;
+    this.tasks = {};
   }
 }
 
@@ -34,7 +31,7 @@ class Result {
  * Generate random number of given length
  * @param  {number} len
  */
-function rnd(len) {
+rnd = (len) => {
   return Math.floor(Math.random() * Math.pow(10, len));
 }
 
@@ -42,19 +39,51 @@ function rnd(len) {
  * Prepare timestamp
  * @param  {number} len
  */
-function date(timestamp) {
+date = (timestamp) => {
   if (timestamp) {
     let str;
     let date = new Date(timestamp);
-    return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    return `${('0'+date.getHours()).slice(-2)}:${('0'+date.getMinutes()).slice(-2)}:${('0'+date.getSeconds()).slice(-2)}`;
   } else {
     return messages.notReady;
   }
 }
 
-async function getHackatonResults() {
+getHackatonResults = async () =>  {
+  const rowData = {};
   const solvedEvents = await contract.getPastEvents(
     'Solved', { fromBlock: 0});
-  hackatonResults.next(mockedResults);
+  solvedEvents.forEach((event, index, array) => {
+    const { amount, factoryName, participantAddress, timestamp}  = event.returnValues;
+    if (rowData[participantAddress]) {
+      rowData[participantAddress][factoryName] = [timestamp, amount]
+    } else {
+      let content = {};
+      content[factoryName] = [timestamp, amount];
+      rowData[participantAddress] = content;
+    }
+  });
+  console.log(rowData);
+  const results = [];
+  Object.keys(rowData).forEach((address, index, array) => {
+    const tasks = rowData[address];
+    const result = new Result(address);
+    result.score = 0;
+    result.timestampScore = 0;
+    result.tasks = {};
+    Object.keys(tasks).forEach((taskName, index, array) => {
+      const task = tasks[taskName];
+      result.tasks[taskName] = task[0]*1000;
+      result.score += +task[1];
+      result.timestampScore += +task[0]*task[1];
+    });
+    results.push(result);
+  });
+  console.log(results)
+  hackatonResults.next(results);
+}
+
+getUserName = (address) => {
+  return true
 }
 
