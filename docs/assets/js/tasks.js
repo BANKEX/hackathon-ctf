@@ -1,7 +1,7 @@
 let myWeb3, contract, account, network, deployedAddressб, intDep, intSol;
 
 const checkAuth = async () => {
-  return await contract.methods.getSignedUp().call();
+  return await contract.methods.getSignedUp().call({from: account});
 };
 
 const funcTusk = () => {
@@ -10,7 +10,7 @@ const funcTusk = () => {
 };
 
 const checkDeployed = async () => {
-  deployedAddress = await contract.methods.getInstance(TASK).call();
+  deployedAddress = await contract.methods.getInstance(TASK).call({from: account});
   if (deployedAddress !== '0x0000000000000000000000000000000000000000') {
     taskCheck.disabled = false;
     taskAddress.innerHTML = deployedAddress;
@@ -26,7 +26,7 @@ const deployFunc = async () => {
 };
 
 const getSolved = async () => {
-  if (await contract.methods.getSolved(TASK).call()) {
+  if (await contract.methods.getSolved(TASK).call({from: account})) {
     taskDeploy.style.display = 'none';
     taskCheck.style.display = 'none';
     taskSolved.style.display = 'block';
@@ -52,7 +52,7 @@ const start = async () => {
     contract = new myWeb3.eth.Contract(abi, contractAddress);
     const auth = await checkAuth();
     if (!auth) window.location.href = 'team_reg.html';
-    teamName.innerHTML = await contract.methods.getTeamName().call();
+    teamName.innerHTML = await contract.methods.getTeamName().call({from: account});
     funcTusk();
     await checkDeployed();
     await getSolved();
