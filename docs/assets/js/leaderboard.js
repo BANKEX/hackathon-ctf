@@ -63,7 +63,8 @@ getHackatonResults = async () =>  {
       rowData[participantAddress] = content;
     }
   });
-  console.log(rowData);
+  // console.log(rowData);
+  getUserNames(rowData);
   const results = [];
   Object.keys(rowData).forEach((address, index, array) => {
     const tasks = rowData[address];
@@ -79,11 +80,15 @@ getHackatonResults = async () =>  {
     });
     results.push(result);
   });
-  console.log(results)
+  //console.log(results)
+  //console.log(userNames)
   hackatonResults.next(results);
 }
 
-getUserName = (address) => {
-  return true
+getUserNames = async (addresses) => {
+  await Promise.all(Object.keys(addresses).map(async(address) => {
+    const name = await contract.methods.participantName(address).call();
+    userNames[address] = name;
+  }));
 }
 

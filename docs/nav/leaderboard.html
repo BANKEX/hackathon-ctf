@@ -48,7 +48,7 @@
   <div class="container" id="root"></div>
 
   <script type="text/babel">
-    var myWeb3, poolingInterval, userAccount, networkId, contract;
+    var myWeb3, poolingInterval, userAccount, networkId, contract, userNames = {};
     console.log(mockedResults);
 
     class Results extends React.Component {
@@ -64,7 +64,7 @@
         if (!this.state.results)
           return <p className="warning text-center">Loading results...</p>;
         else if (!this.state.results.length)
-          return <p className="warning">No appropriate results!</p>;
+          return <p className="warning">No results yet...</p>;
         else return(
           <div>
             <p className="results-title">Результаты</p>
@@ -84,7 +84,7 @@
                 <tbody>
                   {
                     this.state.results
-                      .sort((a,b) => a.score > b.score)
+                      .sort((a,b) => a.score < b.score)
                       .map((item, index) => <ResultsItem key={rnd(10)} {...item} index={index}/>)
                   }
                 </tbody>
@@ -103,12 +103,12 @@
         return(
           <tr>
             <td>{this.props.index+1}</td>
-            <td className="name" title={this.props.userAddress}>{this.props.userAddress}</td>
+            <td className="name" title={this.props.userAddress}>{userNames[this.props.userAddress] || this.props.userAddress}</td>
             <td>{this.props.score}</td>
-            <td>{date(this.props.tasks.test1)}</td>
-            <td>{date(this.props.tasks.test2)}</td>
-            <td>{date(this.props.tasks.test3)}</td>
-            <td>{Result.readyTasks(this.props)}</td>
+            <td>{date(this.props.tasks['JoiCasino'])}</td>
+            <td>{date(this.props.tasks['LEGO'])}</td>
+            <td>{date(this.props.tasks['FastFlow'])}</td>
+            <td title={this.props.timestampScore}>{Result.readyTasks(this.props)}</td>
           </tr>
         )}
     }
