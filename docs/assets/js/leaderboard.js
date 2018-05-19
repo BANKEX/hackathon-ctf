@@ -1,29 +1,29 @@
 const { Observable, Subject, ReplaySubject, from, of, range } = rxjs;
-// const { map, filter, switchMap } = rxjs.operators;
-
 const hackatonResults = new Subject();
-const mockedResults = [
-  {userAddress: '0x1231235', timestamp1: Date.now(), timestamp2: undefined, timestamp3: Date.now()},
-  {userAddress: '0x1233123', timestamp1: Date.now(), timestamp2: Date.now(), timestamp3: Date.now()},
-  {userAddress: '0x4563257', timestamp1: undefined, timestamp2: Date.now(), timestamp3: undefined},
-  {userAddress: '0x1236456', timestamp1: Date.now(), timestamp2: Date.now(), timestamp3: undefined},
-]
 
 const messages = {
   notReady: 'Не готова',
-  notRinkeby: 'Please use Rinkeby Test Network'
+  notRinkeby: 'Please use Rinkeby Test Network',
+  submitedAt: 'Результат получен в',
 }
 
 class Result {
-  static readyTasks(result) {
-    const count = Object.keys(result.tasks).length;
+  static countFinishedTasks(tasks, count = 0) {
+    Object.keys(tasks).forEach((key, index) => tasks[key] && (count +=1))
     return count;
   }
-  constructor( _userAddress = undefined) {
+  constructor( _userAddress) {
     this.userAddress = _userAddress;
+    this.tasks = {};
+    this.tasks['JoiCasino'] = undefined;
+    this.tasks['LEGO'] = undefined;
+    this.tasks['FastFlow'] = undefined;
+    this.tasks['Yohoho and a bottle of rum'] = undefined;
+    this.tasks['Black pearl'] = undefined;
+    this.tasks['Jack the Sparrow'] = undefined;
+    this.tasks['Sir Henry Morgan'] = undefined;
     this.score = undefined;
     this.timestampScore = undefined;
-    this.tasks = {};
   }
 }
 
@@ -41,9 +41,8 @@ rnd = (len) => {
  */
 date = (timestamp) => {
   if (timestamp) {
-    let str;
     let date = new Date(timestamp);
-    return `${('0'+date.getHours()).slice(-2)}:${('0'+date.getMinutes()).slice(-2)}:${('0'+date.getSeconds()).slice(-2)}`;
+    return `${messages.submitedAt+' '+('0'+date.getHours()).slice(-2)}:${('0'+date.getMinutes()).slice(-2)}:${('0'+date.getSeconds()).slice(-2)}`;
   } else {
     return messages.notReady;
   }
