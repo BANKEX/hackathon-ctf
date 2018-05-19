@@ -157,6 +157,29 @@
       "type": "function"
     },
     {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "solvedTimestamp",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "constant": false,
       "inputs": [
         {
@@ -195,6 +218,18 @@
         }
       ],
       "name": "Solved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "teamname",
+          "type": "string"
+        }
+      ],
+      "name": "AddTeam",
       "type": "event"
     },
     {
@@ -417,28 +452,6 @@
           "type": "bool"
         }
       ],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "userAddress",
-          "type": "address"
-        },
-        {
-          "name": "taskName",
-          "type": "string"
-        },
-        {
-          "name": "amount",
-          "type": "uint256"
-        }
-      ],
-      "name": "addSolution",
-      "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
       "type": "function"
