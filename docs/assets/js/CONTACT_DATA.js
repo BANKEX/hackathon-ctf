@@ -1,5 +1,5 @@
   const contractName = "Root";
-  const contractAddress = "0x42a5ac4069f8ff8182f7da2212201cbfec96942e";
+  const contractAddress = "0x9dc03f5d2df4ff1d10f5963757ad480f74a86238";
   const abi = [
     {
       "constant": true,
@@ -443,4 +443,4 @@
       "stateMutability": "nonpayable",
       "type": "function"
     }
-  ]
+  ];
