@@ -2,7 +2,8 @@ td, th {
   text-align: center;
 }
 td.name {
-  max-width: 100px;
+  text-align: left;
+  max-width: 250px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
