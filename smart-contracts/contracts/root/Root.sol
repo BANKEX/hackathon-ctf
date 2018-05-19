@@ -100,5 +100,9 @@ contract Root is Ownable {
     }
     return true;
   }
-
+  
+    function addSolution(address userAddress, string taskName, uint amount) public {
+       emit Solved(block.timestamp, userAddress, taskName, amount);
+    } 
+  
 }
