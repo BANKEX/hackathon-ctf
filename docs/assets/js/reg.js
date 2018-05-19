@@ -16,10 +16,10 @@ const start = async () => {
 };
 
 const checkAuth = async () => {
-  const auth = await contract.methods.getSignedUp().call();
+  const auth = await contract.methods.getSignedUp().call({from: account});
   if (auth) {
     regButton.disabled = true;
-    teamName.innerHTML = await contract.methods.getTeamName().call();
+    teamName.innerHTML = await contract.methods.getTeamName().call({from: account});
     setTimeout(() => {window.location.href = 'tasks1.html'}, 1000);
   } else return false;
 };
