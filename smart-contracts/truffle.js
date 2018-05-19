@@ -54,13 +54,6 @@ module.exports = {
             gas: 4700000,
             gasPrice: 20000000000
         },
-        bankexTestNetwork: {
-            host: '52.166.13.111',
-            port: 8535,
-            network_id: 488412,
-            gasPrice: 180000000000,
-            from: "0xf17f52151EbEF6C7334FAD080c5704D77216b732"
-        },
         solc: {
             optimizer: {
                 enabled: true,
