@@ -54,7 +54,6 @@
 
   <script type="text/babel">
     var myWeb3, poolingInterval, userAccount, networkId, contract, userNames = {};
-    console.log(mockedResults);
 
     class Results extends React.Component {
       constructor (props) {
@@ -80,9 +79,13 @@
                     <th>Место</th>
                     <th>Участник</th>
                     <th>Счёт</th>
-                    <th>Задача 1</th>
-                    <th>Задача 2</th>
-                    <th>Задача 3</th>
+                    <th title="Задача №1 - JoiCasino">1</th>
+                    <th title="Задача №2 - LEGO">2</th>
+                    <th title="Задача №3 - FastFlow">3</th>
+                    <th title="Задача №4 - Yohoho and a bottle of rum">4</th>
+                    <th title="Задача №5 - Black pearl">5</th>
+                    <th title="Задача №6 - Jack the Sparrow">6</th>
+                    <th title="Задача №7 - Sir Henry Morgan">7</th>
                     <th>Решенные задачи</th>
                   </tr>
                 </thead>
@@ -110,10 +113,14 @@
             <td>{this.props.index+1}</td>
             <td className="name" title={this.props.userAddress}>{userNames[this.props.userAddress] || this.props.userAddress}</td>
             <td>{this.props.score}</td>
-            <td>{date(this.props.tasks['JoiCasino'])}</td>
-            <td>{date(this.props.tasks['LEGO'])}</td>
-            <td>{date(this.props.tasks['FastFlow'])}</td>
-            <td title={this.props.timestampScore}>{Result.readyTasks(this.props)}</td>
+            <td title={date(this.props.tasks['JoiCasino'])}>{this.props.tasks['JoiCasino'] ? 'Да' : '-'}</td>
+            <td title={date(this.props.tasks['LEGO'])}>{this.props.tasks['LEGO'] ? 'Да' : '-'}</td>
+            <td title={date(this.props.tasks['FastFlow'])}>{this.props.tasks['FastFlow'] ? 'Да' : '-'}</td>
+            <td title={date(this.props.tasks['Yohoho and a bottle of rum'])}>{this.props.tasks['Yohoho and a bottle of rum'] ? 'Да' : '-'}</td>
+            <td title={date(this.props.tasks['Black pearl'])}>{this.props.tasks['Black pearl'] ? 'Да' : '-'}</td>
+            <td title={date(this.props.tasks['Jack the Sparrow'])}>{this.props.tasks['Jack the Sparrow'] ? 'Да' : '-'}</td>
+            <td title={date(this.props.tasks['Sir Henry Morgan'])}>{this.props.tasks['Sir Henry Morgan'] ? 'Да' : '-'}</td>
+            <td title={this.props.timestampScore}>{Result.countFinishedTasks(this.props.tasks)}</td>
           </tr>
         )}
     }
