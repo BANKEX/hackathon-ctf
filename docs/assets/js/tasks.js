@@ -15,14 +15,26 @@ const checkDeployed = async () => {
     taskCheck.disabled = false;
     taskAddress.innerHTML = deployedAddress;
     clearInterval(intDep);
-  }
+    return true;
+  } else return false;
 };
 
 const deployFunc = async () => {
-  const res = await contract.methods.createInstance(TASK).send({from: account});
-  if (!res) throw new Error('Deploy fail');
+  const oa = taskAddress.innerHTML;
   taskAddress.innerHTML = '...ожидайте...';
-  intDep = setInterval(checkDeployed, 2000);
+  try {
+    const res = await contract.methods.createInstance(TASK).send({from: account});
+    if (!res) throw new Error('Deploy fail');
+    if (!await checkDeployed()) {
+      intDep = setInterval(checkDeployed, 2000);
+    }
+  } catch (e) {
+    if (e.message.indexOf('User denied transaction signature')!==-1) {
+      taskAddress.innerHTML = oa;
+    } else {
+      throw new Error(e);
+    }
+  }
 };
 
 const getSolved = async () => {
@@ -32,14 +44,27 @@ const getSolved = async () => {
     taskSolved.style.display = 'block';
     taskAddress.innerHTML = '----';
     clearInterval(intSol);
-  }
+    return true;
+  } else false;
 };
 
 const sendSolve = async () => {
-  const res = await contract.methods.checkSolved(TASK).send({from: account});
-  if (!res) throw new Error('Check fail');
+  const oa = taskAddress.innerHTML;
   taskAddress.innerHTML = '...ожидайте...';
-  intSol = setInterval(getSolved, 2000);
+  try{
+    const res = await contract.methods.checkSolved(TASK).send({from: account});
+    if (!res) throw new Error('Check fail');
+    if (!await getSolved()) {
+      alert('Задача не решена');
+      taskAddress.innerHTML = oa;
+    }
+  } catch (e) {
+    if (e.message.indexOf('User denied transaction signature')!==-1) {
+      taskAddress.innerHTML = oa;
+    } else {
+      throw new Error(e);
+    }
+  }
 };
 
 const start = async () => {
