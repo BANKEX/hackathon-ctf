@@ -16,16 +16,19 @@ contract Root is Ownable {
 
   mapping (bytes32 => mapping (address => address)) public instance;
   mapping (bytes32 => mapping (address => bool)) public solved;
+  mapping (bytes32 => mapping (address => uint)) public solvedTimestamp;
 
   mapping (bytes32 => address) internal libs_;
 
 
   event Solved(uint indexed timestamp, address participantAddress, string factoryName, uint amount);
+  event AddTeam(string teamname);
 
 
   function signUp(string _name) public returns(bool){
     require(!signed[msg.sender]);
     require(bytes(_name).length<64);
+    emit AddTeam(_name);
     address _teamHash = address(keccak256(_name));
     teamHash[msg.sender] = _teamHash;
     participantName[_teamHash] = _name;
@@ -96,13 +99,9 @@ contract Root is Ownable {
     bool _status = IInstance(instance[keccak256(_factoryName)][_teamHash]).status();
     if(_status) {
       solved[keccak256(_factoryName)][_teamHash] = true;
+      solvedTimestamp[keccak256(_factoryName)][_teamHash] = block.timestamp;
       emit Solved(block.timestamp, _teamHash, _factoryName, factoryAmount[keccak256(_factoryName)]);
     }
     return true;
   }
-  
-    function addSolution(address userAddress, string taskName, uint amount) public {
-       emit Solved(block.timestamp, userAddress, taskName, amount);
-    } 
-  
 }
