@@ -62,7 +62,7 @@
       render(){
         let output;
         if (!this.state.results)
-          return <p className="warning">Loading results compnent...</p>;
+          return <p className="warning text-center">Loading results...</p>;
         else if (!this.state.results.length)
           return <p className="warning">No appropriate results!</p>;
         else return(
@@ -72,7 +72,9 @@
               <table className="table table-striped table-sm">
                 <thead>
                   <tr>
+                    <th>Место</th>
                     <th>Участник</th>
+                    <th>Счёт</th>
                     <th>Задача 1</th>
                     <th>Задача 2</th>
                     <th>Задача 3</th>
@@ -80,7 +82,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.results.map(item => <ResultsItem key={rnd(10)} {...item}/>)}
+                  {
+                    this.state.results
+                      .sort((a,b) => a.score > b.score)
+                      .map((item, index) => <ResultsItem key={rnd(10)} {...item} index={index}/>)
+                  }
                 </tbody>
               </table>
             </div>
@@ -96,11 +102,13 @@
       render(){
         return(
           <tr>
-            <td>{this.props.userAddress}</td>
-            <td>{date(this.props.timestamp1)}</td>
-            <td>{date(this.props.timestamp2)}</td>
-            <td>{date(this.props.timestamp3)}</td>
-            <td>{Result.redyTasks(this.props)}</td>
+            <td>{this.props.index+1}</td>
+            <td className="name" title={this.props.userAddress}>{this.props.userAddress}</td>
+            <td>{this.props.score}</td>
+            <td>{date(this.props.tasks.test1)}</td>
+            <td>{date(this.props.tasks.test2)}</td>
+            <td>{date(this.props.tasks.test3)}</td>
+            <td>{Result.readyTasks(this.props)}</td>
           </tr>
         )}
     }
@@ -121,7 +129,7 @@
           networkId = network;
           if (networkId !== 4 && networkId !== 5777 && networkId !== 1337) { throw Error(messages.notRinkeby); }
           contract = new myWeb3.eth.Contract(abi, contractAddress);
-          poolingInterval = setInterval(getHackatonResults, 1000);
+          poolingInterval = setInterval(getHackatonResults, 5000);
           console.log(`Connected to ${networkId === 4 ? 'Rinkeby' : 'Local'} network`);
           console.log('Your address ' + userAccount);
           console.log('Contract address ' + contract.options.address)
