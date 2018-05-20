@@ -1,0 +1,30 @@
+<template id="navigation-template">
+  <style>
+    :host { display: block; }
+  </style>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="../assets/img/log.png" alt="POS" class="responsive" style="max-width: 300px; max-height: 300px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div style="color: #1e0010; font-weight: 700; font-size: 20px;" class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+          <a style="color: #1a1a1a;" class="nav-item nav-link">Задачи:</a>
+          <a id="nav1" class="nav-item nav-link" href="tasks1.html">1</a>
+          <a id="nav2" class="nav-item nav-link" href="tasks2.html">2</a>
+          <a id="nav3" class="nav-item nav-link" href="tasks3.html">3</a>
+          <a id="nav4" class="nav-item nav-link" href="tasks4.html">4</a>
+          <a id="nav5" class="nav-item nav-link" href="tasks5.html">5</a>
+          <a id="nav6" class="nav-item nav-link" href="tasks6.html">6</a>
+          <a id="nav7" class="nav-item nav-link" href="tasks7.html">7</a>
+          <a id="nav8" style="color: red;" class="nav-item nav-link" href="help.html">Помощь</a>
+          <a id="nav9" style="color: rgb(28,168,252);" class="nav-item nav-link" href="leaderboard.html">Таблица лидеров<span class="sr-only">(current)</span></a>
+          <a style="color: black; float: right" class="nav-item nav-link" id="teamName"></a>
+      </div>
+    </div>
+  </nav>
+</template>
+<script src="./nav.component.js"></script>
