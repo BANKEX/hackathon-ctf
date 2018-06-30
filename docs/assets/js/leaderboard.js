@@ -92,9 +92,6 @@ getUserNames = async (addresses) => {
 }
 
 async function fetchData(request) {
-  fetch(request).then(data => data.json()).then(results => {
-    console.log(results)
-    hackatonResults.next(results);
-  });
+  fetch(request).then(data => data.json()).then(results => hackatonResults.next(results));
 }
 
