@@ -13,62 +13,92 @@
 </head>
 
 <body>
-    <div class="container register-cont">
-        <div class="col-md-12 text-center">
-            <h2>Регистрация</h2>
-            <br>
-            <br>
+  <div class="container register-cont">
+    <div class="col-md-12 text-center" style="display:flex">
+      <h2 class="p-4 m-auto">Регистрация</h2>
+      <br>
+      <br>
+    </div>
+    <form class="form-horizontal col-md-12" role="form">
+      <div id="yourTeamEl" class="d-none">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h5>Ваша команда:</h5>
+            <p id="teamName"></p>
+          </div>
+          <div class="col-md-12 text-center">
+            <h5>
+              <label for="team">Вы можете пригласить товарища в свою команду</label>
+            </h5>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <div class="input-group-addon" style="width: 2.6rem">
+                  <i class="fa fa-user"></i>
+                </div>
+                <input type="text" name="team" class="form-control" id="mate" placeholder="Адрес товарища" required autofocus>
+              </div>
+            </div>
+          </div>
         </div>
-        <form class="form-horizontal col-md-12" role="form">
-            <div class="row">
-                <div class="col-md-3"></div>
+        <div class="row" id="inviteEl">
+          <div class="col-md-12 text-center">
+            <button type="button" class="btn btn-success" id="inviteButton">
+              <i class="fa fa-user-plus"></i>Пригласить</button>
+          </div>
+        </div>
+        <div class="row" id="leaveEl">
+          <div class="col-md-12 text-center mt-3">
+            <button type="button" class="btn btn-info" id="leaveButton">
+              Перейти к заданиям
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="createTeamEl" class="d-none">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <div class="input-group-addon" style="width: 2.6rem">
+                  <i class="fa fa-user"></i>
+                </div>
+                <input type="text" name="team" class="form-control" id="team" placeholder="Название команды" required autofocus>
+              </div>
             </div>
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h5>Вы вошли как:</h5>
-                    <p id="teamName"></p>
-                </div>
-                <div class="col-md-12 text-center">
-                    <h5>
-                        <label for="team">Введите имя команды</label>
-                    </h5>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <div class="input-group-addon" style="width: 2.6rem">
-                                <i class="fa fa-user"></i>
-                            </div>
-                            <input type="text" name="team" class="form-control" id="team" placeholder="Команда 1" required autofocus>
-                        </div>
-                    </div>
-                </div>
+          </div>
+        </div>
+        <div class="row" id="registerTeamEl">
+          <div class="col-md-3"></div>
+          <div class="col-md-12 text-center">
+            <button type="button" class="btn btn-success" id="regButton">
+              <i class="fa fa-user-plus"></i> Зарегистрировать команду</button>
+          </div>
+        </div>
+        <div class="row p-3 mt-4 d-none" id="joinTeamEl">
+          <div class="col-md-12 text-center">
+            <h5>
+              <label for="team">Ваc пригласили в команду:</label>
+            </h5>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div id="info" class="text-danger text-center mt-5"></div>
 
-    </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-12 text-center">
-                    <button type="button" class="btn btn-success" id="regButton">
-                        <i class="fa fa-user-plus"></i> Зарегистрироваться</button>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script>
-      regButton.disabled = true;
-    </script>
-    <script src="../assets/bootstrap/jquery-3.1.1.slim.min.js"></script>
-    <script src="../assets/bootstrap/tether.min.js"></script>
-    <script src="../assets/bootstrap/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-    <script src="../assets/js/vendor/web3.min.js"></script>
-    <script src="../assets/js/connection.js"></script>
-    <script src="../assets/js/CONTACT_DATA.js"></script>
-    <script src="../assets/js/reg.js"></script>
+  <script src="../assets/bootstrap/jquery-3.1.1.slim.min.js"></script>
+  <script src="../assets/bootstrap/tether.min.js"></script>
+  <script src="../assets/bootstrap/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <script src="../assets/js/vendor/web3.min.js"></script>
+  <script src="../assets/js/connection.js"></script>
+  <script src="../assets/js/CONTACT_DATA.js"></script>
+  <script src="../assets/js/reg.js"></script>
 </body>
 
 </html>

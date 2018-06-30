@@ -77,6 +77,8 @@ const start = async () => {
     contract = new myWeb3.eth.Contract(abi, contractAddress);
     const auth = await checkAuth();
     if (!auth) window.location.href = 'team_reg.html';
+    teamName.onclick = () => window.location.href = 'team_reg.html'
+    teamName.style.cursor = 'pointer';
     teamName.innerHTML = await contract.methods.getTeamName().call({from: account});
     funcTusk();
     await checkDeployed();
