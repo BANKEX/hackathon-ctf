@@ -10,4 +10,4 @@ We are using only frontend solution connected directly to Rinkeby.
 
 
 ## Live Demo:
-https://bankex.github.io/proof-of-skill-hackathon-ctf/
+https://bankex.github.io/hackathon-ctf/
