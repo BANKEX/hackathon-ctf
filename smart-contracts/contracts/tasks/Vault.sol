@@ -192,11 +192,6 @@ contract Vault is ERC223ReceivingContract, ERC223Token {
   function get() {
     
     transferFrom(this, msg.sender, sentSum[msg.sender]);
-    // bytes4 sig = bytes4(sha3("transferFrom(address, address, uint256)"));
-    
-    // if (!msg.sender.call(sig, this, msg.sender, sentSum[msg.sender])) {
-    //   revert();
-    // }
     
     sentSum[msg.sender] = 0;
     
