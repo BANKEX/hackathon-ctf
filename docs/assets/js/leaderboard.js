@@ -49,39 +49,39 @@ date = (timestamp) => {
   }
 }
 
-getHackatonResults = async () =>  {
-  const rowData = {};
-  const solvedEvents = await contract.getPastEvents(
-    'Solved', { fromBlock: 0});
-  solvedEvents.forEach((event, index, array) => {
-    const { amount, factoryName, participantAddress, timestamp}  = event.returnValues;
-    if (rowData[participantAddress]) {
-      rowData[participantAddress][factoryName] = [timestamp, amount]
-    } else {
-      let content = {};
-      content[factoryName] = [timestamp, amount];
-      rowData[participantAddress] = content;
-    }
-  });
-  // console.log(rowData);
-  getUserNames(rowData);
-  const results = [];
-  Object.keys(rowData).forEach((address, index, array) => {
-    const tasks = rowData[address];
-    const result = new Result(address);
-    result.score = 0;
-    result.timestampScore = 0;
-    result.tasks = {};
-    Object.keys(tasks).forEach((taskName, index, array) => {
-      const task = tasks[taskName];
-      result.tasks[taskName] = task[0]*1000;
-      result.score += +task[1];
-      result.timestampScore += +task[0]*task[1];
-    });
-    results.push(result);
-  });
-  //console.log(results)
-  //console.log(userNames)
+getHackatonResults = async (streamReader) =>  {
+  // const rowData = {};
+  // const solvedEvents = await contract.getPastEvents(
+  //   'Solved', { fromBlock: 0});
+  // solvedEvents.forEach((event, index, array) => {
+  //   const { amount, factoryName, participantAddress, timestamp}  = event.returnValues;
+  //   if (rowData[participantAddress]) {
+  //     rowData[participantAddress][factoryName] = [timestamp, amount]
+  //   } else {
+  //     let content = {};
+  //     content[factoryName] = [timestamp, amount];
+  //     rowData[participantAddress] = content;
+  //   }
+  // });
+  // // console.log(rowData);
+  // getUserNames(rowData);
+  // const results = [];
+  // Object.keys(rowData).forEach((address, index, array) => {
+  //   const tasks = rowData[address];
+  //   const result = new Result(address);
+  //   result.score = 0;
+  //   result.timestampScore = 0;
+  //   result.tasks = {};
+  //   Object.keys(tasks).forEach((taskName, index, array) => {
+  //     const task = tasks[taskName];
+  //     result.tasks[taskName] = task[0]*1000;
+  //     result.score += +task[1];
+  //     result.timestampScore += +task[0]*task[1];
+  //   });
+  //  results.push(result);
+  //});
+
+  console.log(results)
   hackatonResults.next(results);
 }
 
@@ -90,5 +90,9 @@ getUserNames = async (addresses) => {
     const name = await contract.methods.participantName(address).call();
     userNames[address] = name;
   }));
+}
+
+async function fetchData(request) {
+  fetch(request).then(data => data.json()).then(results => hackatonResults.next(results));
 }
 
