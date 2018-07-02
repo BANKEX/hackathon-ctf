@@ -24,6 +24,7 @@ class Result {
     this.tasks['Sir Henry Morgan'] = undefined;
     this.tasks['Kamikaze'] = undefined;
     this.tasks['Vault'] = undefined;
+    this.tasks['DoubleTapVote'] = undefined;
     this.score = undefined;
     this.timestampScore = undefined;
   }
