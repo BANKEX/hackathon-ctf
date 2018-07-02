@@ -1,6 +1,6 @@
 var Root = artifacts.require("./Root.sol");
 
-var tasks = ["FastFlow", "JoiCasino", "LEGO"];
+var tasks = ["FastFlow", "JoiCasino", "LEGO", "Kamikaze", "Vault"];
 
 
 
