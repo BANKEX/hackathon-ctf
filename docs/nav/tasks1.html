@@ -36,6 +36,7 @@
         <a class="nav-item nav-link" href="tasks6.html">6</a>
         <a class="nav-item nav-link" href="tasks7.html">7</a>
         <a class="nav-item nav-link" href="tasks8.html">8</a>
+        <a class="nav-item nav-link" href="tasks9.html">9</a>
         <a style="color: red;" class="nav-item nav-link" href="help.html">Help</a>
         <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="leaderboard.html">Leaderboard</a>
         <a style="color: black; float: right" class="nav-item nav-link" id="teamName"></a>
@@ -64,51 +65,51 @@
             <cite style="font-weight: 900; color: #1e0010" title="Source Title" id="taskAddress">0ceqiccnoijwncoiwncoiwncb</cite> on <strong style="font-weight: 900; color: #1e0010">Rinkeby</strong> network
           </footer>
         </blockquote>
-        <div style="background: #272822; overfow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em; font-size: 20px;">
-          <pre style="margin: 0; line-height: 125%"><span style="color: #a6e22e">pragma</span> <span style="color: #a6e22e">solidity</span> <span style="color: #a6e22e">^0.4.21;</span>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #a6e22e">pragma</span> <span style="color: #a6e22e">solidity</span> <span style="color: #f92672">^</span><span style="color: #ae81ff">0.4</span><span style="color: #f8f8f2">.</span><span style="color: #ae81ff">21</span><span style="color: #f8f8f2">;</span>
 
 
-  <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">You</span> <span style="color: #a6e22e">need</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">win</span> <span style="color: #a6e22e">by</span> <span style="color: #a6e22e">putting</span> <span style="color: #a6e22e">correct</span> <span style="color: #a6e22e">bet</span>
-  <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">Here</span> <span style="color: #a6e22e">you</span> <span style="color: #a6e22e">a</span> <span style="color: #a6e22e">have</span> <span style="color: #a6e22e">original</span> <span style="color: #a6e22e">code</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">contract</span>
-
-
-  <span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">JoiCasino</span> <span style="color: #f8f8f2">{</span>
-
-  <span style="color: #a6e22e">bool</span> <span style="color: #a6e22e">private</span> <span style="color: #a6e22e">contract_status;</span>
-
-  <span style="color: #a6e22e">modifier</span> <span style="color: #a6e22e">onlyBet</span><span style="color: #e6db74">()</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">require</span><span style="color: #e6db74">(msg.value &gt;= 0.1 ether &amp;&amp; msg.value &lt;= 5 ether)</span><span style="color: #a6e22e">;</span>
-      <span style="color: #a6e22e">_;</span>
-  <span style="color: #f8f8f2">}</span>
-
-  <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">status</span><span style="color: #e6db74">()</span> <span style="color: #a6e22e">external</span> <span style="color: #a6e22e">view</span> <span style="color: #a6e22e">returns</span><span style="color: #e6db74">(bool)</span> <span style="color: #f8f8f2">{</span>
-    <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">contract_status;</span>
-  <span style="color: #f8f8f2">}</span>
-
-  <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">setBet</span><span style="color: #e6db74">(uint256 _userBet)</span> <span style="color: #a6e22e">external</span> <span style="color: #a6e22e">payable</span> <span style="color: #a6e22e">onlyBet</span> <span style="color: #f8f8f2">{</span>
-    <span style="color: #a6e22e">if</span><span style="color: #e6db74">(_userBet == rand())</span> <span style="color: #f8f8f2">{</span>
-        <span style="color: #a6e22e">msg.sender.transfer</span><span style="color: #e6db74">(address(this).balance)</span><span style="color: #a6e22e">;</span>
-        <span style="color: #a6e22e">solved</span><span style="color: #e6db74">()</span><span style="color: #a6e22e">;</span>
+  <span style="color: #75715e">// You need to win by putting correct bet</span>
+  <span style="color: #75715e">// Here you a have original code of contract </span>
+  
+  
+  <span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">Vulkan</span> <span style="color: #f8f8f2">{</span>
+      
+    <span style="color: #a6e22e">bool</span> <span style="color: #66d9ef">private</span> <span style="color: #a6e22e">contract_status</span><span style="color: #f8f8f2">;</span>
+  
+    <span style="color: #a6e22e">modifier</span> <span style="color: #a6e22e">onlyBet</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">value</span> <span style="color: #f92672">&gt;=</span> <span style="color: #ae81ff">0.1</span> <span style="color: #a6e22e">ether</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">value</span> <span style="color: #f92672">&lt;=</span> <span style="color: #ae81ff">5</span> <span style="color: #a6e22e">ether</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #a6e22e">_</span><span style="color: #f8f8f2">;</span>
     <span style="color: #f8f8f2">}</span>
+    
+    <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">status</span><span style="color: #f8f8f2">()</span> <span style="color: #a6e22e">external</span> <span style="color: #a6e22e">view</span> <span style="color: #a6e22e">returns</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+      <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">contract_status</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f8f8f2">}</span>
+  
+    <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">setBet</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">_userBet</span><span style="color: #f8f8f2">)</span> <span style="color: #a6e22e">external</span> <span style="color: #a6e22e">payable</span> <span style="color: #a6e22e">onlyBet</span> <span style="color: #f8f8f2">{</span>
+      <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_userBet</span> <span style="color: #f92672">==</span> <span style="color: #a6e22e">rand</span><span style="color: #f8f8f2">())</span> <span style="color: #f8f8f2">{</span>
+          <span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">transfer</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">this</span><span style="color: #f8f8f2">).</span><span style="color: #a6e22e">balance</span><span style="color: #f8f8f2">);</span>
+          <span style="color: #a6e22e">solved</span><span style="color: #f8f8f2">();</span>
+      <span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span> 
+    <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">constant</span> <span style="color: #66d9ef">private</span> <span style="color: #a6e22e">curve_dot_one</span> <span style="color: #f92672">=</span> <span style="color: #f92672">~</span><span style="color: #a6e22e">uint256</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">12</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">constant</span> <span style="color: #66d9ef">private</span> <span style="color: #a6e22e">curve_dot_two</span> <span style="color: #f92672">=</span> <span style="color: #f92672">~</span><span style="color: #a6e22e">uint256</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">100</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">constant</span> <span style="color: #66d9ef">private</span> <span style="color: #a6e22e">curve_dot_three</span> <span style="color: #f92672">=</span> <span style="color: #f92672">~</span><span style="color: #a6e22e">uint256</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">curve_dot_two</span><span style="color: #f8f8f2">);</span>
+  
+    <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">rand</span><span style="color: #f8f8f2">()</span> <span style="color: #66d9ef">private</span> <span style="color: #a6e22e">view</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">result</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">solc_one</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">curve_dot_one</span> <span style="color: #f92672">/</span> <span style="color: #a6e22e">curve_dot_two</span><span style="color: #f8f8f2">;</span>
+      <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">sum_solc</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">uint256</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">block</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">blockhash</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">block</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">number</span> <span style="color: #f92672">-</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">));</span>
+      <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">uint256</span><span style="color: #f8f8f2">((</span><span style="color: #a6e22e">uint256</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">sum_solc</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">/</span> <span style="color: #a6e22e">solc_one</span><span style="color: #f8f8f2">))</span> <span style="color: #f92672">%</span> <span style="color: #a6e22e">curve_dot_three</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f8f8f2">}</span>
+    
+    <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">solved</span><span style="color: #f8f8f2">()</span> <span style="color: #66d9ef">private</span> <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">contract_status</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f8f8f2">}</span>
+    
+    <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">()</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">payable</span> <span style="color: #f8f8f2">{}</span>
+  
   <span style="color: #f8f8f2">}</span>
-  <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">private</span> <span style="color: #a6e22e">curve_dot_one</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">~uint256</span><span style="color: #e6db74">(12)</span><span style="color: #a6e22e">;</span>
-  <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">private</span> <span style="color: #a6e22e">curve_dot_two</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">~uint256</span><span style="color: #e6db74">(100)</span><span style="color: #a6e22e">;</span>
-  <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">private</span> <span style="color: #a6e22e">curve_dot_three</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">~uint256</span><span style="color: #e6db74">(curve_dot_two)</span><span style="color: #a6e22e">;</span>
-
-  <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">rand</span><span style="color: #e6db74">()</span> <span style="color: #a6e22e">private</span> <span style="color: #a6e22e">view</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(uint256 result)</span> <span style="color: #f8f8f2">{</span>
-    <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">solc_one</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">curve_dot_one</span> <span style="color: #960050; background-color: #1e0010">/</span> <span style="color: #a6e22e">curve_dot_two;</span>
-    <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">sum_solc</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">uint256</span><span style="color: #e6db74">(block.blockhash(block.number - 1))</span><span style="color: #a6e22e">;</span>
-    <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">uint256</span><span style="color: #e6db74">((uint256(sum_solc) / solc_one))</span> <span style="color: #75715e">% curve_dot_three;</span>
-  <span style="color: #f8f8f2">}</span>
-
-  <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">solved</span><span style="color: #e6db74">()</span> <span style="color: #a6e22e">private</span> <span style="color: #f8f8f2">{</span>
-    <span style="color: #a6e22e">contract_status</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">true;</span>
-  <span style="color: #f8f8f2">}</span>
-
-  <span style="color: #a6e22e">function</span><span style="color: #e6db74">()</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">payable</span> <span style="color: #f8f8f2">{}</span>
-
-  <span style="color: #f8f8f2">}</span>
-  </pre>
+  </pre></div>
+  
         </div>
       </div>
     </div>
