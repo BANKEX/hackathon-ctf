@@ -2,9 +2,9 @@ const { Observable, Subject, ReplaySubject, from, of, range } = rxjs;
 const hackatonResults = new Subject();
 
 const messages = {
-  notReady: 'Не готова',
+  notReady: 'Not ready',
   notRinkeby: 'Please use Rinkeby Test Network',
-  submitedAt: 'Результат получен в',
+  submitedAt: 'The result was obtained in',
 }
 
 class Result {

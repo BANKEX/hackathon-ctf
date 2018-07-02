@@ -21,7 +21,7 @@ const checkDeployed = async () => {
 
 const deployFunc = async () => {
   const oa = taskAddress.innerHTML;
-  taskAddress.innerHTML = '...ожидайте...';
+  taskAddress.innerHTML = '...please wait...';
   try {
     const res = await contract.methods.createInstance(TASK).send({from: account});
     if (!res) throw new Error('Deploy fail');
@@ -50,12 +50,12 @@ const getSolved = async () => {
 
 const sendSolve = async () => {
   const oa = taskAddress.innerHTML;
-  taskAddress.innerHTML = '...ожидайте...';
+  taskAddress.innerHTML = '...please wait...';
   try{
     const res = await contract.methods.checkSolved(TASK).send({from: account});
     if (!res) throw new Error('Check fail');
     if (!await getSolved()) {
-      alert('Задача не решена');
+      alert('The task is not solved');
       taskAddress.innerHTML = oa;
     }
   } catch (e) {
