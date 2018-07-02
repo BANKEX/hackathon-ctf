@@ -90,6 +90,9 @@
                     <th title="Task №5 - Black pearl">5</th>
                     <th title="Task №6 - Jack the Sparrow">6</th>
                     <th title="Task №7 - Sir Henry Morgan">7</th>
+                    <th title="Task №8 - Kamikaze">8</th>
+                    <th title="Task №9 - Vault">9</th>
+                    <th title="Task №10 - DoubleTapVote">10</th>
                     <th>Solved tasks</th>
                   </tr>
                 </thead>
@@ -126,6 +129,8 @@
               <td title={date(this.props.tasks['Jack the Sparrow'])}>{this.props.tasks['Jack the Sparrow'] ? 'Да' : '-'}</td>
               <td title={date(this.props.tasks['Sir Henry Morgan'])}>{this.props.tasks['Sir Henry Morgan'] ? 'Да' : '-'}</td>
               <td title={date(this.props.tasks['Kamikaze'])}>{this.props.tasks['Kamikaze'] ? 'Да' : '-'}</td>
+              <td title={date(this.props.tasks['Kamikaze'])}>{this.props.tasks['Vault'] ? 'Да' : '-'}</td>
+              <td title={date(this.props.tasks['Kamikaze'])}>{this.props.tasks['DoubleTapVote'] ? 'Да' : '-'}</td>
               <td title={this.props.timestampScore}>{Result.countFinishedTasks(this.props.tasks)}</td>
             </tr>
           )
