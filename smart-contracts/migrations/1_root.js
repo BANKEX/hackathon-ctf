@@ -22,5 +22,4 @@ module.exports = function(deployer, network, accounts) {
     await Promise.all(cryptoAddresses.map(a => root.addFactory(a)));
   })();
 
-  
 };
