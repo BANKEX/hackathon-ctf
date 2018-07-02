@@ -3,7 +3,7 @@ pragma solidity ^0.4.23;
 import "./IFactory.sol";
 import "../tasks/Vault.sol";
 
-contract VaultFactory {
+contract FactoryVault {
   
   mapping (address => address) contracts;
   
