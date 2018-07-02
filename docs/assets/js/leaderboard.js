@@ -23,6 +23,7 @@ class Result {
     this.tasks['Jack the Sparrow'] = undefined;
     this.tasks['Sir Henry Morgan'] = undefined;
     this.tasks['Kamikaze'] = undefined;
+    this.tasks['Vault'] = undefined;
     this.score = undefined;
     this.timestampScore = undefined;
   }
