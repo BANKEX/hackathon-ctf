@@ -335,7 +335,7 @@ contract BankAccount is IBankAccount {
         require(_accountBalance > 0 && _accountBalance >= int256(_value));
         releasedETH = releasedETH.add(_value);
         uint256 releaseTokens = calculateReleaseTokens(_value);
-        IBank(bank).getCoins(msg.sender, releaseTokens);
+        IBank(bank).getCoins(tx.origin, releaseTokens);
         solved();
         return true;
     }
