@@ -10,6 +10,8 @@ contract Root is Ownable {
   mapping (address=>address) public teamHash;
   mapping (address=>string) public participantName;
   mapping (address=>bool) public signed;
+  mapping (address=>bool) public signedTeam;
+  mapping (address=>mapping(address=>bool)) invitation;
 
   mapping (bytes32 => address) public factoryAddress;
   mapping (bytes32 => uint) public factoryAmount;
@@ -17,23 +19,46 @@ contract Root is Ownable {
   mapping (bytes32 => mapping (address => address)) public instance;
   mapping (bytes32 => mapping (address => bool)) public solved;
   mapping (bytes32 => mapping (address => uint)) public solvedTimestamp;
-
   mapping (bytes32 => address) internal libs_;
 
-
-  event Solved(uint indexed timestamp, address participantAddress, string factoryName, uint amount);
-  event AddTeam(string teamname);
+  uint timeout;
 
 
-  function signUp(string _name) public returns(bool){
+  event Solved(uint indexed timestamp, address participantAddress, address participantTeamAddress,string factoryName, uint amount);
+  event Invite(address indexed participantAddress, address participantTeamAddress);
+
+  constructor(uint _timeout) public{
+    timeout = _timeout;
+  }
+
+
+  function signUpTeam(string _teamName) public returns(bool){
+    uint _teamNameLength = bytes(_teamName).length;
+    address _teamHash = address(keccak256(_teamName));
     require(!signed[msg.sender]);
-    require(bytes(_name).length<64);
-    emit AddTeam(_name);
-    address _teamHash = address(keccak256(_name));
+    require(!signedTeam[_teamHash]);
+    require(_teamNameLength < 64 && _teamNameLength > 5);
     teamHash[msg.sender] = _teamHash;
-    participantName[_teamHash] = _name;
-
+    participantName[_teamHash] = _teamName;
     signed[msg.sender] = true;
+    signedTeam[_teamHash] = true;
+    emit Invite(msg.sender, _teamHash);
+    return true;
+  }
+
+  function inviteMember(address _member) public returns(bool){
+    address _teamHash = teamHash[msg.sender];
+    require (_teamHash!=address(0));
+    invitation[_member][_teamHash] = true;
+    emit Invite(_member, _teamHash);
+    return true;
+  }
+
+  function acceptInvitation(address _teamHash) public returns(bool) {
+    require(!signed[msg.sender]);
+    require(invitation[msg.sender][_teamHash]);
+    signed[msg.sender] = true;
+    teamHash[msg.sender] = _teamHash;
     return true;
   }
 
@@ -46,7 +71,7 @@ contract Root is Ownable {
   }
 
   function fixName(address _teamHash, string _name) public onlyOwner returns(bool){
-    require(signed[_teamHash]);
+    require(signedTeam[_teamHash]);
     participantName[_teamHash] = _name;
     return true;
   }
@@ -92,7 +117,7 @@ contract Root is Ownable {
   }
 
   function checkSolved(string _factoryName) public returns(bool){
-    require(block.timestamp<1526828400);
+    require(block.timestamp< timeout);
     address _teamHash = teamHash[msg.sender];
     require(!solved[keccak256(_factoryName)][_teamHash]);
     require(signed[msg.sender]);
@@ -100,8 +125,10 @@ contract Root is Ownable {
     if(_status) {
       solved[keccak256(_factoryName)][_teamHash] = true;
       solvedTimestamp[keccak256(_factoryName)][_teamHash] = block.timestamp;
-      emit Solved(block.timestamp, _teamHash, _factoryName, factoryAmount[keccak256(_factoryName)]);
+      emit Solved(block.timestamp, msg.sender, _teamHash, _factoryName, factoryAmount[keccak256(_factoryName)]);
     }
     return true;
   }
+  
+
 }

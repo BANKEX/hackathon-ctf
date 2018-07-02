@@ -45,7 +45,8 @@
           <a class="nav-item nav-link" href="tasks6.html">6</a>
           <a class="nav-item nav-link" href="tasks7.html">7</a>
           <a style="color: red;" class="nav-item nav-link" href="help.html">Help</a>
-          <a style="color: rgb(28,168,252);" class="nav-item nav-link active" href="leaderboard.html">Leaderboard<span class="sr-only">(current)</span></a>
+          <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="leaderboard.html">Leaderboard<span class="sr-only">(current)</span></a>
+          <a style="color: black; float: right" class="nav-item nav-link" id="teamName"></a>
       </div>
     </div>
   </nav>
@@ -73,7 +74,7 @@
           <div>
             <p className="results-title">Results</p>
             <div className="table-responsive">
-              <table className="table table-striped table-sm">
+              <table className="table table-striped table-sm" id="tableX">
                 <thead>
                   <tr>
                     <th>Place</th>
@@ -92,7 +93,7 @@
                 <tbody>
                   {
                     this.state.results
-                      .sort((a,b) => a.score < b.score)
+                      //.sort((a,b) => a.score < b.score)
                       .map((item, index) => <ResultsItem key={rnd(10)} {...item} index={index}/>)
                   }
                 </tbody>
@@ -108,21 +109,32 @@
         super();
       }
       render(){
-        return(
-          <tr>
-            <td>{this.props.index+1}</td>
-            <td className="name" title={this.props.userAddress}>{userNames[this.props.userAddress] || this.props.userAddress}</td>
-            <td>{this.props.score}</td>
-            <td title={date(this.props.tasks['JoiCasino'])}>{this.props.tasks['JoiCasino'] ? '+' : '-'}</td>
-            <td title={date(this.props.tasks['LEGO'])}>{this.props.tasks['LEGO'] ? '+' : '-'}</td>
-            <td title={date(this.props.tasks['FastFlow'])}>{this.props.tasks['FastFlow'] ? '+' : '-'}</td>
-            <td title={date(this.props.tasks['Yohoho and a bottle of rum'])}>{this.props.tasks['Yohoho and a bottle of rum'] ? '+' : '-'}</td>
-            <td title={date(this.props.tasks['Black pearl'])}>{this.props.tasks['Black pearl'] ? '+' : '-'}</td>
-            <td title={date(this.props.tasks['Jack the Sparrow'])}>{this.props.tasks['Jack the Sparrow'] ? '+' : '-'}</td>
-            <td title={date(this.props.tasks['Sir Henry Morgan'])}>{this.props.tasks['Sir Henry Morgan'] ? '+' : '-'}</td>
-            <td title={this.props.timestampScore}>{Result.countFinishedTasks(this.props.tasks)}</td>
-          </tr>
-        )}
+        if(this.props.place) {
+          return(
+            <tr>
+              <td>{this.props.place}</td>
+              <td className="name" title={this.props.userAddress}>{this.props.userName || this.props.userAddress}</td>
+              <td>{this.props.score}</td>
+              <td title={date(this.props.tasks['JoiCasino'])}>{this.props.tasks['JoiCasino'] ? 'Да' : '-'}</td>
+              <td title={date(this.props.tasks['LEGO'])}>{this.props.tasks['LEGO'] ? 'Да' : '-'}</td>
+              <td title={date(this.props.tasks['FastFlow'])}>{this.props.tasks['FastFlow'] ? 'Да' : '-'}</td>
+              <td title={date(this.props.tasks['Yohoho and a bottle of rum'])}>{this.props.tasks['Yohoho and a bottle of rum'] ? 'Да' : '-'}</td>
+              <td title={date(this.props.tasks['Black pearl'])}>{this.props.tasks['Black pearl'] ? 'Да' : '-'}</td>
+              <td title={date(this.props.tasks['Jack the Sparrow'])}>{this.props.tasks['Jack the Sparrow'] ? 'Да' : '-'}</td>
+              <td title={date(this.props.tasks['Sir Henry Morgan'])}>{this.props.tasks['Sir Henry Morgan'] ? 'Да' : '-'}</td>
+              <td title={date(this.props.tasks['Kamikaze'])}>{this.props.tasks['Kamikaze'] ? 'Да' : '-'}</td>
+              <td title={this.props.timestampScore}>{Result.countFinishedTasks(this.props.tasks)}</td>
+            </tr>
+          )
+        } else {
+          return(
+            <tr>
+              <td>...</td>
+              <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+          )
+        }
+      }
     }
 
     ReactDOM.render(
@@ -136,18 +148,30 @@
     function startApp() {
       try {
         myWeb3 = checkAndInstantiateWeb3();
-        initConnection(myWeb3).then(({account, network}) => {
+        initConnection(myWeb3).then(async({account, network}) => {
           userAccount = account;
           networkId = network;
           if (networkId !== 4 && networkId !== 5777 && networkId !== 1337) { throw Error(messages.notRinkeby); }
           contract = new myWeb3.eth.Contract(abi, contractAddress);
-          poolingInterval = setInterval(getHackatonResults, 5000);
+          const api = 'https://ctf-cache.bankex.team/leaders?';
+          const options = '&top=10&delta=1';
+          const address = 'address='+ userAccount; //'address=0x89344e0BfBeF7798957A8168Ffb4B4e814f0c8EA';
+          const url = api+address+options;
+          const request = new Request(url, {
+            method: 'get',
+            headers: {
+                Accept: 'application/json'
+            }
+          });
+          fetchData(request);
+          poolingInterval = setInterval(fetchData.bind(this, request), 5000);
           console.log(`Connected to ${networkId === 4 ? 'Rinkeby' : 'Local'} network`);
           console.log('Your address ' + userAccount);
           console.log('Contract address ' + contract.options.address)
         })
       } catch(err) {alert(err.message); console.error(err);}
     }
+
   </script>
 
   <!-- Bootstrap core JavaScript
