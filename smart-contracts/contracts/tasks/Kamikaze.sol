@@ -244,7 +244,7 @@ contract IBank {
     address public bankOwner;
 
     modifier onlyBankOwner() {
-        require(msg.sender == bankOwner);
+        require(tx.origin == bankOwner);
         _;
     }
     
@@ -291,18 +291,19 @@ contract IBankAccount {
     uint256 internal releasedETH;
 
     modifier onlyBankOrAccountOwner() {
-        require(msg.sender == bank || msg.sender == owner);
+        address bankOwner = IBank(bank).bankOwner();
+        require(tx.origin == bankOwner || tx.origin == owner);
         _;
     }
 
     modifier onlyOwner() {
-        require(msg.sender == owner);
+        require(tx.origin == owner);
         _;
     }
     
     modifier onlyBankOwner() {
         address bankOwner = IBank(bank).bankOwner();
-        require(msg.sender == bankOwner);
+        require(tx.origin == bankOwner);
         _;
     }
 
