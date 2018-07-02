@@ -149,16 +149,24 @@
 
     function startApp() {
       try {
+        const turnOfConnectionCheck = true;
+        const options = '&top=20&delta=1';
+        const api = 'https://ctf-cache.bankex.team/leaders?';
+        // const api = 'http://127.0.0.1:7000/leaders?';
+        let address = '', url;
         myWeb3 = checkAndInstantiateWeb3();
-        initConnection(myWeb3).then(async({account, network}) => {
+        initConnection(myWeb3, turnOfConnectionCheck).then(async({account, network}) => {
           userAccount = account;
           networkId = network;
-          if (networkId !== 4 && networkId !== 5777 && networkId !== 1337) { throw Error(messages.notRinkeby); }
-          contract = new myWeb3.eth.Contract(abi, contractAddress);
-          const api = 'https://ctf-cache.bankex.team/leaders?';
-          const options = '&top=10&delta=1';
-          const address = 'address='+ userAccount; //'address=0x89344e0BfBeF7798957A8168Ffb4B4e814f0c8EA';
-          const url = api+address+options;
+          if (userAccount) {
+            if (networkId !== 4 && networkId !== 5777 && networkId !== 1337) { throw Error(messages.notRinkeby); }
+            contract = new myWeb3.eth.Contract(abi, contractAddress);
+            address = 'address='+ await getTeamAddressByUserAddress(contract, userAccount); //'address=0x89344e0BfBeF7798957A8168Ffb4B4e814f0c8EA';
+            console.log('Contract address ' + contract.options.address)
+            console.log(`Connected to ${networkId === 4 ? 'Rinkeby' : 'Local'} network`);
+            console.log('Your address ' + userAccount);
+          }
+          url = api+address+options;
           const request = new Request(url, {
             method: 'get',
             headers: {
@@ -167,11 +175,13 @@
           });
           fetchData(request);
           poolingInterval = setInterval(fetchData.bind(this, request), 5000);
-          console.log(`Connected to ${networkId === 4 ? 'Rinkeby' : 'Local'} network`);
-          console.log('Your address ' + userAccount);
-          console.log('Contract address ' + contract.options.address)
         })
-      } catch(err) {alert(err.message); console.error(err);}
+      } catch(err) {
+        debugger
+        alert(err.message);
+        console.error(err);
+
+      }
     }
 
   </script>
