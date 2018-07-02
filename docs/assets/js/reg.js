@@ -42,10 +42,10 @@ const checkAuth = async () => await contract.methods.getSignedUp().call({from: a
 
 const regSubmit = async () => {
   try {
-    if (team.value === '') throw new Error('Введите название команды');
-    if (team.value.length < 6) throw new Error('Название должно быть больше пяти символов');
+    if (team.value === '') throw new Error('Enter the name of the team');
+    if (team.value.length < 6) throw new Error('The name must be more than five characters');
     regButton.disabled = true;
-    setInfo(`Ожидайте, идет регистрация команды ${team.value}`);
+    setInfo(`Please wait, there is a team registration ${team.value}`);
     try {
       const pEvent = contract.methods.signUpTeam(team.value).send({from: account});
       pEvent
@@ -75,10 +75,10 @@ const regSubmit = async () => {
 
 const invite = async (address) => {
   try {
-    if (address === '') throw new Error('Введите название команды');
-    if (!myWeb3.utils.isAddress(address)) throw new Error('Недействительный адрес');
+    if (address === '') throw new Error('Enter team name');
+    if (!myWeb3.utils.isAddress(address)) throw new Error('Invalid address');
     inviteButton.disabled = true;
-    setInfo('Отправляется приглашение, ожидайте');
+    setInfo('An invitation is sent, wait');
     const pEvent = contract.methods.inviteMember(address).send({from: account});
     pEvent
       .then(success => {
@@ -86,7 +86,7 @@ const invite = async (address) => {
           regButton.disabled = false;
           throw new Error('Invitation failed');
         }
-        setInfo('Приглашение отправлено');
+        setInfo('Invitation sent');
       }).catch(e => {
         resetInfo();
         inviteButton.disabled = false;
@@ -107,10 +107,10 @@ const invite = async (address) => {
 
 const acceptInvitation = async (address) => {
   try {
-    if (address === '') throw new Error('Отсутствует команды');
-    if (!myWeb3.utils.isAddress(address)) throw new Error('Недействительный адрес команды');
+    if (address === '') throw new Error('No teams');
+    if (!myWeb3.utils.isAddress(address)) throw new Error('Invalid team address');
     $('button[name="joinButton"]').toArray().forEach(el => el.disabled = true);
-    setInfo('Происходит подключение к команде, ожидайте');
+    setInfo('Connect to the team, wait');
     const pEvent = contract.methods.acceptInvitation(address).send({from: account});
     pEvent
       .then(success => {
@@ -139,7 +139,7 @@ const acceptInvitation = async (address) => {
 
 const getInvitations = async (address) => {
   try {
-    if (!myWeb3.utils.isAddress(address)) throw new Error('Недействительный адрес');
+    if (!myWeb3.utils.isAddress(address)) throw new Error('Invalid address');
     const invitations = await contract.getPastEvents('Invite', {
       filter: {participantAddress: address},
       fromBlock: 0,
