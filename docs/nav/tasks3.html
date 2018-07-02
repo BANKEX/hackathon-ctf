@@ -36,6 +36,7 @@
         <a class="nav-item nav-link" href="tasks6.html">6</a>
         <a class="nav-item nav-link" href="tasks7.html">7</a>
         <a class="nav-item nav-link" href="tasks8.html">8</a>
+        <a class="nav-item nav-link" href="tasks9.html">9</a>
         <a style="color: red;" class="nav-item nav-link" href="help.html">Help</a>
         <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="leaderboard.html">Leaderboard</a>
         <a style="color: black; float: right" class="nav-item nav-link" id="teamName"></a>
@@ -65,327 +66,327 @@
             <cite style="font-weight: 900; color: #1e0010" title="Source Title" id="taskAddress">0ceqiccnoijwncoiwncoiwncb</cite> on <strong style="font-weight: 900; color: #1e0010">Rinkeby</strong> network
           </footer>
         </blockquote>
-        <div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em; font-size: 20px;">
-          <pre style="margin: 0; line-height: 125%"><span style="color: #a6e22e">pragma</span> <span style="color: #a6e22e">solidity</span> <span style="color: #a6e22e">^0.4.13;</span>
+ <!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #a6e22e">pragma</span> <span style="color: #a6e22e">solidity</span> <span style="color: #f92672">^</span><span style="color: #ae81ff">0.4</span><span style="color: #f8f8f2">.</span><span style="color: #ae81ff">13</span><span style="color: #f8f8f2">;</span>
 
-  <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">TASK</span>
-  <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">You</span> <span style="color: #a6e22e">have</span> <span style="color: #a6e22e">a</span> <span style="color: #a6e22e">Bank</span> <span style="color: #a6e22e">that</span> <span style="color: #a6e22e">can</span> <span style="color: #a6e22e">give</span> <span style="color: #a6e22e">credits</span> <span style="color: #e6db74">(ERC20)</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">owner</span>
-  <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">Firstly,</span> <span style="color: #a6e22e">you</span> <span style="color: #a6e22e">need</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">become</span> <span style="color: #a6e22e">owner</span> <span style="color: #e6db74">( start() )</span>
-  <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">Secondly,</span> <span style="color: #a6e22e">you</span> <span style="color: #a6e22e">need</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">break</span> <span style="color: #a6e22e">math</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">owner</span><span style="color: #f8f8f2">]</span> <span style="color: #a6e22e">-</span> <span style="color: #a6e22e">debt</span> <span style="color: #f8f8f2">&gt;</span> <span style="color: #a6e22e">total</span> <span style="color: #a6e22e">fixed</span> <span style="color: #a6e22e">amount</span> <span style="color: #a6e22e">if</span> <span style="color: #a6e22e">tokens</span>
+<span style="color: #75715e">// TASK</span>
+<span style="color: #75715e">// You have a Bank that can give credits (ERC20) to owner</span>
+<span style="color: #75715e">// Firstly, you need to become owner ( start() )</span>
+<span style="color: #75715e">// Secondly, you need to break math of balances[owner] - debt &gt; total fixed amount if tokens</span>
 
 
-  <span style="color: #f8f8f2">/**</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@title</span> <span style="color: #a6e22e">SafeMath</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">Math</span> <span style="color: #a6e22e">operations</span> <span style="color: #a6e22e">with</span> <span style="color: #a6e22e">safety</span> <span style="color: #a6e22e">checks</span> <span style="color: #a6e22e">that</span> <span style="color: #a6e22e">throw</span> <span style="color: #a6e22e">on</span> <span style="color: #a6e22e">error</span>
-   <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-  <span style="color: #a6e22e">library</span> <span style="color: #a6e22e">SafeMath</span> <span style="color: #f8f8f2">{</span>
-     <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">mul</span><span style="color: #e6db74">(uint256 a, uint256 b)</span> <span style="color: #a6e22e">internal</span> <span style="color: #a6e22e">pure</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(uint256)</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">if</span> <span style="color: #e6db74">(a == 0)</span> <span style="color: #f8f8f2">{</span>
-        <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">0;</span>
-      <span style="color: #f8f8f2">}</span>
-      <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">c</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">a</span> <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">b;</span>
-      <span style="color: #a6e22e">assert</span><span style="color: #e6db74">(c / a == b)</span><span style="color: #a6e22e">;</span>
-      <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">c;</span>
+<span style="color: #75715e">/**</span>
+<span style="color: #75715e"> * @title SafeMath</span>
+<span style="color: #75715e"> * @dev Math operations with safety checks that throw on error</span>
+<span style="color: #75715e"> */</span>
+<span style="color: #a6e22e">library</span> <span style="color: #a6e22e">SafeMath</span> <span style="color: #f8f8f2">{</span>
+   <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">mul</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">a</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">b</span><span style="color: #f8f8f2">)</span> <span style="color: #a6e22e">internal</span> <span style="color: #a6e22e">pure</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">a</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+      <span style="color: #66d9ef">return</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span>
     <span style="color: #f8f8f2">}</span>
-
-    <span style="color: #f8f8f2">/**</span>
-    <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">Integer</span> <span style="color: #a6e22e">division</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">two</span> <span style="color: #a6e22e">numbers,</span> <span style="color: #a6e22e">truncating</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">quotient.</span>
-    <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">div</span><span style="color: #e6db74">(uint256 a, uint256 b)</span> <span style="color: #a6e22e">internal</span> <span style="color: #a6e22e">pure</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(uint256)</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">assert</span><span style="color: #e6db74">(b &gt; 0)</span><span style="color: #a6e22e">;</span> <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">Solidity</span> <span style="color: #a6e22e">automatically</span> <span style="color: #a6e22e">throws</span> <span style="color: #a6e22e">when</span> <span style="color: #a6e22e">dividing</span> <span style="color: #a6e22e">by</span> <span style="color: #ae81ff">0</span>
-      <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">c</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">a</span> <span style="color: #960050; background-color: #1e0010">/</span> <span style="color: #a6e22e">b;</span>
-      <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">assert</span><span style="color: #e6db74">(a == b * c + a % b)</span><span style="color: #a6e22e">;</span> <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">There</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">no</span> <span style="color: #a6e22e">case</span> <span style="color: #a6e22e">in</span> <span style="color: #a6e22e">which</span> <span style="color: #a6e22e">this</span> <span style="color: #a6e22e">doesn&#39;t</span> <span style="color: #a6e22e">hold</span>
-      <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">a</span> <span style="color: #960050; background-color: #1e0010">/</span> <span style="color: #a6e22e">b;</span>
-    <span style="color: #f8f8f2">}</span>
-
-    <span style="color: #f8f8f2">/**</span>
-    <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">Subtracts</span> <span style="color: #a6e22e">two</span> <span style="color: #a6e22e">numbers,</span> <span style="color: #a6e22e">throws</span> <span style="color: #a6e22e">on</span> <span style="color: #a6e22e">overflow</span> <span style="color: #e6db74">(i.e. if subtrahend is greater than minuend)</span><span style="color: #a6e22e">.</span>
-    <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">sub</span><span style="color: #e6db74">(uint256 a, uint256 b)</span> <span style="color: #a6e22e">internal</span> <span style="color: #a6e22e">pure</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(uint256)</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">assert</span><span style="color: #e6db74">(b &lt;= a)</span><span style="color: #a6e22e">;</span>
-      <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">a</span> <span style="color: #a6e22e">-</span> <span style="color: #a6e22e">b;</span>
-    <span style="color: #f8f8f2">}</span>
-
-    <span style="color: #f8f8f2">/**</span>
-    <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">Adds</span> <span style="color: #a6e22e">two</span> <span style="color: #a6e22e">numbers,</span> <span style="color: #a6e22e">throws</span> <span style="color: #a6e22e">on</span> <span style="color: #a6e22e">overflow.</span>
-    <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">add</span><span style="color: #e6db74">(uint256 a, uint256 b)</span> <span style="color: #a6e22e">internal</span> <span style="color: #a6e22e">pure</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(uint256)</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">c</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">a</span> <span style="color: #a6e22e">+</span> <span style="color: #a6e22e">b;</span>
-      <span style="color: #a6e22e">assert</span><span style="color: #e6db74">(c &gt;= a)</span><span style="color: #a6e22e">;</span>
-      <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">c;</span>
-    <span style="color: #f8f8f2">}</span>
+    <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">c</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">a</span> <span style="color: #f92672">*</span> <span style="color: #a6e22e">b</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #a6e22e">assert</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">c</span> <span style="color: #f92672">/</span> <span style="color: #a6e22e">a</span> <span style="color: #f92672">==</span> <span style="color: #a6e22e">b</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">c</span><span style="color: #f8f8f2">;</span>
   <span style="color: #f8f8f2">}</span>
 
-  <span style="color: #f8f8f2">/**</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@title</span> <span style="color: #a6e22e">ERC20Basic</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">Simpler</span> <span style="color: #a6e22e">version</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">ERC20</span> <span style="color: #a6e22e">interface</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">see</span> <span style="color: #a6e22e">https:</span><span style="color: #960050; background-color: #1e0010">/</span><span style="color: #f8f8f2">/github.com/ethereum/EIPs/issues/179</span>
-   <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-  <span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">ERC20Basic</span> <span style="color: #f8f8f2">{</span>
-    <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">TotalSupply;</span>
-    <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">circulationSupply;</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">balanceOf</span><span style="color: #e6db74">(address who)</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(uint256)</span><span style="color: #a6e22e">;</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">transfer</span><span style="color: #e6db74">(address to, uint256 value)</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(bool)</span><span style="color: #a6e22e">;</span>
-    <span style="color: #a6e22e">event</span> <span style="color: #a6e22e">Transfer</span><span style="color: #e6db74">(address indexed from, address indexed to, uint256 value)</span><span style="color: #a6e22e">;</span>
+  <span style="color: #75715e">/**</span>
+<span style="color: #75715e">  * @dev Integer division of two numbers, truncating the quotient.</span>
+<span style="color: #75715e">  */</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">div</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">a</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">b</span><span style="color: #f8f8f2">)</span> <span style="color: #a6e22e">internal</span> <span style="color: #a6e22e">pure</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #75715e">// assert(b &gt; 0); // Solidity automatically throws when dividing by 0</span>
+    <span style="color: #75715e">// uint256 c = a / b;</span>
+    <span style="color: #75715e">// assert(a == b * c + a % b); // There is no case in which this doesn&#39;t hold</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">a</span> <span style="color: #f92672">/</span> <span style="color: #a6e22e">b</span><span style="color: #f8f8f2">;</span>
   <span style="color: #f8f8f2">}</span>
 
-  <span style="color: #f8f8f2">/**</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@title</span> <span style="color: #a6e22e">ERC20</span> <span style="color: #a6e22e">interface</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">see</span> <span style="color: #a6e22e">https:</span><span style="color: #960050; background-color: #1e0010">/</span><span style="color: #f8f8f2">/github.com/ethereum/EIPs/issues/20</span>
-   <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-  <span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">ERC20</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">ERC20Basic</span> <span style="color: #f8f8f2">{</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">allowance</span><span style="color: #e6db74">(address owner, address spender)</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(uint256)</span><span style="color: #a6e22e">;</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">transferFrom</span><span style="color: #e6db74">(address from, address to, uint256 value)</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(bool)</span><span style="color: #a6e22e">;</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">approve</span><span style="color: #e6db74">(address spender, uint256 value)</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(bool)</span><span style="color: #a6e22e">;</span>
-    <span style="color: #a6e22e">event</span> <span style="color: #a6e22e">Approval</span><span style="color: #e6db74">(address indexed owner, address indexed spender, uint256 value)</span><span style="color: #a6e22e">;</span>
+  <span style="color: #75715e">/**</span>
+<span style="color: #75715e">  * @dev Subtracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).</span>
+<span style="color: #75715e">  */</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">sub</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">a</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">b</span><span style="color: #f8f8f2">)</span> <span style="color: #a6e22e">internal</span> <span style="color: #a6e22e">pure</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">assert</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">b</span> <span style="color: #f92672">&lt;=</span> <span style="color: #a6e22e">a</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">a</span> <span style="color: #f92672">-</span> <span style="color: #a6e22e">b</span><span style="color: #f8f8f2">;</span>
   <span style="color: #f8f8f2">}</span>
 
-  <span style="color: #f8f8f2">/**</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@title</span> <span style="color: #a6e22e">Basic</span> <span style="color: #a6e22e">token</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">Basic</span> <span style="color: #a6e22e">version</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">StandardToken,</span> <span style="color: #a6e22e">with</span> <span style="color: #a6e22e">no</span> <span style="color: #a6e22e">allowances.</span>
-   <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-  <span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">BasicToken</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">ERC20Basic</span> <span style="color: #f8f8f2">{</span>
-    <span style="color: #a6e22e">using</span> <span style="color: #a6e22e">SafeMath</span> <span style="color: #a6e22e">for</span> <span style="color: #a6e22e">uint256;</span>
+  <span style="color: #75715e">/**</span>
+<span style="color: #75715e">  * @dev Adds two numbers, throws on overflow.</span>
+<span style="color: #75715e">  */</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">add</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">a</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">b</span><span style="color: #f8f8f2">)</span> <span style="color: #a6e22e">internal</span> <span style="color: #a6e22e">pure</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">c</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">a</span> <span style="color: #f92672">+</span> <span style="color: #a6e22e">b</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #a6e22e">assert</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">c</span> <span style="color: #f92672">&gt;=</span> <span style="color: #a6e22e">a</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">c</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">}</span>
 
-    <span style="color: #a6e22e">mapping</span><span style="color: #e6db74">(address =&gt; uint256)</span> <span style="color: #a6e22e">balances;</span>
+<span style="color: #75715e">/**</span>
+<span style="color: #75715e"> * @title ERC20Basic</span>
+<span style="color: #75715e"> * @dev Simpler version of ERC20 interface</span>
+<span style="color: #75715e"> * @dev see https://github.com/ethereum/EIPs/issues/179</span>
+<span style="color: #75715e"> */</span>
+<span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">ERC20Basic</span> <span style="color: #f8f8f2">{</span>
+  <span style="color: #a6e22e">uint256</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">TotalSupply</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #a6e22e">uint256</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">circulationSupply</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">balanceOf</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">who</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span><span style="color: #f8f8f2">);</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">transfer</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">to</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">value</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">);</span>
+  <span style="color: #a6e22e">event</span> <span style="color: #a6e22e">Transfer</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">indexed</span> <span style="color: #a6e22e">from</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">indexed</span> <span style="color: #a6e22e">to</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">value</span><span style="color: #f8f8f2">);</span>
+<span style="color: #f8f8f2">}</span>
 
-    <span style="color: #f8f8f2">/**</span>
-    <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">transfer</span> <span style="color: #a6e22e">token</span> <span style="color: #a6e22e">for</span> <span style="color: #a6e22e">a</span> <span style="color: #a6e22e">specified</span> <span style="color: #a6e22e">address</span>
-    <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">_to</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">transfer</span> <span style="color: #a6e22e">to.</span>
-    <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">_value</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">amount</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">be</span> <span style="color: #a6e22e">transferred.</span>
-    <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">transfer</span><span style="color: #e6db74">(address _to, uint256 _value)</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(bool)</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg.sender</span><span style="color: #f8f8f2">]</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg.sender</span><span style="color: #f8f8f2">]</span><span style="color: #a6e22e">.sub</span><span style="color: #e6db74">(_value)</span><span style="color: #a6e22e">;</span>
-      <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">]</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">]</span><span style="color: #a6e22e">.add</span><span style="color: #e6db74">(_value)</span><span style="color: #a6e22e">;</span>
-      <span style="color: #a6e22e">emit</span> <span style="color: #a6e22e">Transfer</span><span style="color: #e6db74">(msg.sender, _to, _value)</span><span style="color: #a6e22e">;</span>
-      <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">true;</span>
-    <span style="color: #f8f8f2">}</span>
+<span style="color: #75715e">/**</span>
+<span style="color: #75715e"> * @title ERC20 interface</span>
+<span style="color: #75715e"> * @dev see https://github.com/ethereum/EIPs/issues/20</span>
+<span style="color: #75715e"> */</span>
+<span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">ERC20</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">ERC20Basic</span> <span style="color: #f8f8f2">{</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">allowance</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">owner</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">spender</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span><span style="color: #f8f8f2">);</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">transferFrom</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">from</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">to</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">value</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">);</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">approve</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">spender</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">value</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">);</span>
+  <span style="color: #a6e22e">event</span> <span style="color: #a6e22e">Approval</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">indexed</span> <span style="color: #a6e22e">owner</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">indexed</span> <span style="color: #a6e22e">spender</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">value</span><span style="color: #f8f8f2">);</span>
+<span style="color: #f8f8f2">}</span>
 
-    <span style="color: #f8f8f2">/**</span>
-    <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">Gets</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">balance</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">specified</span> <span style="color: #a6e22e">address.</span>
-    <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">_owner</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">query</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">balance</span> <span style="color: #a6e22e">of.</span>
-    <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@return</span> <span style="color: #a6e22e">An</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">representing</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">amount</span> <span style="color: #a6e22e">owned</span> <span style="color: #a6e22e">by</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">passed</span> <span style="color: #a6e22e">address.</span>
-    <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">balanceOf</span><span style="color: #e6db74">(address _owner)</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(uint256 balance)</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_owner</span><span style="color: #f8f8f2">]</span><span style="color: #a6e22e">;</span>
-    <span style="color: #f8f8f2">}</span>
+<span style="color: #75715e">/**</span>
+<span style="color: #75715e"> * @title Basic token</span>
+<span style="color: #75715e"> * @dev Basic version of StandardToken, with no allowances. </span>
+<span style="color: #75715e"> */</span>
+<span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">BasicToken</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">ERC20Basic</span> <span style="color: #f8f8f2">{</span>
+  <span style="color: #a6e22e">using</span> <span style="color: #a6e22e">SafeMath</span> <span style="color: #66d9ef">for</span> <span style="color: #a6e22e">uint256</span><span style="color: #f8f8f2">;</span>
 
+  <span style="color: #a6e22e">mapping</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #f92672">=&gt;</span> <span style="color: #a6e22e">uint256</span><span style="color: #f8f8f2">)</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">;</span>
+
+  <span style="color: #75715e">/**</span>
+<span style="color: #75715e">  * @dev transfer token for a specified address</span>
+<span style="color: #75715e">  * @param _to The address to transfer to.</span>
+<span style="color: #75715e">  * @param _value The amount to be transferred.</span>
+<span style="color: #75715e">  */</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">transfer</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">].</span><span style="color: #a6e22e">sub</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">].</span><span style="color: #a6e22e">add</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #a6e22e">emit</span> <span style="color: #a6e22e">Transfer</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">;</span>
   <span style="color: #f8f8f2">}</span>
 
-  <span style="color: #f8f8f2">/**</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@title</span> <span style="color: #a6e22e">Standard</span> <span style="color: #a6e22e">ERC20</span> <span style="color: #a6e22e">token</span>
-   <span style="color: #a6e22e">*</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">Implementation</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">basic</span> <span style="color: #a6e22e">standard</span> <span style="color: #a6e22e">token.</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">https:</span><span style="color: #960050; background-color: #1e0010">/</span><span style="color: #f8f8f2">/github.com/ethereum/EIPs/issues/20</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">Based</span> <span style="color: #a6e22e">on</span> <span style="color: #a6e22e">code</span> <span style="color: #a6e22e">by</span> <span style="color: #a6e22e">FirstBlood:</span> <span style="color: #a6e22e">https:</span><span style="color: #960050; background-color: #1e0010">/</span><span style="color: #f8f8f2">/github.com/Firstbloodio/token/blob/master/smart_contract/FirstBloodToken.sol</span>
-   <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-  <span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">StandardToken</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">ERC20,</span> <span style="color: #a6e22e">BasicToken</span> <span style="color: #f8f8f2">{</span>
-
-    <span style="color: #a6e22e">mapping</span> <span style="color: #e6db74">(address =&gt; mapping (address =&gt; uint256))</span> <span style="color: #a6e22e">allowed;</span>
-
-
-    <span style="color: #f8f8f2">/**</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">Transfer</span> <span style="color: #a6e22e">tokens</span> <span style="color: #a6e22e">from</span> <span style="color: #a6e22e">one</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">another</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">_from</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">which</span> <span style="color: #a6e22e">you</span> <span style="color: #a6e22e">want</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">send</span> <span style="color: #a6e22e">tokens</span> <span style="color: #a6e22e">from</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">_to</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">which</span> <span style="color: #a6e22e">you</span> <span style="color: #a6e22e">want</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">transfer</span> <span style="color: #a6e22e">to</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">_value</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">amout</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">tokens</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">be</span> <span style="color: #a6e22e">transfered</span>
-     <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">transferFrom</span><span style="color: #e6db74">(address _from, address _to, uint256 _value)</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(bool)</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">_allowance;</span>
-      <span style="color: #a6e22e">_allowance</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">allowed</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_from</span><span style="color: #f8f8f2">][</span><span style="color: #a6e22e">msg.sender</span><span style="color: #f8f8f2">]</span><span style="color: #a6e22e">;</span>
-
-      <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">Check</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">not</span> <span style="color: #a6e22e">needed</span> <span style="color: #a6e22e">because</span> <span style="color: #a6e22e">sub</span><span style="color: #e6db74">(_allowance, _value)</span> <span style="color: #a6e22e">will</span> <span style="color: #a6e22e">already</span> <span style="color: #a6e22e">throw</span> <span style="color: #a6e22e">if</span> <span style="color: #a6e22e">this</span> <span style="color: #a6e22e">condition</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">not</span> <span style="color: #a6e22e">met</span>
-      <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">require</span> <span style="color: #e6db74">(_value &lt;= _allowance)</span><span style="color: #a6e22e">;</span>
-
-      <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">]</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">]</span><span style="color: #a6e22e">.add</span><span style="color: #e6db74">(_value)</span><span style="color: #a6e22e">;</span>
-      <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_from</span><span style="color: #f8f8f2">]</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_from</span><span style="color: #f8f8f2">]</span><span style="color: #a6e22e">.sub</span><span style="color: #e6db74">(_value)</span><span style="color: #a6e22e">;</span>
-      <span style="color: #a6e22e">allowed</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_from</span><span style="color: #f8f8f2">][</span><span style="color: #a6e22e">msg.sender</span><span style="color: #f8f8f2">]</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">_allowance.sub</span><span style="color: #e6db74">(_value)</span><span style="color: #a6e22e">;</span>
-      <span style="color: #a6e22e">emit</span> <span style="color: #a6e22e">Transfer</span><span style="color: #e6db74">(_from, _to, _value)</span><span style="color: #a6e22e">;</span>
-      <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">true;</span>
-    <span style="color: #f8f8f2">}</span>
-
-    <span style="color: #f8f8f2">/**</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">Aprove</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">passed</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">spend</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">specified</span> <span style="color: #a6e22e">amount</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">tokens</span> <span style="color: #a6e22e">on</span> <span style="color: #a6e22e">behalf</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">msg.sender.</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">_spender</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">which</span> <span style="color: #a6e22e">will</span> <span style="color: #a6e22e">spend</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">funds.</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">_value</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">amount</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">tokens</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">be</span> <span style="color: #a6e22e">spent.</span>
-     <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">approve</span><span style="color: #e6db74">(address _spender, uint256 _value)</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(bool)</span> <span style="color: #f8f8f2">{</span>
-
-      <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">To</span> <span style="color: #a6e22e">change</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">approve</span> <span style="color: #a6e22e">amount</span> <span style="color: #a6e22e">you</span> <span style="color: #a6e22e">first</span> <span style="color: #a6e22e">have</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">reduce</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">addresses`</span>
-      <span style="color: #960050; background-color: #1e0010">//</span>  <span style="color: #a6e22e">allowance</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">zero</span> <span style="color: #a6e22e">by</span> <span style="color: #a6e22e">calling</span> <span style="color: #a6e22e">`approve</span><span style="color: #e6db74">(_spender, 0)</span><span style="color: #a6e22e">`</span> <span style="color: #a6e22e">if</span> <span style="color: #a6e22e">it</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">not</span>
-      <span style="color: #960050; background-color: #1e0010">//</span>  <span style="color: #a6e22e">already</span> <span style="color: #ae81ff">0</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">mitigate</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">race</span> <span style="color: #a6e22e">condition</span> <span style="color: #a6e22e">described</span> <span style="color: #a6e22e">here:</span>
-      <span style="color: #960050; background-color: #1e0010">//</span>  <span style="color: #a6e22e">https:</span><span style="color: #960050; background-color: #1e0010">/</span><span style="color: #f8f8f2">/github.com/ethereum/EIPs/issues/20#issuecomment-263524729</span>
-      <span style="color: #a6e22e">require</span><span style="color: #e6db74">((_value == 0) || (allowed[msg.sender][_spender] == 0))</span><span style="color: #a6e22e">;</span>
-
-      <span style="color: #a6e22e">allowed</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg.sender</span><span style="color: #f8f8f2">][</span><span style="color: #a6e22e">_spender</span><span style="color: #f8f8f2">]</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">_value;</span>
-      <span style="color: #a6e22e">emit</span> <span style="color: #a6e22e">Approval</span><span style="color: #e6db74">(msg.sender, _spender, _value)</span><span style="color: #a6e22e">;</span>
-      <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">true;</span>
-    <span style="color: #f8f8f2">}</span>
-
-    <span style="color: #f8f8f2">/**</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">Function</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">check</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">amount</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">tokens</span> <span style="color: #a6e22e">that</span> <span style="color: #a6e22e">an</span> <span style="color: #a6e22e">owner</span> <span style="color: #a6e22e">allowed</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">a</span> <span style="color: #a6e22e">spender.</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">_owner</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">which</span> <span style="color: #a6e22e">owns</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">funds.</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">_spender</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">which</span> <span style="color: #a6e22e">will</span> <span style="color: #a6e22e">spend</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">funds.</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@return</span> <span style="color: #a6e22e">A</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">specifing</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">amount</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">tokens</span> <span style="color: #a6e22e">still</span> <span style="color: #a6e22e">avaible</span> <span style="color: #a6e22e">for</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">spender.</span>
-     <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">allowance</span><span style="color: #e6db74">(address _owner, address _spender)</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(uint256 remaining)</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">allowed</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_owner</span><span style="color: #f8f8f2">][</span><span style="color: #a6e22e">_spender</span><span style="color: #f8f8f2">]</span><span style="color: #a6e22e">;</span>
-    <span style="color: #f8f8f2">}</span>
-
+  <span style="color: #75715e">/**</span>
+<span style="color: #75715e">  * @dev Gets the balance of the specified address.</span>
+<span style="color: #75715e">  * @param _owner The address to query the the balance of. </span>
+<span style="color: #75715e">  * @return An uint256 representing the amount owned by the passed address.</span>
+<span style="color: #75715e">  */</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">balanceOf</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_owner</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">balance</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_owner</span><span style="color: #f8f8f2">];</span>
   <span style="color: #f8f8f2">}</span>
 
-  <span style="color: #f8f8f2">/**</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@title</span> <span style="color: #a6e22e">Ownable</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">Ownable</span> <span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">has</span> <span style="color: #a6e22e">an</span> <span style="color: #a6e22e">owner</span> <span style="color: #a6e22e">address,</span> <span style="color: #a6e22e">and</span> <span style="color: #a6e22e">provides</span> <span style="color: #a6e22e">basic</span> <span style="color: #a6e22e">authorization</span> <span style="color: #a6e22e">control</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">functions,</span> <span style="color: #a6e22e">this</span> <span style="color: #a6e22e">simplifies</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">implementation</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">&quot;user</span> <span style="color: #a6e22e">permissions&quot;.</span>
-   <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-  <span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">Ownable</span> <span style="color: #f8f8f2">{</span>
-    <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">owner;</span>
+<span style="color: #f8f8f2">}</span>
+
+<span style="color: #75715e">/**</span>
+<span style="color: #75715e"> * @title Standard ERC20 token</span>
+<span style="color: #75715e"> *</span>
+<span style="color: #75715e"> * @dev Implementation of the basic standard token.</span>
+<span style="color: #75715e"> * @dev https://github.com/ethereum/EIPs/issues/20</span>
+<span style="color: #75715e"> * @dev Based on code by FirstBlood: https://github.com/Firstbloodio/token/blob/master/smart_contract/FirstBloodToken.sol</span>
+<span style="color: #75715e"> */</span>
+<span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">StandardToken</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">ERC20</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">BasicToken</span> <span style="color: #f8f8f2">{</span>
+
+  <span style="color: #a6e22e">mapping</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #f92672">=&gt;</span> <span style="color: #a6e22e">mapping</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #f92672">=&gt;</span> <span style="color: #a6e22e">uint256</span><span style="color: #f8f8f2">))</span> <span style="color: #a6e22e">allowed</span><span style="color: #f8f8f2">;</span>
 
 
-    <span style="color: #f8f8f2">/**</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">Ownable</span> <span style="color: #a6e22e">constructor</span> <span style="color: #a6e22e">sets</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">original</span> <span style="color: #a6e22e">`owner`</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">sender</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">account.</span>
-     <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">Ownable</span><span style="color: #e6db74">()</span> <span style="color: #a6e22e">public</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">owner</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">msg.sender;</span>
-    <span style="color: #f8f8f2">}</span>
+  <span style="color: #75715e">/**</span>
+<span style="color: #75715e">   * @dev Transfer tokens from one address to another</span>
+<span style="color: #75715e">   * @param _from address The address which you want to send tokens from</span>
+<span style="color: #75715e">   * @param _to address The address which you want to transfer to</span>
+<span style="color: #75715e">   * @param _value uint256 the amout of tokens to be transfered</span>
+<span style="color: #75715e">   */</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">transferFrom</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_from</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">_allowance</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #a6e22e">_allowance</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">allowed</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_from</span><span style="color: #f8f8f2">][</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">];</span>
+
+    <span style="color: #75715e">// Check is not needed because sub(_allowance, _value) will already throw if this condition is not met</span>
+    <span style="color: #75715e">// require (_value &lt;= _allowance);</span>
+
+    <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">].</span><span style="color: #a6e22e">add</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_from</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_from</span><span style="color: #f8f8f2">].</span><span style="color: #a6e22e">sub</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #a6e22e">allowed</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_from</span><span style="color: #f8f8f2">][</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">_allowance</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sub</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #a6e22e">emit</span> <span style="color: #a6e22e">Transfer</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_from</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #f8f8f2">}</span>
+
+  <span style="color: #75715e">/**</span>
+<span style="color: #75715e">   * @dev Aprove the passed address to spend the specified amount of tokens on behalf of msg.sender.</span>
+<span style="color: #75715e">   * @param _spender The address which will spend the funds.</span>
+<span style="color: #75715e">   * @param _value The amount of tokens to be spent.</span>
+<span style="color: #75715e">   */</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">approve</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_spender</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+
+    <span style="color: #75715e">// To change the approve amount you first have to reduce the addresses`</span>
+    <span style="color: #75715e">//  allowance to zero by calling `approve(_spender, 0)` if it is not</span>
+    <span style="color: #75715e">//  already 0 to mitigate the race condition described here:</span>
+    <span style="color: #75715e">//  https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729</span>
+    <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">((</span><span style="color: #a6e22e">_value</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">||</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">allowed</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">][</span><span style="color: #a6e22e">_spender</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">));</span>
+
+    <span style="color: #a6e22e">allowed</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">][</span><span style="color: #a6e22e">_spender</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #a6e22e">emit</span> <span style="color: #a6e22e">Approval</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_spender</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #f8f8f2">}</span>
+
+  <span style="color: #75715e">/**</span>
+<span style="color: #75715e">   * @dev Function to check the amount of tokens that an owner allowed to a spender.</span>
+<span style="color: #75715e">   * @param _owner address The address which owns the funds.</span>
+<span style="color: #75715e">   * @param _spender address The address which will spend the funds.</span>
+<span style="color: #75715e">   * @return A uint256 specifing the amount of tokens still avaible for the spender.</span>
+<span style="color: #75715e">   */</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">allowance</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_owner</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_spender</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">remaining</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">allowed</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_owner</span><span style="color: #f8f8f2">][</span><span style="color: #a6e22e">_spender</span><span style="color: #f8f8f2">];</span>
+  <span style="color: #f8f8f2">}</span>
+
+<span style="color: #f8f8f2">}</span>
+
+<span style="color: #75715e">/**</span>
+<span style="color: #75715e"> * @title Ownable</span>
+<span style="color: #75715e"> * @dev The Ownable contract has an owner address, and provides basic authorization control</span>
+<span style="color: #75715e"> * functions, this simplifies the implementation of &quot;user permissions&quot;.</span>
+<span style="color: #75715e"> */</span>
+<span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">Ownable</span> <span style="color: #f8f8f2">{</span>
+  <span style="color: #a6e22e">address</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">owner</span><span style="color: #f8f8f2">;</span>
 
 
-    <span style="color: #f8f8f2">/**</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">Throws</span> <span style="color: #a6e22e">if</span> <span style="color: #a6e22e">called</span> <span style="color: #a6e22e">by</span> <span style="color: #a6e22e">any</span> <span style="color: #a6e22e">account</span> <span style="color: #a6e22e">other</span> <span style="color: #a6e22e">than</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">owner.</span>
-     <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-    <span style="color: #a6e22e">modifier</span> <span style="color: #a6e22e">onlyOwner</span><span style="color: #e6db74">()</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">require</span><span style="color: #e6db74">(msg.sender == owner)</span><span style="color: #a6e22e">;</span>
-      <span style="color: #a6e22e">_;</span>
-    <span style="color: #f8f8f2">}</span>
-
-
-    <span style="color: #f8f8f2">/**</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">Allows</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">current</span> <span style="color: #a6e22e">owner</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">transfer</span> <span style="color: #a6e22e">control</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">a</span> <span style="color: #a6e22e">newOwner.</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">newOwner</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">transfer</span> <span style="color: #a6e22e">ownership</span> <span style="color: #a6e22e">to.</span>
-     <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">transferOwnership</span><span style="color: #e6db74">(address newOwner)</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">onlyOwner</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">if</span> <span style="color: #e6db74">(newOwner != address(0))</span> <span style="color: #f8f8f2">{</span>
-        <span style="color: #a6e22e">owner</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">newOwner;</span>
-      <span style="color: #f8f8f2">}</span>
-    <span style="color: #f8f8f2">}</span>
-
+  <span style="color: #75715e">/**</span>
+<span style="color: #75715e">   * @dev The Ownable constructor sets the original `owner` of the contract to the sender</span>
+<span style="color: #75715e">   * account.</span>
+<span style="color: #75715e">   */</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">Ownable</span><span style="color: #f8f8f2">()</span> <span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">owner</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">;</span>
   <span style="color: #f8f8f2">}</span>
 
 
-
-  <span style="color: #f8f8f2">/**</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@title</span> <span style="color: #a6e22e">Bank</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">ERC20</span> <span style="color: #a6e22e">Bank</span> <span style="color: #e6db74">(BNK)</span>
-   <span style="color: #a6e22e">*</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">BNK</span> <span style="color: #a6e22e">Tokens</span> <span style="color: #a6e22e">are</span> <span style="color: #a6e22e">divisible</span> <span style="color: #a6e22e">by</span> <span style="color: #ae81ff">1e8</span> <span style="color: #e6db74">(100,000,000)</span> <span style="color: #a6e22e">base</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">units</span> <span style="color: #a6e22e">referred</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">as</span> <span style="color: #a6e22e">&#39;Grains&#39;.</span>
-   <span style="color: #a6e22e">*</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">BNK</span> <span style="color: #a6e22e">are</span> <span style="color: #a6e22e">displayed</span> <span style="color: #a6e22e">using</span> <span style="color: #ae81ff">8</span> <span style="color: #a6e22e">decimal</span> <span style="color: #a6e22e">places</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">precision.</span>
-   <span style="color: #a6e22e">*</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #ae81ff">1</span> <span style="color: #a6e22e">BNK</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">equivalent</span> <span style="color: #a6e22e">to:</span>
-   <span style="color: #a6e22e">*</span>   <span style="color: #ae81ff">100000000</span> <span style="color: #a6e22e">==</span> <span style="color: #ae81ff">1</span> <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">10*8</span> <span style="color: #a6e22e">==</span> <span style="color: #ae81ff">1e8</span>
-   <span style="color: #a6e22e">*</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">All</span> <span style="color: #a6e22e">initial</span> <span style="color: #a6e22e">BNK</span> <span style="color: #a6e22e">Grains</span> <span style="color: #a6e22e">are</span> <span style="color: #a6e22e">assigned</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">creator</span> <span style="color: #a6e22e">of</span>
-   <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">this</span> <span style="color: #a6e22e">contract.</span>
-   <span style="color: #a6e22e">*</span>
-   <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-  <span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">BankToken</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">StandardToken,</span> <span style="color: #a6e22e">Ownable</span> <span style="color: #f8f8f2">{</span>
-
-    <span style="color: #a6e22e">string</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">name</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">&#39;Bank&#39;;</span>                                      <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">Set</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">token</span> <span style="color: #a6e22e">name</span> <span style="color: #a6e22e">for</span> <span style="color: #a6e22e">display</span>
-    <span style="color: #a6e22e">string</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">symbol</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">&#39;BNK&#39;;</span>                                       <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">Set</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">token</span> <span style="color: #a6e22e">symbol</span> <span style="color: #a6e22e">for</span> <span style="color: #a6e22e">display</span>
-    <span style="color: #a6e22e">uint8</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">decimals</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">8;</span>                                           <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">Set</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">number</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">decimals</span> <span style="color: #a6e22e">for</span> <span style="color: #a6e22e">display</span> <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #ae81ff">15000000</span> <span style="color: #a6e22e">BNK</span> <span style="color: #a6e22e">specified</span> <span style="color: #a6e22e">in</span> <span style="color: #a6e22e">Grains</span>
-    <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">INITIAL_SUPPLY</span> <span style="color: #a6e22e">=</span> <span style="color: #ae81ff">10000000</span> <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">10**uint256</span><span style="color: #e6db74">(decimals)</span><span style="color: #a6e22e">;</span>    <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #ae81ff">10000000</span> <span style="color: #a6e22e">BILT</span> <span style="color: #a6e22e">specified</span> <span style="color: #a6e22e">in</span> <span style="color: #a6e22e">Grains</span>
-    <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">debt=0;</span>
-    <span style="color: #f8f8f2">/**</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">BrainIsToken</span> <span style="color: #a6e22e">Constructor</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">Runs</span> <span style="color: #a6e22e">only</span> <span style="color: #a6e22e">on</span> <span style="color: #a6e22e">initial</span> <span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">creation.</span>
-     <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-
-
-
-    <span style="color: #f8f8f2">/**</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">Transfer</span> <span style="color: #a6e22e">token</span> <span style="color: #a6e22e">for</span> <span style="color: #a6e22e">a</span> <span style="color: #a6e22e">specified</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">when</span> <span style="color: #a6e22e">not</span> <span style="color: #a6e22e">paused</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">_to</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">transfer</span> <span style="color: #a6e22e">to.</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">_value</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">amount</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">be</span> <span style="color: #a6e22e">transferred.</span>
-     <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">transfer</span><span style="color: #e6db74">(address _to, uint256 _value)</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(bool)</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">require</span><span style="color: #e6db74">(_to != address(0))</span><span style="color: #a6e22e">;</span>
-      <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">super.transfer</span><span style="color: #e6db74">(_to, _value)</span><span style="color: #a6e22e">;</span>
-    <span style="color: #f8f8f2">}</span>
-
-    <span style="color: #f8f8f2">/**</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">Transfer</span> <span style="color: #a6e22e">tokens</span> <span style="color: #a6e22e">from</span> <span style="color: #a6e22e">one</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">another</span> <span style="color: #a6e22e">when</span> <span style="color: #a6e22e">not</span> <span style="color: #a6e22e">paused</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">_from</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">which</span> <span style="color: #a6e22e">you</span> <span style="color: #a6e22e">want</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">send</span> <span style="color: #a6e22e">tokens</span> <span style="color: #a6e22e">from</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">_to</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">which</span> <span style="color: #a6e22e">you</span> <span style="color: #a6e22e">want</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">transfer</span> <span style="color: #a6e22e">to</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">_value</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">amount</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">tokens</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">be</span> <span style="color: #a6e22e">transferred</span>
-     <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">transferFrom</span><span style="color: #e6db74">(address _from, address _to, uint256 _value)</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(bool)</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">require</span><span style="color: #e6db74">(_to != address(0))</span><span style="color: #a6e22e">;</span>
-      <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">super.transferFrom</span><span style="color: #e6db74">(_from, _to, _value)</span><span style="color: #a6e22e">;</span>
-    <span style="color: #f8f8f2">}</span>
-
-    <span style="color: #f8f8f2">/**</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@dev</span> <span style="color: #a6e22e">Aprove</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">passed</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">spend</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">specified</span> <span style="color: #a6e22e">amount</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">tokens</span> <span style="color: #a6e22e">on</span> <span style="color: #a6e22e">behalf</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">msg.sender</span> <span style="color: #a6e22e">when</span> <span style="color: #a6e22e">not</span> <span style="color: #a6e22e">paused.</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">_spender</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">which</span> <span style="color: #a6e22e">will</span> <span style="color: #a6e22e">spend</span> <span style="color: #a6e22e">the</span> <span style="color: #a6e22e">funds.</span>
-     <span style="color: #a6e22e">*</span> <span style="color: #a6e22e">@param</span> <span style="color: #a6e22e">_value</span> <span style="color: #a6e22e">The</span> <span style="color: #a6e22e">amount</span> <span style="color: #a6e22e">of</span> <span style="color: #a6e22e">tokens</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">be</span> <span style="color: #a6e22e">spent.</span>
-     <span style="color: #a6e22e">*</span><span style="color: #960050; background-color: #1e0010">/</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">approve</span><span style="color: #e6db74">(address _spender, uint256 _value)</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(bool)</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">super.approve</span><span style="color: #e6db74">(_spender, _value)</span><span style="color: #a6e22e">;</span>
-    <span style="color: #f8f8f2">}</span>
-
+  <span style="color: #75715e">/**</span>
+<span style="color: #75715e">   * @dev Throws if called by any account other than the owner.</span>
+<span style="color: #75715e">   */</span>
+  <span style="color: #a6e22e">modifier</span> <span style="color: #a6e22e">onlyOwner</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span> <span style="color: #f92672">==</span> <span style="color: #a6e22e">owner</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #a6e22e">_</span><span style="color: #f8f8f2">;</span>
   <span style="color: #f8f8f2">}</span>
 
-  <span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">Bank</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">BankToken</span> <span style="color: #f8f8f2">{</span>
 
-    <span style="color: #a6e22e">bool</span> <span style="color: #a6e22e">private</span> <span style="color: #a6e22e">contract_status;</span>
-
-    <span style="color: #a6e22e">modifier</span> <span style="color: #a6e22e">winnerCheck</span><span style="color: #e6db74">()</span> <span style="color: #f8f8f2">{</span>
-       <span style="color: #a6e22e">_;</span>
-      <span style="color: #a6e22e">if</span><span style="color: #e6db74">(calcRight(balances[msg.sender], debt) &gt; INITIAL_SUPPLY)</span> <span style="color: #f8f8f2">{</span>
-        <span style="color: #a6e22e">contract_status</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">true;</span>
-      <span style="color: #f8f8f2">}</span>
+  <span style="color: #75715e">/**</span>
+<span style="color: #75715e">   * @dev Allows the current owner to transfer control of the contract to a newOwner.</span>
+<span style="color: #75715e">   * @param newOwner The address to transfer ownership to.</span>
+<span style="color: #75715e">   */</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">transferOwnership</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">newOwner</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">onlyOwner</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">newOwner</span> <span style="color: #f92672">!=</span> <span style="color: #a6e22e">address</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">))</span> <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">owner</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">newOwner</span><span style="color: #f8f8f2">;</span>
     <span style="color: #f8f8f2">}</span>
-
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">calcRight</span><span style="color: #e6db74">(uint256 a, uint256 b)</span> <span style="color: #a6e22e">private</span> <span style="color: #a6e22e">pure</span> <span style="color: #a6e22e">returns</span><span style="color: #e6db74">(uint256)</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">a</span> <span style="color: #a6e22e">-</span> <span style="color: #a6e22e">b;</span>
-    <span style="color: #f8f8f2">}</span>
-
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">Bank</span><span style="color: #e6db74">()</span> <span style="color: #a6e22e">public</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">TotalSupply</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">INITIAL_SUPPLY;</span>
-    <span style="color: #f8f8f2">}</span>
-
-    <span style="color: #960050; background-color: #1e0010">//</span> <span style="color: #a6e22e">!</span> <span style="color: #a6e22e">IMPORTANT</span> <span style="color: #a6e22e">you</span> <span style="color: #a6e22e">need</span> <span style="color: #a6e22e">to</span> <span style="color: #a6e22e">become</span> <span style="color: #a6e22e">owner</span>
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">start</span><span style="color: #e6db74">()</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">owner</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">msg.sender;</span>
-      <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg.sender</span><span style="color: #f8f8f2">]</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">INITIAL_SUPPLY;</span>
-    <span style="color: #f8f8f2">}</span>
-
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">TakeCredit</span><span style="color: #e6db74">(uint256 amount)</span> <span style="color: #a6e22e">winnerCheck</span> <span style="color: #f8f8f2">{</span>
-         <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">new_debt</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">debt</span> <span style="color: #a6e22e">+</span> <span style="color: #a6e22e">amount;</span>
-         <span style="color: #a6e22e">require</span><span style="color: #e6db74">(new_debt &lt;= 100)</span><span style="color: #a6e22e">;</span>
-         <span style="color: #a6e22e">debt</span> <span style="color: #a6e22e">=</span> <span style="color: #a6e22e">new_debt;</span>
-         <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg.sender</span><span style="color: #f8f8f2">]</span> <span style="color: #a6e22e">+=</span> <span style="color: #a6e22e">amount;</span>
-     <span style="color: #f8f8f2">}</span>
-
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">PayCredit</span><span style="color: #e6db74">(uint256 amount)</span> <span style="color: #a6e22e">winnerCheck</span> <span style="color: #f8f8f2">{</span>
-         <span style="color: #a6e22e">require</span><span style="color: #e6db74">(amount == debt)</span><span style="color: #a6e22e">;</span>
-         <span style="color: #a6e22e">require</span><span style="color: #e6db74">(balances[msg.sender] &gt;= amount)</span><span style="color: #a6e22e">;</span>
-         <span style="color: #a6e22e">debt=0;</span>
-         <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg.sender</span><span style="color: #f8f8f2">]</span> <span style="color: #a6e22e">-=</span> <span style="color: #a6e22e">amount;</span>
-    <span style="color: #f8f8f2">}</span>
-
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">getDebt</span><span style="color: #e6db74">()</span> <span style="color: #a6e22e">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">returns</span> <span style="color: #e6db74">(uint256 debtValue)</span><span style="color: #f8f8f2">{</span>
-        <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">debt;</span>
-    <span style="color: #f8f8f2">}</span>
-
-    <span style="color: #a6e22e">function</span> <span style="color: #a6e22e">status</span><span style="color: #e6db74">()</span> <span style="color: #a6e22e">external</span> <span style="color: #a6e22e">view</span> <span style="color: #a6e22e">returns</span><span style="color: #e6db74">(bool)</span> <span style="color: #f8f8f2">{</span>
-      <span style="color: #a6e22e">return</span> <span style="color: #a6e22e">contract_status;</span>
-    <span style="color: #f8f8f2">}</span>
-
   <span style="color: #f8f8f2">}</span>
-  </pre>
+
+<span style="color: #f8f8f2">}</span>
+
+
+
+<span style="color: #75715e">/**</span>
+<span style="color: #75715e"> * @title Bank</span>
+<span style="color: #75715e"> * @dev ERC20 Bank (BNK)</span>
+<span style="color: #75715e"> *</span>
+<span style="color: #75715e"> * BNK Tokens are divisible by 1e8 (100,000,000) base</span>
+<span style="color: #75715e"> * units referred to as &#39;Grains&#39;.</span>
+<span style="color: #75715e"> *</span>
+<span style="color: #75715e"> * BNK are displayed using 8 decimal places of precision.</span>
+<span style="color: #75715e"> *</span>
+<span style="color: #75715e"> * 1 BNK is equivalent to:</span>
+<span style="color: #75715e"> *   100000000 == 1 * 10*8 == 1e8</span>
+<span style="color: #75715e"> *</span>
+<span style="color: #75715e"> * All initial BNK Grains are assigned to the creator of</span>
+<span style="color: #75715e"> * this contract.</span>
+<span style="color: #75715e"> *</span>
+<span style="color: #75715e"> */</span>
+<span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">BankToken</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">StandardToken</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">Ownable</span> <span style="color: #f8f8f2">{</span>
+
+  <span style="color: #a6e22e">string</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">name</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;Bank&#39;</span><span style="color: #f8f8f2">;</span>                                      <span style="color: #75715e">// Set the token name for display</span>
+  <span style="color: #a6e22e">string</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">symbol</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;BNK&#39;</span><span style="color: #f8f8f2">;</span>                                       <span style="color: #75715e">// Set the token symbol for display</span>
+  <span style="color: #a6e22e">uint8</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">decimals</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">8</span><span style="color: #f8f8f2">;</span>                                           <span style="color: #75715e">// Set the number of decimals for display // 15000000 BNK specified in Grains</span>
+  <span style="color: #a6e22e">uint256</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">INITIAL_SUPPLY</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">10000000</span> <span style="color: #f92672">*</span> <span style="color: #ae81ff">10</span><span style="color: #f92672">**</span><span style="color: #a6e22e">uint256</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">decimals</span><span style="color: #f8f8f2">);</span>    <span style="color: #75715e">// 10000000 BILT specified in Grains</span>
+  <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">debt</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #75715e">/**</span>
+<span style="color: #75715e">   * @dev BrainIsToken Constructor</span>
+<span style="color: #75715e">   * Runs only on initial contract creation.</span>
+<span style="color: #75715e">   */</span>
+  
+  
+  
+  <span style="color: #75715e">/**</span>
+<span style="color: #75715e">   * @dev Transfer token for a specified address when not paused</span>
+<span style="color: #75715e">   * @param _to The address to transfer to.</span>
+<span style="color: #75715e">   * @param _value The amount to be transferred.</span>
+<span style="color: #75715e">   */</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">transfer</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_to</span> <span style="color: #f92672">!=</span> <span style="color: #a6e22e">address</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">));</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #66d9ef">super</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">transfer</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
+  <span style="color: #f8f8f2">}</span>
+
+  <span style="color: #75715e">/**</span>
+<span style="color: #75715e">   * @dev Transfer tokens from one address to another when not paused</span>
+<span style="color: #75715e">   * @param _from address The address which you want to send tokens from</span>
+<span style="color: #75715e">   * @param _to address The address which you want to transfer to</span>
+<span style="color: #75715e">   * @param _value uint256 the amount of tokens to be transferred</span>
+<span style="color: #75715e">   */</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">transferFrom</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_from</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_to</span> <span style="color: #f92672">!=</span> <span style="color: #a6e22e">address</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">));</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #66d9ef">super</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">transferFrom</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_from</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
+  <span style="color: #f8f8f2">}</span>
+
+  <span style="color: #75715e">/**</span>
+<span style="color: #75715e">   * @dev Aprove the passed address to spend the specified amount of tokens on behalf of msg.sender when not paused.</span>
+<span style="color: #75715e">   * @param _spender The address which will spend the funds.</span>
+<span style="color: #75715e">   * @param _value The amount of tokens to be spent.</span>
+<span style="color: #75715e">   */</span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">approve</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_spender</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #66d9ef">super</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">approve</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_spender</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
+  <span style="color: #f8f8f2">}</span>
+
+<span style="color: #f8f8f2">}</span>
+
+<span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">Bank</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">BankToken</span> <span style="color: #f8f8f2">{</span>
+
+  <span style="color: #a6e22e">bool</span> <span style="color: #66d9ef">private</span> <span style="color: #a6e22e">contract_status</span><span style="color: #f8f8f2">;</span>
+
+  <span style="color: #a6e22e">modifier</span> <span style="color: #a6e22e">winnerCheck</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
+     <span style="color: #a6e22e">_</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">calcRight</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">],</span> <span style="color: #a6e22e">debt</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">INITIAL_SUPPLY</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">contract_status</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">}</span>
+
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">calcRight</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">a</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">b</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">private</span> <span style="color: #a6e22e">pure</span> <span style="color: #a6e22e">returns</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">a</span> <span style="color: #f92672">-</span> <span style="color: #a6e22e">b</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #f8f8f2">}</span>
+
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">Bank</span><span style="color: #f8f8f2">()</span> <span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">TotalSupply</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">INITIAL_SUPPLY</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #f8f8f2">}</span>
+
+  <span style="color: #75715e">// ! IMPORTANT you need to become owner </span>
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">start</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">owner</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">INITIAL_SUPPLY</span><span style="color: #f8f8f2">;</span>                
+  <span style="color: #f8f8f2">}</span>
+ 
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">TakeCredit</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">amount</span><span style="color: #f8f8f2">)</span> <span style="color: #a6e22e">winnerCheck</span> <span style="color: #f8f8f2">{</span>    
+       <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">new_debt</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">debt</span> <span style="color: #f92672">+</span> <span style="color: #a6e22e">amount</span><span style="color: #f8f8f2">;</span>
+       <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">new_debt</span> <span style="color: #f92672">&lt;=</span> <span style="color: #ae81ff">100</span><span style="color: #f8f8f2">);</span> 
+       <span style="color: #a6e22e">debt</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">new_debt</span><span style="color: #f8f8f2">;</span>
+       <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">+=</span> <span style="color: #a6e22e">amount</span><span style="color: #f8f8f2">;</span>
+   <span style="color: #f8f8f2">}</span>
+   
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">PayCredit</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">amount</span><span style="color: #f8f8f2">)</span> <span style="color: #a6e22e">winnerCheck</span> <span style="color: #f8f8f2">{</span>    
+       <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">amount</span> <span style="color: #f92672">==</span> <span style="color: #a6e22e">debt</span><span style="color: #f8f8f2">);</span>
+       <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">&gt;=</span> <span style="color: #a6e22e">amount</span><span style="color: #f8f8f2">);</span>
+       <span style="color: #a6e22e">debt</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span>
+       <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">-=</span> <span style="color: #a6e22e">amount</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #f8f8f2">}</span>
+
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">getDebt</span><span style="color: #f8f8f2">()</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">debtValue</span><span style="color: #f8f8f2">){</span>
+      <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">debt</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #f8f8f2">}</span>
+
+  <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">status</span><span style="color: #f8f8f2">()</span> <span style="color: #a6e22e">external</span> <span style="color: #a6e22e">view</span> <span style="color: #a6e22e">returns</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">contract_status</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #f8f8f2">}</span> 
+  
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
         </div>
 
 
