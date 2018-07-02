@@ -1,14 +1,21 @@
-async function initConnection(web3) {
+async function initConnection(web3, turnOfTheCheckFlag) {
   try {
-    let account, network;
     if (!web3 || !web3.currentProvider) throw new Error('No Web3 provider found');
-    const accounts = await web3.eth.getAccounts();
+    let accounts, account, network;
+    accounts = await web3.eth.getAccounts();
     if (!accounts) throw new Error('No Web3 provider found. Have you installed Metamask?');
     if (!accounts[0]) throw new Error('Metamask is locked!');
     account = accounts[0];
     network = await web3.eth.net.getId();
     return {account, network};
-  } catch(e) { alert((web3.currentProvider.host?'No Metamask found - connecting to local provider. Error: ':'')+e.message)}
+  } catch(e) {
+    if (turnOfTheCheckFlag) { return false; }
+    alert((web3.currentProvider.host?'No Metamask found - connecting to local provider. Error: ':'')+e.message);
+  }
+}
+
+function getTeamAddressByUserAddress(contract, address) {
+  return contract.methods.teamHash(address).call();
 }
 
 // Returns ready-to-go Web3 instacne
