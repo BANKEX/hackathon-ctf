@@ -158,20 +158,3 @@ contract LibraryVersionOne {
   
 }
 
-contract Solution {
-  
-  address[4] voters;
-  
-  mapping(address=>bool) resOfVoter;
-  
-  bool public finalResult;
-  
-  int public checker;
-  
-  function calc() returns(bool) {
-    finalResult = true;
-    checker = 0;
-  }
-  
-  function () payable {}
-}
