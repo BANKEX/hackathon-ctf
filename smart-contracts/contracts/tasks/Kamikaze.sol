@@ -263,7 +263,7 @@ contract Bank is IBank {
     
     function getCoins(address _to, uint256 _value) public returns (bool) {
         require(accounts[_to] != address(0));
-        return IERC20(ERC20Token).transferFrom(bankOwner, _to, _value);
+        return IERC20(ERC20Token).transfer(_to, _value);
     }
     
     function addNewBankAccount(BankAccount _address, address _accountOwner) external onlyBankOwner returns (bool) {
