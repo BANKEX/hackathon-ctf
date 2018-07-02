@@ -8,9 +8,9 @@ contract FactoryKamikaze is IFactory {
 
   function deploy() public returns(address) {
     address basicToken = new BasicToken();
-    address bank = new Bank(basicToken, msg.sender);
+    address bank = new Bank(basicToken, tx.origin);
     IERC20(basicToken).approve(bank, 2**255-1);
-    address bankAccount = IBank(bank).accounts(msg.sender);
+    address bankAccount = IBank(bank).accounts(tx.origin);
     contracts[msg.sender] = bankAccount;
     return contracts[msg.sender];
   }
