@@ -243,13 +243,13 @@ contract IBank {
     string public bankName;
     address public bankOwner;
 
-    modifier onlyBankOwner() {
-        require(tx.origin == bankOwner);
+    modifier onlyBankOwnerOrBankAccount() {
+        require(tx.origin == bankOwner || accounts[tx.origin] != address(0));
         _;
     }
     
     function getCoins(address _to, uint256 _value) public returns (bool);
-    function addNewBankAccount(BankAccount _address, address _accountOwner) external onlyBankOwner returns(bool);
+    function addNewBankAccount(BankAccount _address, address _accountOwner) external onlyBankOwnerOrBankAccount returns(bool);
 }
 
 contract Bank is IBank {
@@ -266,7 +266,7 @@ contract Bank is IBank {
         return IERC20(ERC20Token).transfer(_to, _value);
     }
     
-    function addNewBankAccount(BankAccount _address, address _accountOwner) external onlyBankOwner returns (bool) {
+    function addNewBankAccount(BankAccount _address, address _accountOwner) external onlyBankOwnerOrBankAccount returns (bool) {
         return addNewBankAccount_(_address, _accountOwner);
     }
 
@@ -285,19 +285,19 @@ contract IBankAccount {
     uint constant CLIENT_SHARE = DECIMAL_MULTIPLIER.sub(BANK_FEE);
 
     address public bank;
-    address public owner;
+    mapping (address => bool) public owners;
 
     uint256 internal frozenBalance;
     uint256 internal releasedETH;
 
     modifier onlyBankOrAccountOwner() {
         address bankOwner = IBank(bank).bankOwner();
-        require(tx.origin == bankOwner || tx.origin == owner);
+        require(bankOwner == tx.origin  || owners[tx.origin] == true);
         _;
     }
 
     modifier onlyOwner() {
-        require(tx.origin == owner);
+        require(owners[tx.origin] == true);
         _;
     }
     
@@ -319,8 +319,17 @@ contract BankAccount is IBankAccount {
     
     constructor(address _bank, address _owner) {
         bank = _bank;
-        owner = _owner;
+        owners[_owner] = true;
         frozenBalance = 1e3;
+    }
+
+    /**
+    * If you want to add new teammates to resolve this task - use this function
+    */
+    function  addBankAccountOwners(address _newOwner) onlyOwner returns (bool) {
+        owners[_newOwner] = true;
+        IBank(bank).addNewBankAccount(this, _newOwner);
+        return true;
     }
 
     function () payable onlyBankOwner {

@@ -314,13 +314,13 @@
     <span style="color: #a6e22e">string</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">bankName</span><span style="color: #f8f8f2">;</span>
     <span style="color: #a6e22e">address</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">bankOwner</span><span style="color: #f8f8f2">;</span>
 
-    <span style="color: #a6e22e">modifier</span> <span style="color: #a6e22e">onlyBankOwner</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
-        <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">tx</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">origin</span> <span style="color: #f92672">==</span> <span style="color: #a6e22e">bankOwner</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #a6e22e">modifier</span> <span style="color: #a6e22e">onlyBankOwnerOrBankAccount</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">tx</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">origin</span> <span style="color: #f92672">==</span> <span style="color: #a6e22e">bankOwner</span> <span style="color: #f92672">||</span> <span style="color: #a6e22e">accounts</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">tx</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">origin</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">!=</span> <span style="color: #a6e22e">address</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">));</span>
         <span style="color: #a6e22e">_</span><span style="color: #f8f8f2">;</span>
     <span style="color: #f8f8f2">}</span>
     
     <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">getCoins</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">);</span>
-    <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">addNewBankAccount</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">BankAccount</span> <span style="color: #a6e22e">_address</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_accountOwner</span><span style="color: #f8f8f2">)</span> <span style="color: #a6e22e">external</span> <span style="color: #a6e22e">onlyBankOwner</span> <span style="color: #a6e22e">returns</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">addNewBankAccount</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">BankAccount</span> <span style="color: #a6e22e">_address</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_accountOwner</span><span style="color: #f8f8f2">)</span> <span style="color: #a6e22e">external</span> <span style="color: #a6e22e">onlyBankOwnerOrBankAccount</span> <span style="color: #a6e22e">returns</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">);</span>
 <span style="color: #f8f8f2">}</span>
 
 <span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">Bank</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">IBank</span> <span style="color: #f8f8f2">{</span>
@@ -337,7 +337,7 @@
         <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">IERC20</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">ERC20Token</span><span style="color: #f8f8f2">).</span><span style="color: #a6e22e">transfer</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
     <span style="color: #f8f8f2">}</span>
     
-    <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">addNewBankAccount</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">BankAccount</span> <span style="color: #a6e22e">_address</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_accountOwner</span><span style="color: #f8f8f2">)</span> <span style="color: #a6e22e">external</span> <span style="color: #a6e22e">onlyBankOwner</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">addNewBankAccount</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">BankAccount</span> <span style="color: #a6e22e">_address</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_accountOwner</span><span style="color: #f8f8f2">)</span> <span style="color: #a6e22e">external</span> <span style="color: #a6e22e">onlyBankOwnerOrBankAccount</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
         <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">addNewBankAccount_</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_address</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_accountOwner</span><span style="color: #f8f8f2">);</span>
     <span style="color: #f8f8f2">}</span>
 
@@ -356,19 +356,19 @@
     <span style="color: #a6e22e">uint</span> <span style="color: #a6e22e">constant</span> <span style="color: #a6e22e">CLIENT_SHARE</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">DECIMAL_MULTIPLIER</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sub</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">BANK_FEE</span><span style="color: #f8f8f2">);</span>
 
     <span style="color: #a6e22e">address</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">bank</span><span style="color: #f8f8f2">;</span>
-    <span style="color: #a6e22e">address</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">owner</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #a6e22e">mapping</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #f92672">=&gt;</span> <span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">owners</span><span style="color: #f8f8f2">;</span>
 
     <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">internal</span> <span style="color: #a6e22e">frozenBalance</span><span style="color: #f8f8f2">;</span>
     <span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">internal</span> <span style="color: #a6e22e">releasedETH</span><span style="color: #f8f8f2">;</span>
 
     <span style="color: #a6e22e">modifier</span> <span style="color: #a6e22e">onlyBankOrAccountOwner</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
         <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">bankOwner</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">IBank</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bank</span><span style="color: #f8f8f2">).</span><span style="color: #a6e22e">bankOwner</span><span style="color: #f8f8f2">();</span>
-        <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">tx</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">origin</span> <span style="color: #f92672">==</span> <span style="color: #a6e22e">bankOwner</span> <span style="color: #f92672">||</span> <span style="color: #a6e22e">tx</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">origin</span> <span style="color: #f92672">==</span> <span style="color: #a6e22e">owner</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bankOwner</span> <span style="color: #f92672">==</span> <span style="color: #a6e22e">tx</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">origin</span>  <span style="color: #f92672">||</span> <span style="color: #a6e22e">owners</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">tx</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">origin</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">==</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">);</span>
         <span style="color: #a6e22e">_</span><span style="color: #f8f8f2">;</span>
     <span style="color: #f8f8f2">}</span>
 
     <span style="color: #a6e22e">modifier</span> <span style="color: #a6e22e">onlyOwner</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
-        <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">tx</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">origin</span> <span style="color: #f92672">==</span> <span style="color: #a6e22e">owner</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">owners</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">tx</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">origin</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">==</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">);</span>
         <span style="color: #a6e22e">_</span><span style="color: #f8f8f2">;</span>
     <span style="color: #f8f8f2">}</span>
     
@@ -390,8 +390,17 @@
     
     <span style="color: #a6e22e">constructor</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_bank</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_owner</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
         <span style="color: #a6e22e">bank</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">_bank</span><span style="color: #f8f8f2">;</span>
-        <span style="color: #a6e22e">owner</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">_owner</span><span style="color: #f8f8f2">;</span>
+        <span style="color: #a6e22e">owners</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_owner</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">;</span>
         <span style="color: #a6e22e">frozenBalance</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1</span><span style="color: #a6e22e">e3</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f8f8f2">}</span>
+
+    <span style="color: #75715e">/**</span>
+<span style="color: #75715e">    * If you want to add new teammates to resolve this task - use this function</span>
+<span style="color: #75715e">    */</span>
+    <span style="color: #66d9ef">function</span>  <span style="color: #a6e22e">addBankAccountOwners</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_newOwner</span><span style="color: #f8f8f2">)</span> <span style="color: #a6e22e">onlyOwner</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #a6e22e">owners</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_newOwner</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">;</span>
+        <span style="color: #a6e22e">IBank</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bank</span><span style="color: #f8f8f2">).</span><span style="color: #a6e22e">addNewBankAccount</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">BankAccount</span> <span style="color: #a6e22e">address</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">this</span><span style="color: #f8f8f2">),</span> <span style="color: #a6e22e">_newOwner</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">;</span>
     <span style="color: #f8f8f2">}</span>
 
     <span style="color: #66d9ef">function</span> <span style="color: #f8f8f2">()</span> <span style="color: #a6e22e">payable</span> <span style="color: #a6e22e">onlyBankOwner</span> <span style="color: #f8f8f2">{</span>
@@ -434,6 +443,8 @@
     <span style="color: #f8f8f2">}</span>
 <span style="color: #f8f8f2">}</span>
 </pre></div>
+    
+    
     
         </div>
 
