@@ -157,8 +157,3 @@ contract LibraryVersionOne {
   function() payable {}
   
 }
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 65a08babe7fca14e556940a35cdcf9b89cd5d63e
