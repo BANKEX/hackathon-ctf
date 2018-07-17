@@ -71,7 +71,7 @@
       <a class="nav-item nav-link" href="tasks10.html">10</a>
       <a style="color: red;" class="nav-item nav-link" href="help.html">Help</a>
       <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="leaderboard.html">Leaderboard</a>
-      <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="prize.html">Get Prize<span class="sr-only">(current)</span></a>
+      <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="prize.html">WINNERS<span class="sr-only">(current)</span></a>
       <a style="color: black; float: right" class="nav-item nav-link" id="teamName"></a>
     </div>
   </div>
@@ -131,10 +131,9 @@
     const pub = utils.ecrecover(messageBuffer, v, r, s);
 
     const recoveredAddress = '0x' + utils.pubToAddress(pub).toString('hex');
-    console.log(recoveredAddress)
-    document.getElementById('wrapper').innerHTML = `<p style="margin-top: 5%">Address: ${recoveredAddress}</p>`;
+    const teamAddress = await getTeamAddressByUserAddress(contract, recoveredAddress);
+    document.getElementById('wrapper').innerHTML = `<p style="margin-top: 5%">Address: ${recoveredAddress}</p><p style="margin-top: 5%">Team Address: ${teamAddress}</p>`;
   }
-
 </script>
 
 <!-- Bootstrap core JavaScript
