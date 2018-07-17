@@ -132,7 +132,37 @@
 
     const recoveredAddress = '0x' + utils.pubToAddress(pub).toString('hex');
     const teamAddress = await getTeamAddressByUserAddress(contract, recoveredAddress);
-    document.getElementById('wrapper').innerHTML = `<p style="margin-top: 5%">Address: ${recoveredAddress}</p><p style="margin-top: 5%">Team Address: ${teamAddress}</p>`;
+    document.getElementById('wrapper').innerHTML = `
+        <p style="margin-top: 5%">Address: ${recoveredAddress}</p>
+        <p style="margin-top: 5%">Team Address: <span id="teamAddr">${teamAddress}</span></p>
+        <p style="margin-top: 3%">Enter team name</p>
+        <input id="teamName1" type="text" style="width: 20em">
+        <button onclick="getTeamHash()">Verify team</button>
+        <span id="teamVerify"></span>
+    `;
+  }
+
+  async function getTeamHash() {
+    const teamName = document.getElementById('teamName1').value;
+
+    let hash = myWeb3.utils.keccak256(teamName);
+    let bytesHash = myWeb3.utils.hexToBytes(hash);
+    let bytesAddress = [];
+    for (let i = 12; i < bytesHash.length; i++) {
+      bytesAddress.push(bytesHash[i]);
+    }
+
+    let teamAddress = myWeb3.utils.bytesToHex(bytesAddress);
+    const contractTeamAddress = document.getElementById('teamAddr').innerText;
+    console.log(contractTeamAddress)
+    console.log(teamAddress)
+
+    let verify = false;
+    if (teamAddress.toUpperCase() == contractTeamAddress.toUpperCase())
+      verify = true;
+    document.getElementById('teamVerify').innerHTML = `
+        <p style="margin-top: 2%">Verify address: ${verify}</p>
+    `;
   }
 </script>
 
