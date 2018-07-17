@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../../../favicon.ico">
+
+  <title>BKX : CTF</title>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="../assets/bootstrap/boostrap.min.css">
+  <link rel="stylesheet" href="../assets/styles/leaderboard.css">
+  <script src="https://unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <script src="../assets/js/vendor/web3.min.js"></script>
+  <script src="../assets/js/CONTACT_DATA.js"></script>
+  <script src="../assets/js/connection.js"></script>
+  <script src="../assets/js/leaderboard.js"></script>
+</head>
+
+<style type="text/css">
+  html, body, .wrapper {
+    height: 100%;
+    margin: 0;
+    font-size: 1vw;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wrapper * {
+    margin: 10px;
+  }
+
+  button {
+    font-size: 1vw;
+    padding: 10px 50px;
+  }
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <h1>BKX : CTF</h1>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+          aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div style="color: #1e0010; font-weight: 700; font-size: 20px;" class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="#">Tasks:</a>
+      <a class="nav-item nav-link" href="tasks1.html">1</a>
+      <a class="nav-item nav-link" href="tasks2.html">2</a>
+      <a class="nav-item nav-link" href="tasks3.html">3</a>
+      <a class="nav-item nav-link" href="tasks4.html">4</a>
+      <a class="nav-item nav-link" href="tasks5.html">5</a>
+      <a class="nav-item nav-link" href="tasks6.html">6</a>
+      <a class="nav-item nav-link" href="tasks7.html">7</a>
+      <a class="nav-item nav-link" href="tasks8.html">8</a>
+      <a class="nav-item nav-link" href="tasks9.html">9</a>
+      <a class="nav-item nav-link" href="tasks10.html">10</a>
+      <a style="color: red;" class="nav-item nav-link" href="help.html">Help</a>
+      <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="leaderboard.html">Leaderboard</a>
+      <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="prize.html">Get Prize<span class="sr-only">(current)</span></a>
+      <a style="color: black; float: right" class="nav-item nav-link" id="teamName"></a>
+    </div>
+  </div>
+</nav>
+
+<div class="container" id="root">
+  <div class="wrapper">
+    <p style="margin-top: 5%; font-size: 49px !important; color: #1e0010; font-weight: 700;">Congratulate our winners!</p>
+    <p style="margin-top: 0%; font-size: 49px !important; color: #1e0010; font-weight: 300;">k06aaa, ZumZoom and Astroband</p>
+    <br>
+    <p>To get the prize you need:</p>
+    <p>1) Sing message below with your matamask account, just press button below</p>
+    <b id="sig-note" style="color: black">Important! Use address that you have been using during the hackathon</b>
+    <p></p>
+    <p id="sig-button">
+      <button onclick="sign()">Sign - "That is my wallet"</button>
+    </p>
+    <p id="sig-title" style="margin-bottom: 0px"></p>
+    <p id="sig" style="color: #1a82ae"></p>
+    <p></p>
+    <p>2) Send a message with your team name, signature and main net address,</p>
+    <p>to the telegram channel: <a href="t.me/sss" style="text-decoration: underline; color: '#1a82ae'">t.me</a></p>
+  </div>
+</div>
+
+<script type="text/babel">
+  var myWeb3, userAccount, networkId, contract = {};
+
+  window.addEventListener('load', function() {
+    startApp();
+  });
+
+  function startApp() {
+    try {
+      const turnOfConnectionCheck = true;
+      let address = '', url;
+      myWeb3 = checkAndInstantiateWeb3();
+      initConnection(myWeb3, turnOfConnectionCheck).then(async({account, network}) => {
+        userAccount = account;
+        networkId = network;
+        if (userAccount) {
+          if (networkId !== 4 && networkId !== 5777 && networkId !== 1337) { throw Error(messages.notRinkeby); }
+          contract = new myWeb3.eth.Contract(abi, contractAddress);
+          address = 'address='+ await getTeamAddressByUserAddress(contract, userAccount);
+          console.log('Contract address ' + contract.options.address);
+          console.log(`Connected to ${networkId === 4 ? 'Rinkeby' : 'Local'} network`);
+          console.log('Your address ' + userAccount);
+        }
+      })
+    } catch(err) {
+      alert(err.message);
+      console.error(err);
+
+    }
+  }
+
+  async function sign() {
+
+    const message = myWeb3.utils.toHex('That is may wallet');
+    const messageHash = myWeb3.utils.sha3(message);
+    // const messageBuffer = new Buffer(messageHash.split('x')[1], 'hex');
+
+    let signature = myWeb3.eth.sign(messageHash, userAccount, (err, result) => {
+
+      console.log(err);
+      console.log(result);
+      signature = result;
+
+      console.log('signature: ', signature);
+
+      signature = signature.split('x')[1];
+
+      document.getElementById('sig-note').remove();
+      document.getElementById('sig-button').remove();
+      document.getElementById('sig-title').innerHTML += "Yor signature is:";
+      document.getElementById('sig').innerHTML += signature;
+    });
+  }
+
+</script>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../assets/bootstrap/jquery-3.1.1.slim.min.js"></script>
+<script src="../assets/bootstrap/tether.min.js"></script>
+<script src="../assets/bootstrap/bootstrap.min.js"></script>
+
+</body>
+
+</html>

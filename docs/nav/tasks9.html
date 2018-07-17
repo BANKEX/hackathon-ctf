@@ -42,6 +42,7 @@
         <a class="nav-item nav-link" href="tasks10.html">10</a>
         <a style="color: red;" class="nav-item nav-link" href="help.html">Help</a>
         <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="leaderboard.html">Leaderboard</a>
+        <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="prize.html">Get Prize</a>
         <a style="color: black; float: right" class="nav-item nav-link" id="teamName"></a>
       </div>
     </div>
@@ -76,7 +77,7 @@
 <span style="color: #75715e"> * @dev Math operations with safety checks that throw on error</span>
 <span style="color: #75715e"> */</span>
 <span style="color: #a6e22e">library</span> <span style="color: #a6e22e">SafeMath</span> <span style="color: #f8f8f2">{</span>
-  
+
   <span style="color: #75715e">/**</span>
 <span style="color: #75715e">  * @dev Multiplies two numbers, throws on overflow.</span>
 <span style="color: #75715e">  */</span>
@@ -88,7 +89,7 @@
     <span style="color: #a6e22e">assert</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">c</span> <span style="color: #f92672">/</span> <span style="color: #a6e22e">a</span> <span style="color: #f92672">==</span> <span style="color: #a6e22e">b</span><span style="color: #f8f8f2">);</span>
     <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">c</span><span style="color: #f8f8f2">;</span>
   <span style="color: #f8f8f2">}</span>
-  
+
   <span style="color: #75715e">/**</span>
 <span style="color: #75715e">  * @dev Integer division of two numbers, truncating the quotient.</span>
 <span style="color: #75715e">  */</span>
@@ -98,7 +99,7 @@
     <span style="color: #75715e">// assert(a == b * c + a % b); // There is no case in which this doesn&#39;t hold</span>
     <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">c</span><span style="color: #f8f8f2">;</span>
   <span style="color: #f8f8f2">}</span>
-  
+
   <span style="color: #75715e">/**</span>
 <span style="color: #75715e">  * @dev Substracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).</span>
 <span style="color: #75715e">  */</span>
@@ -106,7 +107,7 @@
     <span style="color: #a6e22e">assert</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">b</span> <span style="color: #f92672">&lt;=</span> <span style="color: #a6e22e">a</span><span style="color: #f8f8f2">);</span>
     <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">a</span> <span style="color: #f92672">-</span> <span style="color: #a6e22e">b</span><span style="color: #f8f8f2">;</span>
   <span style="color: #f8f8f2">}</span>
-  
+
   <span style="color: #75715e">/**</span>
 <span style="color: #75715e">  * @dev Adds two numbers, throws on overflow.</span>
 <span style="color: #75715e">  */</span>
@@ -128,9 +129,9 @@
 
 <span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">ERC223Token</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">ERC223Interface</span> <span style="color: #f8f8f2">{</span>
   <span style="color: #a6e22e">using</span> <span style="color: #a6e22e">SafeMath</span> <span style="color: #66d9ef">for</span> <span style="color: #a6e22e">uint</span><span style="color: #f8f8f2">;</span>
-  
+
   <span style="color: #a6e22e">mapping</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #f92672">=&gt;</span> <span style="color: #a6e22e">uint</span><span style="color: #f8f8f2">)</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">;</span> <span style="color: #75715e">// List of user balances.</span>
-  
+
   <span style="color: #75715e">/**</span>
 <span style="color: #75715e">   * @dev Transfer the specified amount of tokens to the specified address.</span>
 <span style="color: #75715e">   *      Invokes the `tokenFallback` function if the recipient is a contract.</span>
@@ -146,12 +147,12 @@
     <span style="color: #75715e">// Standard function transfer similar to ERC20 transfer with no _data .</span>
     <span style="color: #75715e">// Added due to backwards compatibility reasons .</span>
     <span style="color: #a6e22e">uint</span> <span style="color: #a6e22e">codeLength</span><span style="color: #f8f8f2">;</span>
-    
+
     <span style="color: #a6e22e">assembly</span> <span style="color: #f8f8f2">{</span>
     <span style="color: #75715e">// Retrieve the size of the code on target address, this needs assembly .</span>
       <span style="color: #a6e22e">codeLength</span> <span style="color: #f92672">:=</span> <span style="color: #a6e22e">extcodesize</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">)</span>
     <span style="color: #f8f8f2">}</span>
-    
+
     <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">].</span><span style="color: #a6e22e">sub</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
     <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">].</span><span style="color: #a6e22e">add</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
     <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">codeLength</span><span style="color: #f92672">&gt;</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
@@ -160,7 +161,7 @@
     <span style="color: #f8f8f2">}</span>
     <span style="color: #a6e22e">emit</span> <span style="color: #a6e22e">Transfer</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_data</span><span style="color: #f8f8f2">);</span>
   <span style="color: #f8f8f2">}</span>
-  
+
   <span style="color: #75715e">/**</span>
 <span style="color: #75715e">   * @dev Transfer the specified amount of tokens to the specified address.</span>
 <span style="color: #75715e">   *      This function works the same with the previous one</span>
@@ -173,12 +174,12 @@
   <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">transfer</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
     <span style="color: #a6e22e">uint</span> <span style="color: #a6e22e">codeLength</span><span style="color: #f8f8f2">;</span>
     <span style="color: #a6e22e">bytes</span> <span style="color: #a6e22e">memory</span> <span style="color: #a6e22e">empty</span><span style="color: #f8f8f2">;</span>
-    
+
     <span style="color: #a6e22e">assembly</span> <span style="color: #f8f8f2">{</span>
     <span style="color: #75715e">// Retrieve the size of the code on target address, this needs assembly .</span>
       <span style="color: #a6e22e">codeLength</span> <span style="color: #f92672">:=</span> <span style="color: #a6e22e">extcodesize</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">)</span>
     <span style="color: #f8f8f2">}</span>
-    
+
     <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">].</span><span style="color: #a6e22e">sub</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
     <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">].</span><span style="color: #a6e22e">add</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
     <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">codeLength</span><span style="color: #f92672">&gt;</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
@@ -187,8 +188,8 @@
     <span style="color: #f8f8f2">}</span>
     <span style="color: #a6e22e">emit</span> <span style="color: #a6e22e">Transfer</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">empty</span><span style="color: #f8f8f2">);</span>
   <span style="color: #f8f8f2">}</span>
-  
-  
+
+
   <span style="color: #75715e">/**</span>
 <span style="color: #75715e">   * @dev Returns balance of the `_owner`.</span>
 <span style="color: #75715e">   *</span>
@@ -217,39 +218,39 @@
 <span style="color: #f8f8f2">}</span>
 
 <span style="color: #a6e22e">contract</span> <span style="color: #a6e22e">Vault</span> <span style="color: #a6e22e">is</span> <span style="color: #a6e22e">ERC223ReceivingContract</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">ERC223Token</span> <span style="color: #f8f8f2">{</span>
-  
+
   <span style="color: #a6e22e">bool</span> <span style="color: #66d9ef">private</span> <span style="color: #a6e22e">contract_status</span><span style="color: #f8f8f2">;</span>
-  
+
   <span style="color: #a6e22e">mapping</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span><span style="color: #f92672">=&gt;</span><span style="color: #a6e22e">uint</span><span style="color: #f8f8f2">)</span> <span style="color: #a6e22e">sentSum</span><span style="color: #f8f8f2">;</span>
-  
+
   <span style="color: #a6e22e">constructor</span> <span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
     <span style="color: #a6e22e">totalSupply</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">10000</span><span style="color: #f8f8f2">;</span>
     <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #66d9ef">this</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">totalSupply</span><span style="color: #f8f8f2">;</span>
     <span style="color: #a6e22e">giftController</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">;</span>
   <span style="color: #f8f8f2">}</span>
-  
+
   <span style="color: #a6e22e">bool</span> <span style="color: #66d9ef">private</span> <span style="color: #a6e22e">giftController</span><span style="color: #f8f8f2">;</span>
-  
+
   <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">gift</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
     <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">giftController</span><span style="color: #f8f8f2">);</span>
     <span style="color: #a6e22e">giftController</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">false</span><span style="color: #f8f8f2">;</span>
     <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1000</span><span style="color: #f8f8f2">;</span>
   <span style="color: #f8f8f2">}</span>
-  
+
   <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">put</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">uint</span> <span style="color: #a6e22e">sum</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
     <span style="color: #a6e22e">transfer</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">this</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">sum</span><span style="color: #f8f8f2">);</span>
     <span style="color: #a6e22e">sentSum</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">sum</span><span style="color: #f8f8f2">;</span>
   <span style="color: #f8f8f2">}</span>
-  
+
   <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">transferFrom</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_from</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">,</span><span style="color: #a6e22e">uint256</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">returns</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
     <span style="color: #a6e22e">uint</span> <span style="color: #a6e22e">codeLength</span><span style="color: #f8f8f2">;</span>
     <span style="color: #a6e22e">bytes</span> <span style="color: #a6e22e">memory</span> <span style="color: #a6e22e">empty</span><span style="color: #f8f8f2">;</span>
-    
+
     <span style="color: #a6e22e">assembly</span> <span style="color: #f8f8f2">{</span>
     <span style="color: #75715e">// Retrieve the size of the code on target address, this needs assembly .</span>
       <span style="color: #a6e22e">codeLength</span> <span style="color: #f92672">:=</span> <span style="color: #a6e22e">extcodesize</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">)</span>
     <span style="color: #f8f8f2">}</span>
-    
+
     <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_from</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_from</span><span style="color: #f8f8f2">].</span><span style="color: #a6e22e">sub</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
     <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">].</span><span style="color: #a6e22e">add</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">);</span>
     <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">codeLength</span><span style="color: #f92672">&gt;</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
@@ -259,32 +260,32 @@
     <span style="color: #a6e22e">emit</span> <span style="color: #a6e22e">Transfer</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">_from</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_to</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">empty</span><span style="color: #f8f8f2">);</span>
     <span style="color: #66d9ef">return</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">;</span>
   <span style="color: #f8f8f2">}</span>
-  
+
   <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">get</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
-    
+
     <span style="color: #a6e22e">transferFrom</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">this</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">sentSum</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">]);</span>
-    
+
     <span style="color: #a6e22e">sentSum</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">msg</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">sender</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span>
-    
+
     <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">balances</span><span style="color: #f8f8f2">[</span><span style="color: #66d9ef">this</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
       <span style="color: #a6e22e">solved</span><span style="color: #f8f8f2">();</span>
     <span style="color: #f8f8f2">}</span>
   <span style="color: #f8f8f2">}</span>
-  
+
   <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">tokenFallback</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">address</span> <span style="color: #a6e22e">_from</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">uint</span> <span style="color: #a6e22e">_value</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">bytes</span> <span style="color: #a6e22e">_data</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{}</span>
-  
+
   <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
     <span style="color: #a6e22e">revert</span><span style="color: #f8f8f2">();</span>
   <span style="color: #f8f8f2">}</span>
-  
+
   <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">status</span><span style="color: #f8f8f2">()</span> <span style="color: #a6e22e">external</span> <span style="color: #a6e22e">view</span> <span style="color: #a6e22e">returns</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">bool</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
     <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">contract_status</span><span style="color: #f8f8f2">;</span>
   <span style="color: #f8f8f2">}</span>
-  
+
   <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">solved</span><span style="color: #f8f8f2">()</span> <span style="color: #66d9ef">private</span> <span style="color: #f8f8f2">{</span>
     <span style="color: #a6e22e">contract_status</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">;</span>
   <span style="color: #f8f8f2">}</span>
-  
+
 <span style="color: #f8f8f2">}</span>
 </pre></div>
 
