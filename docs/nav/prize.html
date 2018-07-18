@@ -130,19 +130,19 @@
 
   async function sign() {
 
-    const message = myWeb3.utils.toHex('That is may wallet');
-    const messageHash = myWeb3.utils.sha3(message);
+    const message = 'That is my wallet';
+    // const messageHash = myWeb3.utils.sha3(message);
+    // console.log(messageHash)
+    console.log(userAccount)
     // const messageBuffer = new Buffer(messageHash.split('x')[1], 'hex');
 
-    let signature = myWeb3.eth.sign(messageHash, userAccount, (err, result) => {
+    let signature = myWeb3.eth.personal.sign(message, userAccount, (err, result) => {
 
       console.log(err);
       console.log(result);
       signature = result;
 
       console.log('signature: ', signature);
-
-      signature = signature.split('x')[1];
 
       document.getElementById('sig-note').remove();
       document.getElementById('sig-button').remove();

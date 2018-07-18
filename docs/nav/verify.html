@@ -118,28 +118,31 @@
   }
 
   async function verify() {
-    const message = myWeb3.utils.toHex('That is may wallet');
-    const messageHash = myWeb3.utils.sha3(message);
-    const messageBuffer = new Buffer(messageHash.split('x')[1], 'hex');
+    const message = myWeb3.utils.toHex('That is my wallet');
+    // const messageHash = myWeb3.utils.sha3(message);
+    // const messageBuffer = new Buffer(messageHash.split('x')[1], 'hex');
     const signature = document.getElementById('signature').value;
 
-    const r = new Buffer(signature.substring(0, 64), 'hex');
-    const s = new Buffer(signature.substring(64, 128), 'hex');
-    const v = new Buffer((parseInt(signature.substring(128, 130)) + 27).toString());
+    // const r = new Buffer(signature.substring(0, 64), 'hex');
+    // const s = new Buffer(signature.substring(64, 128), 'hex');
+    // const v = new Buffer((parseInt(signature.substring(128, 130)) + 27).toString());
 
     // debugger
-    const pub = utils.ecrecover(messageBuffer, v, r, s);
+    myWeb3.eth.personal.ecRecover(message, signature, async (err,recoveredAddress) => {
+      // const recoveredAddress = '0x' + utils.pubToAddress(pub).toString('hex');
+      const teamAddress = await getTeamAddressByUserAddress(contract, recoveredAddress);
+      document.getElementById('wrapper').innerHTML = `
+          <p style="margin-top: 5%">Address: ${recoveredAddress}</p>
+          <p style="margin-top: 5%">Team Address: <span id="teamAddr">${teamAddress}</span></p>
+          <p style="margin-top: 3%">Enter team name</p>
+          <input id="teamName1" type="text" style="width: 20em">
+          <button onclick="getTeamHash()">Verify team</button>
+          <span id="teamVerify"></span>
+      `;
+    });
+    // const pub = utils.ecrecover(messageBuffer, v, r, s);
+    //
 
-    const recoveredAddress = '0x' + utils.pubToAddress(pub).toString('hex');
-    const teamAddress = await getTeamAddressByUserAddress(contract, recoveredAddress);
-    document.getElementById('wrapper').innerHTML = `
-        <p style="margin-top: 5%">Address: ${recoveredAddress}</p>
-        <p style="margin-top: 5%">Team Address: <span id="teamAddr">${teamAddress}</span></p>
-        <p style="margin-top: 3%">Enter team name</p>
-        <input id="teamName1" type="text" style="width: 20em">
-        <button onclick="getTeamHash()">Verify team</button>
-        <span id="teamVerify"></span>
-    `;
   }
 
   async function getTeamHash() {
