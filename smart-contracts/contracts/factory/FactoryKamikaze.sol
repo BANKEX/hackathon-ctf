@@ -1,22 +1,27 @@
 pragma solidity ^0.4.23;
 
 import "./IFactory.sol";
-import "../tasks/Kamikaze.sol";
+import "../tasks/CALLapse.sol";
 
-contract FactoryKamikaze is IFactory {
+contract FactoryCALLapse is IFactory {
   mapping (address => address) public contracts;
+  mapping(address=>address) proxylibs;
+  mapping(address=>address) versions;
+  
 
   function deploy() public returns(address) {
-    address basicToken = new BasicToken();
-    address bank = new Bank(basicToken, tx.origin);
-    IERC20(basicToken).transfer(bank, 2**256-1);
-    address bankAccount = IBank(bank).accounts(tx.origin);
-    contracts[msg.sender] = bankAccount;
+    VersionOne v = new VersionOne();
+    CALLapse c = new CALLapse(address(v));
+    address p = c.getProxyAddress();
+    contracts[msg.sender] = address(c);
+    proxylibs[msg.sender] = p;
+    versions[msg.sender] = address(v);
+    
     return contracts[msg.sender];
   }
 
   function factoryName() public view returns(string) {
-    return "Kamikaze";
+    return "CALLapse";
   }
 
   function factoryAmount() public view returns(uint) {

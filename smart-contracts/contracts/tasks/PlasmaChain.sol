@@ -1,9 +1,3 @@
-pragma solidity ^0.4.21;
-
-/**
- * @title SafeMath
- * @dev Math operations with safety checks that throw on error
- */
 library SafeMath {
   
   /**
@@ -49,11 +43,16 @@ library SafeMath {
 
 contract ERC223Interface {
   uint public totalSupply;
+  
   function balanceOf(address who) constant returns (uint);
+  
   function transfer(address to, uint value);
+  
   function transfer(address to, uint value, bytes data);
+  
   event Transfer(address indexed from, address indexed to, uint value, bytes data);
 }
+
 
 contract ERC223Token is ERC223Interface {
   using SafeMath for uint;
@@ -83,7 +82,7 @@ contract ERC223Token is ERC223Interface {
     
     balances[msg.sender] = balances[msg.sender].sub(_value);
     balances[_to] = balances[_to].add(_value);
-    if(codeLength>0) {
+    if (codeLength > 0) {
       ERC223ReceivingContract receiver = ERC223ReceivingContract(_to);
       receiver.tokenFallback(msg.sender, _value, _data);
     }
@@ -110,7 +109,7 @@ contract ERC223Token is ERC223Interface {
     
     balances[msg.sender] = balances[msg.sender].sub(_value);
     balances[_to] = balances[_to].add(_value);
-    if(codeLength>0) {
+    if (codeLength > 0) {
       ERC223ReceivingContract receiver = ERC223ReceivingContract(_to);
       receiver.tokenFallback(msg.sender, _value, empty);
     }
@@ -130,10 +129,6 @@ contract ERC223Token is ERC223Interface {
 }
 
 
-/**
-* @title Contract that will work with ERC223 tokens.
-*/
-
 contract ERC223ReceivingContract {
   /**
    * @dev Standard ERC223 function that will handle incoming token transfers.
@@ -145,11 +140,15 @@ contract ERC223ReceivingContract {
   function tokenFallback(address _from, uint _value, bytes _data);
 }
 
-contract Vault is ERC223ReceivingContract, ERC223Token {
+
+contract PlasmaChain is ERC223ReceivingContract, ERC223Token {
   
   bool private contract_status;
   
-  mapping(address=>uint) sentSum;
+  // possibly multi assets in future
+  mapping(uint => address) assets;
+  
+  mapping(address => uint) sentSum;
   
   constructor () {
     totalSupply = 10000;
@@ -159,18 +158,18 @@ contract Vault is ERC223ReceivingContract, ERC223Token {
   
   bool private giftController;
   
-  function gift() {
+  function GetPlasmagift() {// Doesn't matter
     require(giftController);
     giftController = false;
     balances[msg.sender] = 1000;
   }
   
-  function put(uint sum) {
+  function Deposit(uint sum) {
     transfer(this, sum);
     sentSum[msg.sender] = sum;
   }
   
-  function transferFrom(address _from, address _to,uint256 _value) public returns(bool) {
+  function transferFrom(address _from, address _to, uint256 _value) public returns (bool) {
     uint codeLength;
     bytes memory empty;
     
@@ -181,7 +180,7 @@ contract Vault is ERC223ReceivingContract, ERC223Token {
     
     balances[_from] = balances[_from].sub(_value);
     balances[_to] = balances[_to].add(_value);
-    if(codeLength>0) {
+    if (codeLength > 0) {
       ERC223ReceivingContract receiver = ERC223ReceivingContract(_to);
       receiver.tokenFallback(_from, _value, empty);
     }
@@ -189,7 +188,7 @@ contract Vault is ERC223ReceivingContract, ERC223Token {
     return true;
   }
   
-  function get() {
+  function WithDraw() {
     
     transferFrom(this, msg.sender, sentSum[msg.sender]);
     
