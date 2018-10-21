@@ -18,48 +18,32 @@
 
 
 <body>
-  <header class="github__header" style="
-      padding-top: 12px;
-      padding-bottom: 12px;
-      color: rgba(255,255,255,0.75);
-      background-color: #202327;
-      box-sizing: inherit;
-      -webkit-font-smoothing: antialiased;
-      font-size: 1.23em;
-      text-align: center;">
-    <a class="github__link" href="https://github.com/BANKEX/hackathon-ctf" style="color: inherit; cursor: pointer;text-decoration: none;">
-      <img src="https://plasma.bankex.com/assets/img/GitHub-Mark-Light-64px.png" style="width: 1.75em" alt="">
-      <span>GitHub, <b style="font-weight: 700;line-height: inherit;">Contribute!</b></span>
-    </a>
-  </header>
-  <!--<a href="https://github.com/BANKEX/hackathon-ctf"><img style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px; z-index: 99999" src="http://aral.github.com/fork-me-on-github-retina-ribbons/right-graphite@2x.png" alt="Fork me on GitHub"></a>-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-      <h1>BKX : CTF</h1>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div style="color: #1e0010; font-weight: 700; font-size: 20px;" class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-          <a class="nav-item nav-link" href="tasks1.html">Tasks:</a>
-          <a class="nav-item nav-link" href="tasks1.html">1</a>
-          <a class="nav-item nav-link" href="tasks2.html">2</a>
-          <a class="nav-item nav-link" href="tasks3.html">3</a>
-          <a class="nav-item nav-link" href="tasks4.html">4</a>
-          <a class="nav-item nav-link" href="tasks5.html">5</a>
-          <a class="nav-item nav-link" href="tasks6.html">6</a>
-          <a class="nav-item nav-link" href="tasks7.html">7</a>
-          <a class="nav-item nav-link" href="tasks8.html">8</a>
-          <a class="nav-item nav-link" href="tasks9.html">9</a>
-          <a class="nav-item nav-link" href="tasks10.html">10</a>
-          <a style="color: red;" class="nav-item nav-link active" href="help.html">Help<span class="sr-only">(current)</span></a>
-          <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="leaderboard.html">Leaderboard</a>
-          <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="prize.html">WINNERS</a>
-      </div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="../assets/img/CTF2.png" height="40">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div style="color: #1e0010; font-weight: 700; font-size: 20px;" class="collapse navbar-collapse"
+       id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="#">Tasks:</a>
+      <a class="nav-item nav-link" href="tasks1.html">1</a>
+      <a class="nav-item nav-link" href="tasks2.html">2</a>
+      <a class="nav-item nav-link" href="tasks3.html">3</a>
+      <a class="nav-item nav-link" href="tasks4.html">4</a>
+      <a class="nav-item nav-link" href="tasks5.html">5</a>
+      <a style="color: red;" class="nav-item nav-link active" href="#">Help<span class="sr-only">(current)</span></a>
+      <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="leaderboard.html">Leaderboard</a>
+      <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="prize.html">WINNERS</a>
+      <a style="color: black; float: right" class="nav-item nav-link" id="teamName"></a>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <div class="container">
     <div class="row">
@@ -92,8 +76,10 @@
       </div>
     </div>
     <div class="col-12 text-center" style="margin-top: 10%; margin-bottom: 5%">
-      <img src="../assets/img/logo.png" alt="POS" class="responsive" style="max-width: 550px; max-height: 550px;">
-
+      <img
+        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTg0IiBoZWlnaHQ9IjM2IiB2aWV3Qm94PSIwIDAgMTg0IDM2IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNS4wNDMgMEgwVjIuNjQxNkgxNS4wNDNWMFpNMTUuMDQzIDUuNTU0NjlIMFY4LjE5NjI5SDE1LjA0M1Y1LjU1NDY5Wk0wIDExLjEwOTRIMTUuMDQzVjEzLjc1MUgwVjExLjEwOTRaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMC42MzI4IDExLjEzNzcpIiBmaWxsPSIjMERBOUZGIi8+CiAgICA8cGF0aCBkPSJNMTguMTEyMyAwQzguMTEwOCAwIDAgOC4wNjA1MSAwIDE4QzAgMjcuOTM5NSA4LjExMDggMzYgMTguMTEyMyAzNkMyOC4xMTM4IDM2IDM2LjIyNDYgMjcuOTM5NSAzNi4yMjQ2IDE4QzM2LjIyNDYgOC4wNjA1MSAyOC4xMTM4IDAgMTguMTEyMyAwWk0xOS40NTUgMzMuMzA0MVYyOS4xMTA0SDE2Ljc5N1YzMy4zMDQxQzguODc4MDMgMzIuNjIzMyAyLjY1NzkzIDI2LjAzMzMgMi42NTc5MyAxOEMyLjY1NzkzIDkuOTY2NzIgOC44NzgwMyAzLjM3NjcgMTYuNzk3IDIuNjk1OTJWNi44NjIzM0gxOS40NTVWMi42OTU5MkMyNy4zNDY1IDMuMzc2NyAzMy41OTQgOS45NjY3MiAzMy41OTQgMThDMzMuNTY2NiAyNi4wMzMzIDI3LjM0NjUgMzIuNjIzMyAxOS40NTUgMzMuMzA0MVoiIGZpbGw9IiMyMDIzMjYiLz4KICAgIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMzQuNDQ1MyAwTDQ0LjMwODYgMjIuNDExMUg0MC4xNDQ1TDM3Ljg2OTEgMTcuMDc0MkgzMC42MzQ4TDMyLjA4NzkgMTMuNjE2MkgzNi4zOTA2TDMyLjU1MjcgNC42ODM1OUwyNC45OTAyIDIyLjQxMTFIMjAuOTYyOUwzMC44MDA4IDBIMzQuNDQ1M1pNNDguMDA3OCAwLjE2MzA4Nkg1MS42NTIzTDYzLjY1NDMgMTUuNTQ4OFYwLjE2MzA4Nkg2Ny41MTc2VjIyLjQxMTFINjQuMjI4NUw1MS44NzExIDYuNTg5ODRWMjIuNDExMUg0OC4wMDc4VjAuMTYzMDg2Wk0xNC4yMjA3IDEwLjgzODlDMTUuODkyNiA5Ljk2Nzc3IDE3LjQyNzcgOC41NTE3NiAxNy40Mjc3IDUuODgyODFWNS44MjgxMkMxNy40Mjc3IDQuMzMxMDUgMTYuOTA2MiAzLjEzMjgxIDE1LjkxOTkgMi4xNTIzNEMxNC42MzI4IDAuODcyMDcgMTIuNjMyOCAwLjE5MTQwNiAxMC4wNTY2IDAuMTkxNDA2SDBWMy42NDk0MUg5LjUzNTE2QzEyLjA1NjYgMy42NDk0MSAxMy40ODI0IDQuNzM5MjYgMTMuNDgyNCA2LjQ4MTQ1VjYuNTM2MTNDMTMuNDgyNCA4LjU3OTEgMTEuNzgzMiA5LjU1ODU5IDkuMjYxNzIgOS41NTg1OUgwLjAyNzM0MzhWMjIuNDM5NUgxMC4zODQ4QzE1LjM3MyAyMi40Mzk1IDE4LjY2MDIgMjAuMzE1NCAxOC42NjAyIDE2LjMzOThWMTYuMjg1MkMxOC42NjAyIDEzLjIzNTQgMTYuODI0MiAxMS43MzczIDE0LjIyMDcgMTAuODM4OVpNMTQuNzE0OCAxNS45MDQzQzE0LjcxNDggMTcuOTE4OSAxMy4wNzAzIDE4Ljk1NDEgMTAuMzg0OCAxOC45NTQxSDMuODYzMjhWMTIuODU0NUgxMC4xMTEzQzEzLjIwNyAxMi44NTQ1IDE0LjcxNDggMTMuOTcwNyAxNC43MTQ4IDE1Ljg0OTZWMTUuOTA0M1pNNzguMjMwNSAwLjE2MzA4Nkg3NC4yODUyVjIyLjQxMTFINzguMjMwNVYxNS45NTdMODEuNzEwOSAxMi4zODk2TDg5LjM1NTUgMjIuNDExMUg5NC4xMjNMODQuMzk2NSA5LjcyMTY4TDkzLjcxMjkgMC4xNjMwODZIODguODkwNkw3OC4yMzA1IDExLjM1NTVWMC4xNjMwODZaTTEyNS42ODkgMTEuMTEwNEwxMTcuODUyIDAuMTYzMDg2SDEyMi40ODJMMTI4LjA0NSA4LjE0MTZMMTMzLjYzNSAwLjE2MzA4NkgxMzguMTU2TDEzMC4zNDggMTEuMDI4M0wxMzguNDg2IDIyLjQxMTFIMTMzLjg1NUwxMjcuOTYzIDEzLjk5NzFMMTIyLjA0NSAyMi40MTExSDExNy41MjNMMTI1LjY4OSAxMS4xMTA0Wk0xMTQuNzMgMC4xNjMwODZIOTcuMzAyN1YzLjY0ODQ0SDExNC43M1YwLjE2MzA4NlpNMTAwLjgzOCAxMi45MzM2VjE4LjkyNDhIMTE0Ljg5NVYyMi40MTAySDk3LjMwMjdWOS40NDgyNEgxMTAuODRWMTIuOTMzNkgxMDAuODM4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDUuNTEzNyA2LjY5OTIyKSIgZmlsbD0iIzIwMjMyNiIvPgo8L3N2Zz4K"
+        alt="" data-reactid="12">
+      <!--<img src="../assets/img/bankex-logo-full.ai" alt="POS" class="responsive" style="max-width: 550px; max-height: 550px;">-->
     </div>
 
 

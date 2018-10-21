@@ -233,7 +233,7 @@ contract DividendsCalculator {
   }
   
   function CalculateSumToSend(address author) returns(uint256) {
-    Dividends i = Dividend(machine);
+    Dividends i = Dividends(machine);
     require(author.balance > 0);
     require(address(i).balance > 0);
     uint256 mult =  address(i).balance * 10 ** 18;

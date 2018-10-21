@@ -31,3 +31,9 @@ body {
 .about_describtion {
     color: #1e0010 !important;
 }
+
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;}
+}

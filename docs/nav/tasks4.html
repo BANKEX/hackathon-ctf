@@ -6,9 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="../../../../favicon.ico">
-
-  <title>BKX : CTF</title>
+  <link rel="icon" href="../assets/img/favicon-32x32.png">
+  <title>CTF</title>
 
 
   <!-- Bootstrap core CSS -->
@@ -17,99 +16,359 @@
 
 
 <body>
-  <header class="github__header" style="
-          padding-top: 12px;
-          padding-bottom: 12px;
-          color: rgba(255,255,255,0.75);
-          background-color: #202327;
-          box-sizing: inherit;
-          -webkit-font-smoothing: antialiased;
-          font-size: 1.23em;
-          text-align: center;">
-    <a class="github__link" href="https://github.com/BANKEX/hackathon-ctf" style="color: inherit; cursor: pointer;text-decoration: none;">
-      <img src="https://plasma.bankex.com/assets/img/GitHub-Mark-Light-64px.png" style="width: 1.75em" alt="">
-      <span>GitHub, <b style="font-weight: 700;line-height: inherit;">Contribute!</b></span>
-    </a>
-  </header>
-  <!--<a href="https://github.com/BANKEX/hackathon-ctf"><img style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px; z-index: 99999" src="http://aral.github.com/fork-me-on-github-retina-ribbons/right-graphite@2x.png" alt="Fork me on GitHub"></a>-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-      <h1>BKX : CTF</h1>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div style="color: #1e0010; font-weight: 700; font-size: 20px;" class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link" href="#">Tasks:</a>
-        <a class="nav-item nav-link" href="tasks1.html">1</a>
-        <a class="nav-item nav-link" href="tasks2.html">2</a>
-        <a class="nav-item nav-link" href="tasks3.html">3</a>
-        <a class="nav-item nav-link active" href="#">4<span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="tasks5.html">5</a>
-        <a class="nav-item nav-link" href="tasks6.html">6</a>
-        <a class="nav-item nav-link" href="tasks7.html">7</a>
-        <a class="nav-item nav-link" href="tasks8.html">8</a>
-        <a class="nav-item nav-link" href="tasks9.html">9</a>
-        <a class="nav-item nav-link" href="tasks10.html">10</a>
-        <a style="color: red;" class="nav-item nav-link" href="help.html">Help</a>
-        <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="leaderboard.html">Leaderboard</a>
-        <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="prize.html">WINNERS</a>
-        <a style="color: black; float: right" class="nav-item nav-link" id="teamName"></a>
-      </div>
-    </div>
-  </nav>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <p style="margin-top: 5%; font-size: 69px !important; color: #1e0010; font-weight: 700;">Task 4: "Yohoho and a bottle of rum"</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="../assets/img/CTF2.png" height="40">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div style="color: #1e0010; font-weight: 700; font-size: 20px;" class="collapse navbar-collapse"
+       id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="#">Tasks:</a>
+      <a class="nav-item nav-link" href="tasks1.html">1</a>
+      <a class="nav-item nav-link" href="tasks2.html">2</a>
+      <a class="nav-item nav-link" href="tasks3.html">3</a>
+      <a class="nav-item nav-link active" href="#">4<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="tasks5.html">5</a>
+      <a style="color: red;" class="nav-item nav-link" href="help.html">Help</a>
+      <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="leaderboard.html">Leaderboard</a>
+      <a style="color: rgb(28,168,252);" class="nav-item nav-link" href="prize.html">WINNERS</a>
+      <a style="color: black; float: right" class="nav-item nav-link" id="teamName"></a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <p style="margin-top: 5%; font-size: 69px !important; color: #1e0010; font-weight: 700;">Task 4: Lottery</p>
+      <div class="btns text-center">
         <button type="submit" class="btn btn-success btn-md" style="font-size: 20px;" id="taskDeploy">
-          <i class="fa fa-user-plus"></i>Deploy to network</button>
+          <i class="fa fa-user-plus"></i> Deploy to network
+        </button>
         <button type="submit" class="btn btn-warning btn-md" style="font-size: 20px;" id="taskCheck">
-          <i class="fa fa-user-plus"></i>Send solution</button>
+          <i class="fa fa-user-plus"></i>Send solution
+        </button>
 
         <!-- если уже решено-->
 
         <button type="submit" class="btn btn-danger disabled btn-md" style="font-size: 20px;" id="taskSolved">
-          <i class="fa fa-user-plus"></i>Solved</button>
-        <blockquote style="font-size: 20px " class="blockquote">
-          <br>
-          <p style="font-size: 40px">Task source code:</p>
-          <p style="font-size: 20px" class="mb-0"></p>
-              <a href="https://github.com/BANKEX/CurveArithmetics/blob/master/contracts/TreasureChestInstance.sol">https://github.com/BANKEX/CurveArithmetics/blob/master/contracts/TreasureChestInstance.sol</a>
-          </p>
-          <footer style="font-size: 40px " class="blockquote-footer">Your smart contract is at
-            <cite style="font-weight: 900; color: #1e0010" title="Source Title" id="taskAddress">0ceqiccnoijwncoiwncoiwncb</cite> on <strong style="font-weight: 900; color: #1e0010">Rinkeby</strong> network
-          </footer>
-        </blockquote>
+          <i class="fa fa-user-plus"></i>Solved
+        </button>
+
       </div>
-    </div>
-    <div class="col-12 text-center" style="margin-top: 10%; margin-bottom: 5%">
-      <img src="../assets/img/logo.png" alt="POS" class="responsive" style="max-width: 550px; max-height: 550px;">
-    </div>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <h1>@About</h1>
+
+      <blockquote style="font-size: 40px " class="blockquote">
+        <p style="font-size: 25px " class="mb-0">Seems that lotteries is a good idea</p>
+        <hr>
+        <h1>@Task</h1>
+
+        <p style="font-size: 25px " class="mb-0">contract_status == true;</p>
+
+        <br>
+        <footer style="font-size: 30px " class="blockquote-footer">Your smart contract is at
+          <cite style="font-weight: 900; color: #1e0010" title="Source Title"
+                id="taskAddress">0ceqiccnoijwncoiwncoiwncb</cite> on <strong style="font-weight: 900; color: #1e0010">Rinkeby</strong>
+          network
+        </footer>
+        <div>
+          <!-- Target --><textarea style="display: none" id="foo">
+contract Lottery {
+
+  address owner;
+
+  address[1001] public participators;
+
+  address public winner;
+
+  uint256 sum;
+
+  address winContract;
+
+  constructor () {
+
+    owner = msg.sender;
+    participators[1] = 0xca35b7d915458ef540ade6068dfe2f44e8fa723c;
+    participators[2] = 0xca35b7d915458ef540ade6068dfe2f44e8fa743c;
+    //
+    // ...
+    participators[1000] = 0xca35b7d915458ef540ade6068dfe2f44e8fa343c;
+
+  }
+
+  modifier onlyOwner() {
+    require(owner == msg.sender);
+    _;
+  }
 
 
+  function participate() payable {
+    require(msg.value >= 0.1 ether);
+    participators[0] = msg.sender;
+  }
+
+  uint256 private pi = 31415926535897932384626433832795;
+
+  function initLottery(uint256 _lot)  {
+    require(_lot < pi - 1000);
+    uint256 _winner = uint256((uint256(uint256(block.blockhash(block.number - 10)))
+    / pi % 1000) + _lot) % 1000;
+    setWinnerAddress(participators[_winner]);
+  }
+
+  function setWinnerAddress(address _target) {
+    winner = _target;
+  }
+
+  function sendToWinner() {
+    SuperContract s = SuperContract(winContract);
+    s.setOwner(winner);
+  }
+
+  function setSuperContract(address _c) onlyOwner {
+    winContract = _c;
+  }
+}
+
+contract SuperContract {
+
+  address owner;
+
+  bool private contract_status;
+
+  constructor () {
+    owner = msg.sender;
+  }
+
+  function status() external view returns (bool) {
+    return contract_status;
+  }
+
+  function solved() private {
+    contract_status = true;
+  }
+
+  modifier onlyOwner() {
+    require(owner == msg.sender);
+    _;
+  }
+
+  function setOwner(address _owner) onlyOwner {
+    owner = _owner;
+  }
+
+
+  function withdraw() onlyOwner {}
+
+  function win() onlyOwner {
+    solved();
+  }
+
+}
+
+
+                          </textarea>
+        </div>
+        <!-- Trigger -->
+        <div class="text-center">
+
+
+          <button class="btn btn-info" data-clipboard-target="#foo">
+            Copy task code
+          </button>
+        </div>
+      </blockquote>
+      <!-- HTML generated using hilite.me -->
+      <div
+        style="font-size:18px;background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre
+        style="margin: 0; line-height: 125%"><span style="color: #d0d0d0">contract</span> <span style="color: #d0d0d0">Lottery</span> <span
+        style="color: #d0d0d0">{</span>
+
+  <span style="color: #d0d0d0">address</span> <span style="color: #d0d0d0">owner;</span>
+
+  <span style="color: #d0d0d0">address[</span><span style="color: #3677a9">1001</span><span
+          style="color: #d0d0d0">]</span> <span style="color: #6ab825; font-weight: bold">public</span> <span
+          style="color: #d0d0d0">participators;</span>
+
+  <span style="color: #d0d0d0">address</span> <span style="color: #6ab825; font-weight: bold">public</span> <span
+          style="color: #d0d0d0">winner;</span>
+
+  <span style="color: #d0d0d0">uint256</span> <span style="color: #d0d0d0">sum;</span>
+
+  <span style="color: #d0d0d0">address</span> <span style="color: #d0d0d0">winContract;</span>
+
+  <span style="color: #d0d0d0">constructor</span> <span style="color: #d0d0d0">()</span> <span
+          style="color: #d0d0d0">{</span>
+
+    <span style="color: #d0d0d0">owner</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">msg.sender;</span>
+    <span style="color: #d0d0d0">participators[</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">]</span> <span
+          style="color: #d0d0d0">=</span> <span style="color: #3677a9">0xca35b7d915458ef540ade6068dfe2f44e8fa723c</span><span
+          style="color: #d0d0d0">;</span>
+    <span style="color: #d0d0d0">participators[</span><span style="color: #3677a9">2</span><span style="color: #d0d0d0">]</span> <span
+          style="color: #d0d0d0">=</span> <span style="color: #3677a9">0xca35b7d915458ef540ade6068dfe2f44e8fa743c</span><span
+          style="color: #d0d0d0">;</span>
+    <span style="color: #999999; font-style: italic">//</span>
+    <span style="color: #999999; font-style: italic">// ...</span>
+    <span style="color: #d0d0d0">participators[</span><span style="color: #3677a9">1000</span><span
+          style="color: #d0d0d0">]</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0xca35b7d915458ef540ade6068dfe2f44e8fa343c</span><span
+          style="color: #d0d0d0">;</span>
+
+  <span style="color: #d0d0d0">}</span>
+
+  <span style="color: #d0d0d0">modifier</span> <span style="color: #d0d0d0">onlyOwner()</span> <span
+          style="color: #d0d0d0">{</span>
+    <span style="color: #d0d0d0">require(owner</span> <span style="color: #d0d0d0">==</span> <span
+          style="color: #d0d0d0">msg.sender);</span>
+    <span style="color: #d0d0d0">_;</span>
+  <span style="color: #d0d0d0">}</span>
+
+
+  <span style="color: #6ab825; font-weight: bold">function</span> <span
+          style="color: #d0d0d0">participate()</span> <span style="color: #d0d0d0">payable</span> <span
+          style="color: #d0d0d0">{</span>
+    <span style="color: #d0d0d0">require(msg.value</span> <span style="color: #d0d0d0">&gt;=</span> <span
+          style="color: #3677a9">0.1</span> <span style="color: #d0d0d0">ether);</span>
+    <span style="color: #d0d0d0">participators[</span><span style="color: #3677a9">0</span><span style="color: #d0d0d0">]</span> <span
+          style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">msg.sender;</span>
+  <span style="color: #d0d0d0">}</span>
+
+  <span style="color: #d0d0d0">uint256</span> <span style="color: #6ab825; font-weight: bold">private</span> <span
+          style="color: #d0d0d0">pi</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">31415926535897932384626433832795</span><span
+          style="color: #d0d0d0">;</span>
+
+  <span style="color: #6ab825; font-weight: bold">function</span> <span
+          style="color: #d0d0d0">initLottery(uint256</span> <span style="color: #d0d0d0">_lot)</span>  <span
+          style="color: #d0d0d0">{</span>
+    <span style="color: #d0d0d0">require(_lot</span> <span style="color: #d0d0d0">&lt;</span> <span
+          style="color: #d0d0d0">pi</span> <span style="color: #d0d0d0">-</span> <span
+          style="color: #3677a9">1000</span><span style="color: #d0d0d0">);</span>
+    <span style="color: #d0d0d0">uint256</span> <span style="color: #d0d0d0">_winner</span> <span
+          style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">uint256((uint256(uint256(block.blockhash(block.number</span> <span
+          style="color: #d0d0d0">-</span> <span style="color: #3677a9">10</span><span style="color: #d0d0d0">)))</span>
+    <span style="color: #d0d0d0">/</span> <span style="color: #d0d0d0">pi</span> <span
+          style="color: #d0d0d0">%</span> <span style="color: #3677a9">1000</span><span style="color: #d0d0d0">)</span> <span
+          style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">_lot)</span> <span
+          style="color: #d0d0d0">%</span> <span style="color: #3677a9">1000</span><span style="color: #d0d0d0">;</span>
+    <span style="color: #d0d0d0">setWinnerAddress(participators[_winner]);</span>
+  <span style="color: #d0d0d0">}</span>
+
+  <span style="color: #6ab825; font-weight: bold">function</span> <span
+          style="color: #d0d0d0">setWinnerAddress(address</span> <span style="color: #d0d0d0">_target)</span> <span
+          style="color: #d0d0d0">{</span>
+    <span style="color: #d0d0d0">winner</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">_target;</span>
+  <span style="color: #d0d0d0">}</span>
+
+  <span style="color: #6ab825; font-weight: bold">function</span> <span
+          style="color: #d0d0d0">sendToWinner()</span> <span style="color: #d0d0d0">{</span>
+    <span style="color: #d0d0d0">SuperContract</span> <span style="color: #d0d0d0">s</span> <span
+          style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">SuperContract(winContract);</span>
+    <span style="color: #d0d0d0">s.setOwner(winner);</span>
+  <span style="color: #d0d0d0">}</span>
+
+  <span style="color: #6ab825; font-weight: bold">function</span> <span
+          style="color: #d0d0d0">setSuperContract(address</span> <span style="color: #d0d0d0">_c)</span> <span
+          style="color: #d0d0d0">onlyOwner</span> <span style="color: #d0d0d0">{</span>
+    <span style="color: #d0d0d0">winContract</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">_c;</span>
+  <span style="color: #d0d0d0">}</span>
+<span style="color: #d0d0d0">}</span>
+
+<span style="color: #d0d0d0">contract</span> <span style="color: #d0d0d0">SuperContract</span> <span
+          style="color: #d0d0d0">{</span>
+
+  <span style="color: #d0d0d0">address</span> <span style="color: #d0d0d0">owner;</span>
+
+  <span style="color: #d0d0d0">bool</span> <span style="color: #6ab825; font-weight: bold">private</span> <span
+          style="color: #d0d0d0">contract_status;</span>
+
+  <span style="color: #d0d0d0">constructor</span> <span style="color: #d0d0d0">()</span> <span
+          style="color: #d0d0d0">{</span>
+    <span style="color: #d0d0d0">owner</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">msg.sender;</span>
+  <span style="color: #d0d0d0">}</span>
+
+  <span style="color: #6ab825; font-weight: bold">function</span> <span style="color: #d0d0d0">status()</span> <span
+          style="color: #d0d0d0">external</span> <span style="color: #d0d0d0">view</span> <span style="color: #d0d0d0">returns</span> <span
+          style="color: #d0d0d0">(bool)</span> <span style="color: #d0d0d0">{</span>
+    <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">contract_status;</span>
+  <span style="color: #d0d0d0">}</span>
+
+  <span style="color: #6ab825; font-weight: bold">function</span> <span style="color: #d0d0d0">solved()</span> <span
+          style="color: #6ab825; font-weight: bold">private</span> <span style="color: #d0d0d0">{</span>
+    <span style="color: #d0d0d0">contract_status</span> <span style="color: #d0d0d0">=</span> <span
+          style="color: #6ab825; font-weight: bold">true</span><span style="color: #d0d0d0">;</span>
+  <span style="color: #d0d0d0">}</span>
+
+  <span style="color: #d0d0d0">modifier</span> <span style="color: #d0d0d0">onlyOwner()</span> <span
+          style="color: #d0d0d0">{</span>
+    <span style="color: #d0d0d0">require(owner</span> <span style="color: #d0d0d0">==</span> <span
+          style="color: #d0d0d0">msg.sender);</span>
+    <span style="color: #d0d0d0">_;</span>
+  <span style="color: #d0d0d0">}</span>
+
+  <span style="color: #6ab825; font-weight: bold">function</span> <span
+          style="color: #d0d0d0">setOwner(address</span> <span style="color: #d0d0d0">_owner)</span> <span
+          style="color: #d0d0d0">onlyOwner</span> <span style="color: #d0d0d0">{</span>
+    <span style="color: #d0d0d0">owner</span> <span style="color: #d0d0d0">=</span> <span
+          style="color: #d0d0d0">_owner;</span>
+  <span style="color: #d0d0d0">}</span>
+
+
+  <span style="color: #6ab825; font-weight: bold">function</span> <span style="color: #d0d0d0">withdraw()</span> <span
+          style="color: #d0d0d0">onlyOwner</span> <span style="color: #d0d0d0">{}</span>
+
+  <span style="color: #6ab825; font-weight: bold">function</span> <span style="color: #d0d0d0">win()</span> <span
+          style="color: #d0d0d0">onlyOwner</span> <span style="color: #d0d0d0">{</span>
+    <span style="color: #d0d0d0">solved();</span>
+  <span style="color: #d0d0d0">}</span>
+
+<span style="color: #d0d0d0">}</span>
+</pre>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-12 text-center" style="margin-top: 10%; margin-bottom: 5%">
+    <img
+      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTg0IiBoZWlnaHQ9IjM2IiB2aWV3Qm94PSIwIDAgMTg0IDM2IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNS4wNDMgMEgwVjIuNjQxNkgxNS4wNDNWMFpNMTUuMDQzIDUuNTU0NjlIMFY4LjE5NjI5SDE1LjA0M1Y1LjU1NDY5Wk0wIDExLjEwOTRIMTUuMDQzVjEzLjc1MUgwVjExLjEwOTRaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMC42MzI4IDExLjEzNzcpIiBmaWxsPSIjMERBOUZGIi8+CiAgICA8cGF0aCBkPSJNMTguMTEyMyAwQzguMTEwOCAwIDAgOC4wNjA1MSAwIDE4QzAgMjcuOTM5NSA4LjExMDggMzYgMTguMTEyMyAzNkMyOC4xMTM4IDM2IDM2LjIyNDYgMjcuOTM5NSAzNi4yMjQ2IDE4QzM2LjIyNDYgOC4wNjA1MSAyOC4xMTM4IDAgMTguMTEyMyAwWk0xOS40NTUgMzMuMzA0MVYyOS4xMTA0SDE2Ljc5N1YzMy4zMDQxQzguODc4MDMgMzIuNjIzMyAyLjY1NzkzIDI2LjAzMzMgMi42NTc5MyAxOEMyLjY1NzkzIDkuOTY2NzIgOC44NzgwMyAzLjM3NjcgMTYuNzk3IDIuNjk1OTJWNi44NjIzM0gxOS40NTVWMi42OTU5MkMyNy4zNDY1IDMuMzc2NyAzMy41OTQgOS45NjY3MiAzMy41OTQgMThDMzMuNTY2NiAyNi4wMzMzIDI3LjM0NjUgMzIuNjIzMyAxOS40NTUgMzMuMzA0MVoiIGZpbGw9IiMyMDIzMjYiLz4KICAgIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMzQuNDQ1MyAwTDQ0LjMwODYgMjIuNDExMUg0MC4xNDQ1TDM3Ljg2OTEgMTcuMDc0MkgzMC42MzQ4TDMyLjA4NzkgMTMuNjE2MkgzNi4zOTA2TDMyLjU1MjcgNC42ODM1OUwyNC45OTAyIDIyLjQxMTFIMjAuOTYyOUwzMC44MDA4IDBIMzQuNDQ1M1pNNDguMDA3OCAwLjE2MzA4Nkg1MS42NTIzTDYzLjY1NDMgMTUuNTQ4OFYwLjE2MzA4Nkg2Ny41MTc2VjIyLjQxMTFINjQuMjI4NUw1MS44NzExIDYuNTg5ODRWMjIuNDExMUg0OC4wMDc4VjAuMTYzMDg2Wk0xNC4yMjA3IDEwLjgzODlDMTUuODkyNiA5Ljk2Nzc3IDE3LjQyNzcgOC41NTE3NiAxNy40Mjc3IDUuODgyODFWNS44MjgxMkMxNy40Mjc3IDQuMzMxMDUgMTYuOTA2MiAzLjEzMjgxIDE1LjkxOTkgMi4xNTIzNEMxNC42MzI4IDAuODcyMDcgMTIuNjMyOCAwLjE5MTQwNiAxMC4wNTY2IDAuMTkxNDA2SDBWMy42NDk0MUg5LjUzNTE2QzEyLjA1NjYgMy42NDk0MSAxMy40ODI0IDQuNzM5MjYgMTMuNDgyNCA2LjQ4MTQ1VjYuNTM2MTNDMTMuNDgyNCA4LjU3OTEgMTEuNzgzMiA5LjU1ODU5IDkuMjYxNzIgOS41NTg1OUgwLjAyNzM0MzhWMjIuNDM5NUgxMC4zODQ4QzE1LjM3MyAyMi40Mzk1IDE4LjY2MDIgMjAuMzE1NCAxOC42NjAyIDE2LjMzOThWMTYuMjg1MkMxOC42NjAyIDEzLjIzNTQgMTYuODI0MiAxMS43MzczIDE0LjIyMDcgMTAuODM4OVpNMTQuNzE0OCAxNS45MDQzQzE0LjcxNDggMTcuOTE4OSAxMy4wNzAzIDE4Ljk1NDEgMTAuMzg0OCAxOC45NTQxSDMuODYzMjhWMTIuODU0NUgxMC4xMTEzQzEzLjIwNyAxMi44NTQ1IDE0LjcxNDggMTMuOTcwNyAxNC43MTQ4IDE1Ljg0OTZWMTUuOTA0M1pNNzguMjMwNSAwLjE2MzA4Nkg3NC4yODUyVjIyLjQxMTFINzguMjMwNVYxNS45NTdMODEuNzEwOSAxMi4zODk2TDg5LjM1NTUgMjIuNDExMUg5NC4xMjNMODQuMzk2NSA5LjcyMTY4TDkzLjcxMjkgMC4xNjMwODZIODguODkwNkw3OC4yMzA1IDExLjM1NTVWMC4xNjMwODZaTTEyNS42ODkgMTEuMTEwNEwxMTcuODUyIDAuMTYzMDg2SDEyMi40ODJMMTI4LjA0NSA4LjE0MTZMMTMzLjYzNSAwLjE2MzA4NkgxMzguMTU2TDEzMC4zNDggMTEuMDI4M0wxMzguNDg2IDIyLjQxMTFIMTMzLjg1NUwxMjcuOTYzIDEzLjk5NzFMMTIyLjA0NSAyMi40MTExSDExNy41MjNMMTI1LjY4OSAxMS4xMTA0Wk0xMTQuNzMgMC4xNjMwODZIOTcuMzAyN1YzLjY0ODQ0SDExNC43M1YwLjE2MzA4NlpNMTAwLjgzOCAxMi45MzM2VjE4LjkyNDhIMTE0Ljg5NVYyMi40MTAySDk3LjMwMjdWOS40NDgyNEgxMTAuODRWMTIuOTMzNkgxMDAuODM4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDUuNTEzNyA2LjY5OTIyKSIgZmlsbD0iIzIwMjMyNiIvPgo8L3N2Zz4K"
+      alt="" data-reactid="12">
+    <!--<img src="../assets/img/bankex-logo-full.ai" alt="POS" class="responsive" style="max-width: 550px; max-height: 550px;">-->
   </div>
 
-  <!-- Bootstrap core JavaScript
-    ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script>
-    taskCheck.disabled = true;
-    taskSolved.style.display = 'none';
-    taskAddress.innerHTML = '---';
-    const TASK = 'Yohoho and a bottle of rum';
-  </script>
-  <script src="../assets/bootstrap/jquery-3.1.1.slim.min.js"></script>
-  <script src="../assets/bootstrap/tether.min.js"></script>
-  <script src="../assets/bootstrap/bootstrap.min.js"></script>
-  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-  <script src="../assets/js/vendor/web3.min.js"></script>
-  <script src="../assets/js/connection.js"></script>
-  <script src="../assets/js/CONTACT_DATA.js"></script>
-  <script src="../assets/js/tasks.js"></script>
+
+</div>
+
+<!-- Bootstrap core JavaScript
+  ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script>
+  taskCheck.disabled = true;
+  taskSolved.style.display = 'none';
+  taskAddress.innerHTML = '---';
+  const TASK = 'Lottery';
+</script>
+
+<script src="../assets/bootstrap/jquery-3.1.1.slim.min.js"></script>
+<script src="../assets/bootstrap/tether.min.js"></script>
+<script src="../assets/bootstrap/bootstrap.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+<script src="../assets/js/vendor/web3.min.js"></script>
+<script src="../assets/js/connection.js"></script>
+<script src="../assets/js/CONTACT_DATA.js"></script>
+<script src="../assets/js/tasks.js"></script>
+<script src="../assets/js/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
 </body>
 
 </html>
