@@ -8,7 +8,7 @@ contract Lottery {
   
   uint256 sum;
   
-  address winContract;
+  address public winContract;
   
   constructor () {
     

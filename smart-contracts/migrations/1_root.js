@@ -1,25 +1,27 @@
-var Root = artifacts.require("./Root.sol");
+const Root = artifacts.require("./Root.sol");
 
-var tasks = ["FastFlow", "JoiCasino", "LEGO", "Kamikaze", "Vault", "DoubleTapVote"];
-var cryptoAddresses = ["0x635a457b2c04cfc57a6d6553b2254af624c42e23", "0x98af0a02278fa978d0cdd006f0dab3692cd0d680", "0xdeeb17af769dd158fccb12208907833f2dd03215", "0xd52f3792c3afabd246113ef058c5671b6baa0191"];
+let tasks = ["BrokenVisaCard", "CALLapse", "Dividends", "Lottery", "PlasmaChain"];
+// const cryptoAddresses = ["0xff55a7b95adEe5d578b1aB182350A8b765119097", "0xc658C6cE553e14cc30439E424ff74dcFD21c2E43", "0xd59b3C1c8E35Ae98EB2c16F672C471549aBA01DB", "0xCaDcf41B2676fa4f910c7C55C890F4BcDD0CBca7", "0xB3fd9919dBd9db534078097Ac17d8c28e9d5F20b"];
 
+module.exports = (deployer, network, accounts) => {
+    async function deploy(contract, operator, params){
+        params = typeof params !== 'undefined' ?  params : [];
+        params = [contract].concat(params).concat([{"from" : operator}]);
+        await deployer.deploy.apply(deployer, params);
+        return await contract.deployed()
+    }
 
-// Before "truffle migrate" - comment DoubleTapVote and it factory because maybe assembler dont read
-module.exports = function(deployer, network, accounts) {
-  async function deploy(contract, operator, params){
-    params = typeof params !== 'undefined' ?  params : [];
-    params = [contract].concat(params).concat([{"from" : operator}]);
-    await deployer.deploy.apply(deployer, params);
-    return await contract.deployed()
-  }
+    const operator = accounts[0];
 
-  const operator = accounts[0];
-  (async () => {
-    let rootPromise = deploy(Root, operator, (Math.floor(Date.now()/1000) + 3600*24*2).toString());
-    tasks = await Promise.all(tasks.map(t=>deploy(artifacts.require("./Factory"+t+".sol"), operator)));
-    let root = await rootPromise;
-    await Promise.all(tasks.map(t=> root.addFactory(t.address)));
-    await Promise.all(cryptoAddresses.map(a => root.addFactory(a)));
-  })();
+    deployer.then(async function () {
+        const root = await deploy(Root, operator, (Math.floor(Date.now()/1000) + 3600*24*30).toString());
+        const deployedTasks = [];
+        for (let i in tasks)
+            deployedTasks.push(await deploy(artifacts.require("./Factory"+tasks[i]+".sol"), operator));
+        for (let i in deployedTasks) {
+            await root.addFactory(deployedTasks[i].address, {from: operator})
+            console.log(`Address ${deployedTasks[i].address} was successfully added to Root Contract`)
+        }
+    });
 
 };

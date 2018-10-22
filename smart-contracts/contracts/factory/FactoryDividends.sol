@@ -9,7 +9,7 @@ contract FactoryDividends is IFactory{
 
   function deploy() public returns(address) {
     DividendsCalculator _calc = new DividendsCalculator();
-    DividendsMachine _machine = new DividendsMachine(address(_calc));
+    Dividends _machine = new Dividends(address(_calc));
     _calc.setMachine(address(_machine));
     calc[msg.sender] = _calc;
     contracts[msg.sender] = _machine;
@@ -19,6 +19,7 @@ contract FactoryDividends is IFactory{
   function factoryName() public view returns(string) {
     return "Dividends";
   }
+  
   function factoryAmount() public view returns(uint) {
     return 10;
   }

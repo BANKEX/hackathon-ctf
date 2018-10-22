@@ -240,5 +240,5 @@ contract DividendsCalculator {
     uint256 sumPerToken = mult / i.TotalSupply();
     return sumPerToken * author.balance / mult;
   }
-  
+
 }

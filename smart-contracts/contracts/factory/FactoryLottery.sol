@@ -8,6 +8,7 @@ contract FactoryLottery is IFactory{
   mapping (address => address) superContracts;
 
   function deploy() public returns(address) {
+    Lottery l = new Lottery();
     SuperContract s = new SuperContract();
     s.setOwner(address(l));
     contracts[msg.sender] = address(l);
