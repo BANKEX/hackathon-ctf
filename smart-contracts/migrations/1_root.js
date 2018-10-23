@@ -14,7 +14,7 @@ module.exports = (deployer, network, accounts) => {
     const operator = accounts[0];
 
     deployer.then(async function () {
-        const root = await deploy(Root, operator, "1540706400");
+        const root = await deploy(Root, operator, (1540706400).toString());
         const deployedTasks = [];
         for (let i in tasks)
             deployedTasks.push(await deploy(artifacts.require("./Factory"+tasks[i]+".sol"), operator));

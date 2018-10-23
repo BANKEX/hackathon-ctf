@@ -1,4 +1,4 @@
-let myWeb3, contract, account, network, deployedAddressб, intDep, intSol;
+let myWeb3, contract, account, network, deployedAddress, intDep, intSol;
 
 const checkAuth = async () => {
   return await contract.methods.getSignedUp().call({from: account});
