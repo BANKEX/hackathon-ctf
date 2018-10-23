@@ -53,6 +53,11 @@ contract Lottery {
   function setSuperContract(address _c) onlyOwner {
     winContract = _c;
   }
+
+  function status() external view returns (bool) {
+      SuperContract s = SuperContract(winContract);
+      return s.status();
+  }
 }
 
 contract SuperContract {
