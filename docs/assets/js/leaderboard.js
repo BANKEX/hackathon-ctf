@@ -15,16 +15,11 @@ class Result {
   constructor( _userAddress) {
     this.userAddress = _userAddress;
     this.tasks = {};
-    this.tasks['JoiCasino'] = undefined;
-    this.tasks['LEGO'] = undefined;
-    this.tasks['FastFlow'] = undefined;
-    this.tasks['Yohoho and a bottle of rum'] = undefined;
-    this.tasks['Black pearl'] = undefined;
-    this.tasks['Jack the Sparrow'] = undefined;
-    this.tasks['Sir Henry Morgan'] = undefined;
-    this.tasks['Kamikaze'] = undefined;
-    this.tasks['Vault'] = undefined;
-    this.tasks['DoubleTapVote'] = undefined;
+    this.tasks['BrokenVisaCard'] = undefined;
+    this.tasks['CALLapse'] = undefined;
+    this.tasks['Dividends'] = undefined;
+    this.tasks['Lottery'] = undefined;
+    this.tasks['PlasmaChain'] = undefined;
     this.score = undefined;
     this.timestampScore = undefined;
   }
