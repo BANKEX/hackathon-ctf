@@ -82,104 +82,6 @@
                 id="taskAddress">0ceqiccnoijwncoiwncoiwncb</cite> on <strong style="font-weight: 900; color: #1e0010">Rinkeby</strong>
           network
         </footer>
-        <div>
-          <!-- Target --><textarea style="display: none" id="foo">
-contract Lottery {
-
-  address owner;
-
-  address[1001] public participators;
-
-  address public winner;
-
-  uint256 sum;
-
-  address public winContract;
-
-  constructor () {
-
-    owner = msg.sender;
-    participators[1] = 0xca35b7d915458ef540ade6068dfe2f44e8fa723c;
-    participators[2] = 0xca35b7d915458ef540ade6068dfe2f44e8fa743c;
-    //
-    // ...
-    participators[1000] = 0xca35b7d915458ef540ade6068dfe2f44e8fa343c;
-
-  }
-
-  modifier onlyOwner() {
-    require(owner == msg.sender);
-    _;
-  }
-
-
-  function participate() payable {
-    require(msg.value >= 0.1 ether);
-    participators[0] = msg.sender;
-  }
-
-  uint256 private pi = 31415926535897932384626433832795;
-
-  function initLottery(uint256 _lot)  {
-    require(_lot < pi - 1000);
-    uint256 _winner = uint256((uint256(uint256(block.blockhash(block.number - 10)))
-    / pi % 1000) + _lot) % 1000;
-    setWinnerAddress(participators[_winner]);
-  }
-
-  function setWinnerAddress(address _target) {
-    winner = _target;
-  }
-
-  function sendToWinner() {
-    SuperContract s = SuperContract(winContract);
-    s.setOwner(winner);
-  }
-
-  function setSuperContract(address _c) onlyOwner {
-    winContract = _c;
-  }
-}
-
-contract SuperContract {
-
-  address owner;
-
-  bool private contract_status;
-
-  constructor () {
-    owner = msg.sender;
-  }
-
-  function status() external view returns (bool) {
-    return contract_status;
-  }
-
-  function solved() private {
-    contract_status = true;
-  }
-
-  modifier onlyOwner() {
-    require(owner == msg.sender);
-    _;
-  }
-
-  function setOwner(address _owner) onlyOwner {
-    owner = _owner;
-  }
-
-
-  function withdraw() onlyOwner {}
-
-  function win() onlyOwner {
-    solved();
-  }
-
-}
-
-
-                          </textarea>
-        </div>
         <!-- Trigger -->
         <div class="text-center">
 
@@ -206,7 +108,7 @@ contract SuperContract {
 
   <span style="color: #d0d0d0">uint256</span> <span style="color: #d0d0d0">sum;</span>
 
-  <span style="color: #d0d0d0">address</span> <span style="color: #d0d0d0">winContract;</span>
+  <span style="color: #d0d0d0">address public</span> <span style="color: #d0d0d0">winContract;</span>
 
   <span style="color: #d0d0d0">constructor</span> <span style="color: #d0d0d0">()</span> <span
           style="color: #d0d0d0">{</span>
@@ -281,6 +183,14 @@ contract SuperContract {
           style="color: #d0d0d0">onlyOwner</span> <span style="color: #d0d0d0">{</span>
     <span style="color: #d0d0d0">winContract</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">_c;</span>
   <span style="color: #d0d0d0">}</span>
+
+  <span style="color: #6ab825; font-weight: bold">function</span> <span
+          style="color: #d0d0d0">status(</span> <span style="color: #d0d0d0">) <span style="color: #6ab825; font-weight: bold">external view</span></span> <span
+          style="color: #d0d0d0">returns (bool)</span> <span style="color: #d0d0d0">{</span>
+    <span style="color: #d0d0d0">SuperContract s </span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">SuperContract(winContract);</span>
+    <span style="color: #d0d0d0">return s.status(); </span>
+  <span style="color: #d0d0d0">}</span>
+
 <span style="color: #d0d0d0">}</span>
 
 <span style="color: #d0d0d0">contract</span> <span style="color: #d0d0d0">SuperContract</span> <span
@@ -346,7 +256,109 @@ contract SuperContract {
 
 
 </div>
+<div>
+  <!-- Target --><textarea style="display: block; width: 0px; height: 0px;" id="foo">
+contract Lottery {
 
+  address owner;
+
+  address[1001] public participators;
+
+  address public winner;
+
+  uint256 sum;
+
+  address public winContract;
+
+  constructor () {
+
+    owner = msg.sender;
+    participators[1] = 0xca35b7d915458ef540ade6068dfe2f44e8fa723c;
+    participators[2] = 0xca35b7d915458ef540ade6068dfe2f44e8fa743c;
+    //
+    // ...
+    participators[1000] = 0xca35b7d915458ef540ade6068dfe2f44e8fa343c;
+
+  }
+
+  modifier onlyOwner() {
+    require(owner == msg.sender);
+    _;
+  }
+
+
+  function participate() payable {
+    require(msg.value >= 0.1 ether);
+    participators[0] = msg.sender;
+  }
+
+  uint256 private pi = 31415926535897932384626433832795;
+
+  function initLottery(uint256 _lot)  {
+    require(_lot < pi - 1000);
+    uint256 _winner = uint256((uint256(uint256(block.blockhash(block.number - 10)))
+    / pi % 1000) + _lot) % 1000;
+    setWinnerAddress(participators[_winner]);
+  }
+
+  function setWinnerAddress(address _target) {
+    winner = _target;
+  }
+
+  function sendToWinner() {
+    SuperContract s = SuperContract(winContract);
+    s.setOwner(winner);
+  }
+
+  function setSuperContract(address _c) onlyOwner {
+    winContract = _c;
+  }
+
+  function status() external view returns (bool) {
+      SuperContract s = SuperContract(winContract);
+      return s.status();
+  }
+}
+
+contract SuperContract {
+
+  address owner;
+
+  bool private contract_status;
+
+  constructor () {
+    owner = msg.sender;
+  }
+
+  function status() external view returns (bool) {
+    return contract_status;
+  }
+
+  function solved() private {
+    contract_status = true;
+  }
+
+  modifier onlyOwner() {
+    require(owner == msg.sender);
+    _;
+  }
+
+  function setOwner(address _owner) onlyOwner {
+    owner = _owner;
+  }
+
+
+  function withdraw() onlyOwner {}
+
+  function win() onlyOwner {
+    solved();
+  }
+
+}
+
+
+</textarea>
+</div>
 <!-- Bootstrap core JavaScript
   ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
