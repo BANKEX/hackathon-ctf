@@ -20,6 +20,7 @@ class Result {
     this.tasks['Dividends'] = undefined;
     this.tasks['Lottery'] = undefined;
     this.tasks['PlasmaChain'] = undefined;
+    this.tasks['Kamikaze'] = undefined;
     this.score = undefined;
     this.timestampScore = undefined;
   }
