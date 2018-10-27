@@ -55,7 +55,10 @@
   </nav>
 
   <div class="container" id="root"></div>
-
+  <div class="container-fluid" style="font-size: 1.8em">
+  <p class="sec-info" align="center"><span>Tasks will close </span> in
+    <span style="color: black;  font-weight: bold" id="time"></span></p>
+  </div>
   <script type="text/babel">
     var myWeb3, poolingInterval, userAccount, networkId, contract, userNames = {};
 
@@ -179,6 +182,35 @@
 
       }
     }
+
+    function startTimer(duration,  display) {
+      let timer = duration, hours, minutes, seconds;
+      const bomb = setInterval(function () {
+        hours = parseInt(timer / 60 / 60, 10);
+        minutes = parseInt(timer / 60 % 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = hours + "h : " + minutes + "m : " + seconds + "s";
+
+        if (--timer < 0) {
+          alert('THE END');
+          clearInterval(bomb)
+        }
+      }, 1000);
+    }
+
+    (async () => {
+      const deleteDate = 1540706400;
+      const now = Date.now();
+      const difference = deleteDate * 1000 - now;
+      const duration = difference / 1000,
+        display = document.querySelector('#time');
+      startTimer(duration, display);
+    })();
 
   </script>
 
