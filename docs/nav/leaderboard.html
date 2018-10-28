@@ -57,8 +57,7 @@
 
   <div class="container" id="root"></div>
   <div class="container-fluid" style="font-size: 1.8em">
-  <p class="sec-info" align="center"><span>Tasks will close </span> in
-    <span style="color: black;  font-weight: bold" id="time"></span></p>
+    <p class="sec-info" align="center"><span>Tasks were closed. Congrats Solitude, catlovers2003_2004 and faza__! Winners go <a href="https://bankex.github.io/hackathon-ctf/nav/prize.html">to https://bankex.github.io/hackathon-ctf/nav/prize.html</a></span></p>
   </div>
   <script type="text/babel">
     var myWeb3, poolingInterval, userAccount, networkId, contract, userNames = {};
@@ -206,14 +205,14 @@
       }, 1000);
     }
 
-    (async () => {
-      const deleteDate = 1540706400;
-      const now = Date.now();
-      const difference = deleteDate * 1000 - now;
-      const duration = difference / 1000,
-        display = document.querySelector('#time');
-      startTimer(duration, display);
-    })();
+    // (async () => {
+    //   const deleteDate = 1540706400;
+    //   const now = Date.now();
+    //   const difference = deleteDate * 1000 - now;
+    //   const duration = difference / 1000,
+    //     display = document.querySelector('#time');
+    //   startTimer(duration, display);
+    // })();
 
   </script>
 
